@@ -45,9 +45,9 @@ var drink = function () {
       })
    })
 };
-// var function api call movies
+// var function api call movies ! need to change the current values in html to match the ids needed for the api call
 var movie = function () {
-   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
+   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres="+ genreId + "")
       .then(function (movieResponse) {
          if (response.ok) {
             return movieResponse.json();
@@ -88,7 +88,7 @@ var mealChoice = function () {
    //movie genre
    var movieChoice = function () {
       let genreId = $("#movie-type").val()
-      console.log(genreId);
+      console.log("selected genre id is: "+genreId);
       //return genreId;
    }
 
