@@ -95,6 +95,13 @@ div.center-grid {
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
+.grid-container, .fluid, .blue {
+    display: inline-grid;
+    text-align: center;
+  }
+
+  
+
 @media screen and (max-width: 39.9375em) {
     section {
         padding: 20px;
