@@ -17,7 +17,7 @@
     <main class="grid-container fluid">
         <section id="home-slide" class="blue">
             <div class="grid-x align-middle">
-                <div class="cell small-12 large-6 intro">
+                <div class="cell small-12 large-6 intro small-order-2 medium-order-1">
                     <h1>BORED IN THE HOUSE</h1>
                     <p>Let’s just face it, we’re stuck in the house and all our usuals just feel boring now. Same food,
                         same drinks, same tv shows. Sometimes you just need a little help to find something new. That’s
@@ -26,14 +26,16 @@
                     <a id="start-btn" href="#dinner" class="button main start-btn" data-control="1">Start a Plan</a><a
                         href="history.html" class="button secondary" id="history-btn">Plans History</a>
                 </div>
-                <div class="cell large-6 hero small-12">
+                <div class="cell large-6 hero small-12 small-order-1 medium-order-2">
+                    <img src="/assets/images/man-bored.jpg" class="img-responsive" />
                 </div>
             </div>
-
+            </section>
             <!-- begin second page-->
             <section id="dinner-slide" class="dark animate__animated hide">
                 <div class="grid-x align-middle align-center">
                     <div class="cell medium-4 choices">
+                        <img src="/assets/images/dinner.png" />
                         <h2>Let's plan a meal. Tell me, what food are you in the mood for?</h2>
                         <div class="grid-x align-center">
                             <div class="cell medium-8">
@@ -48,7 +50,7 @@
                         </div>
 
                         <a id="add-food-btn" href="#add-food" class="button main" data-control="2">Add
-                            Cuisine</a><a href="#back-button" id="backtohome-btn" class="button secondary">Back</a>
+                            Cuisine</a><a href="#back-button"  class="button secondary back-btn">Back</a>
                     </div>
                 </div>
             </section>
@@ -56,10 +58,11 @@
             <section id="drink-slide" class="blue animate__animated hide">
                 <div class="grid-x align-middle align-center">
                     <div class="cell medium-4 choices">
+                        <img src="/assets/images/drink.png" />
                         <h2>[cusineType],great choice! Let's Pair that with a drink. Pick your poision.</h2>
                         <div class="grid-x align-center">
                             <div class="cell medium-8">
-                                <select name="cuisine-type" id="cuisine-type">
+                                <select name="drink-type" id="drink-type">
                                     <option disabled value="">Select an Alcohol type</option>
                                     <option value="random">Random</option>
                                     <option value="item1">item1</option>
@@ -70,30 +73,19 @@
                         </div>
 
                         <a id="add-drink-btn" href="#add-drink" class="button main" data-control="3">Add drink
-                        </a><a href="#back-button" id="backtohome-btn" class="button secondary">Back</a>
+                        </a><a href="#back-button"  class="button secondary back-btn">Back</a>
                     </div>
                 </div>
             </section>
             <!-- begin fourth page-->
-            <section id="movie-slide" class="dark animate__animated hide">
-                <div class="grid-x align-middle align-center">
-                    <div class="cell medium-4 choices">
-                        <h2>[drinkType] drink with [cuisineType] dinner, sounds perfect. Do you want to watch a movie
-                            too?</h2>
-                        <a id="add-movie-btn" href="#add-movie" class="button main" data-control="4">Yes
-                            <a id="add-movie-btn" href="#add-movie" class="button main" data-control="5">No
-                            </a><a href="#back-button" id="backtohome-btn" class="button secondary">Back</a>
-                    </div>
-                </div>
-            </section>
-            <!-- begin fith page-->
-            <section id="genre-slide" class="blue animate__animated hide">
+            <section id="genre-slide" class="dark animate__animated hide">
                 <div class="grid-x align-middle align-center">
                     <div class="cell medium-4 choices">
                         <h2>Great, let's pick a genre.</h2>
                         <div class="grid-x align-center">
                             <div class="cell medium-8">
-                                <select name="cuisine-type" id="cuisine-type">
+                                <img src="/assets/images/movie.png" />
+                                <select name="movie-type" id="movie-type">
                                     <option disabled value="">Select a Movie genre</option>
                                     <option value="random">Random</option>
                                     <option value="item1">item1</option>
@@ -104,7 +96,7 @@
                         </div>
 
                         <a id="add-genre-btn" href="#add-genre" class="button main" data-control="6">Add Movie
-                        </a><a href="#back-button" id="backtohome-btn" class="button secondary">Back</a>
+                        </a><a href="#back-button"  class="button secondary back-btn">Back</a>
                     </div>
                 </div>
             </section>
@@ -117,48 +109,47 @@
     <script src="./Foundation-Sites-6.6.3-CSS/Foundation-Sites-6.6.3-CSS/assets/js/foundation.js"></script>
     <script src="./assets/js/script.js"></script>
     <script>
-        document.querySelector("#home-slide").addEventListener("click", function () {
+
+        document.querySelector('main').addEventListener("click", function() {
             event.preventDefault();
-            var clickedBtn = event.target.getAttribute("id");
-            if (clickedBtn === "start-btn") {
+
+            // find which button was click
+            var clickedBtn = event.target;
+            var clickedBtnId = clickedBtn.getAttribute("id");
+            var parent = clickedBtn.closest("section");
+
+            // if a back button was clicked, remove current slide
+            if(clickedBtn.classList.contains("back-btn")) {
+                parent.classList.replace("animate__slideInUp", "animate__slideOutDown");
+                setTimeout(function() {
+                    parent.classList.remove("animate__slideOutDown");
+                    parent.classList.add("hide");
+                }, 500);
+            }
+
+            
+
+            if (clickedBtnId === "start-btn") {
                 document.querySelector("#dinner-slide").classList.replace("hide", "animate__slideInUp");
             }
-            if (clickedBtn === "backtohome-btn") {
-                document.querySelector("#dinner-slide").classList.replace("animate__slideInUp", "animate__slideOutDown");
-                setTimeout(function () {
-                    document.querySelector("#dinner-slide").classList.remove("animate__slideOutDown");
-                    document.querySelector("#dinner-slide").classList.add("hide");
-                }, 500);
-            }
-        });
-        document.querySelector("#dinner-slide").addEventListener("click", function () {
-            event.preventDefault();
-            var clickedBtn = event.target.getAttribute("id");
-            if (clickedBtn === "add-food-btn") {
+            if (clickedBtnId === "add-food-btn") {
                 document.querySelector("#drink-slide").classList.replace("hide", "animate__slideInUp");
+                var foodType = document.querySelector("#cuisine-type").value;
+                console.log(foodType);
             }
-            if (clickedBtn === "backtohome-btn") {
-                document.querySelector("#drink-slide").classList.replace("animate__slideInUp", "animate__slideOutDown");
-                setTimeout(function () {
-                    document.querySelector("#drink-slide").classList.remove("animate__slideOutDown");
-                    document.querySelector("#drink-slide").classList.add("hide");
-                }, 500);
+            if (clickedBtnId === "add-drink-btn") {
+                document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
+                var drinkType = document.querySelector("#drink-type").value;
+                console.log(drinkType);
             }
-        });
-        document.querySelector("#drink-slide").addEventListener("click", function () {
-            event.preventDefault();
-            var clickedBtn = event.target.getAttribute("id");
-            if (clickedBtn === "add-drink-btn") {
-                document.querySelector("#movie-slide").classList.replace("hide", "animate__slideInUp");
-            }
-            if (clickedBtn === "backtohome-btn") {
-                document.querySelector("#drink-slide").classList.replace("animate__slideInUp", "animate__slideOutDown");
-                setTimeout(function () {
-                    document.querySelector("#drink-slide").classList.remove("animate__slideOutDown");
-                    document.querySelector("#drink-slide").classList.add("hide");
-                }, 500);
+            if (clickedBtnId === "add-drink-btn") {
+                document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
+                var movieType = document.querySelector("#movie-type").value;
+                console.log(movieType);
             }
         });
+
+
     </script>
 </body>
 

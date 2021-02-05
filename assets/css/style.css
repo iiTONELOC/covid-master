@@ -56,14 +56,14 @@ section{
 .dark .button {
     border: 1px solid var(--white);
 }
-
+.choices img {
+    margin-bottom: 20px;
+}
 
 .question-container {
     display: flex;
 }
 .hero {
-    background: url("../images/bored.jpg") no-repeat;
-    background-size: cover;
     height: 100vh;
 }
 h1 {
@@ -100,10 +100,24 @@ div.center-grid {
     text-align: center;
   }
 
-  
+  .img-responsive {
+    display:block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
 
+/* ---------------------------------
+MEDIA QUERIES
+----------------------------------*/
 @media screen and (max-width: 39.9375em) {
     section {
         padding: 20px;
+    }
+    .hero {
+        height: auto;
+    }
+    .img-responsive {
+        height: auto;
     }
 }
