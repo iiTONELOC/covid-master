@@ -1,6 +1,5 @@
 
 //ROOT
-//DROP JQUERY LINK
 
 // COSMIDIC
 
@@ -35,7 +34,5 @@
 // API FETCH MEALS
 
 
+
 // EVENT LISTNERS
-   // FOR MEAL 
-   // FOR DRINK
-   // FOR MEAL

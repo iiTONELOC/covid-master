@@ -1,6 +1,5 @@
 
 //ROOT
-//DROP JQUERY LINK
 
 // COSMIDIC
 
@@ -38,4 +37,4 @@
 // EVENT LISTNERS
    // FOR MEAL 
    // FOR DRINK
-   // FOR MEAL
+   // 

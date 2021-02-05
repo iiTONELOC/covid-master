@@ -1,6 +1,6 @@
 
 //ROOT
-//DROP JQUERY LINK
+//DROP 
 
 // COSMIDIC
 
