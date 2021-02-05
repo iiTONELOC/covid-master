@@ -1,1 +1,93 @@
-/*Create Branch*/
+* {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+html, body {
+    height: 100%;
+    overflow: hidden;
+    font-size: 16px;
+}
+#main {
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+section{
+   min-height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+
+}
+.blue {
+    background: #144692;
+    color: #fff;
+}
+.dark {
+    background: #434343 !important;
+    color: #fff;
+}
+.secondary {
+    background: #434343 !important;
+    color: #fff;
+}
+.dark .secondary {
+    background:#144692;
+    color: #fff;
+}
+.main {
+    background: #fff;
+    color: #434343;
+}
+.button {
+    border-radius: 50px;
+    margin-right: 20px;
+    padding: 15px 35px;
+
+}
+.dark, .button {
+    border: 1px solid white;
+}
+
+.intro {
+    padding: 0 8rem !important;
+}
+.question-container {
+    display: flex;
+}
+.hero {
+    background: url("../images/bored.jpg") no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+h1 {
+    font-size: 5rem;
+    font-weight: 600;
+    line-height: 5rem;
+
+}
+.grid-container, .fluid, .dark {
+  display: inline-grid;
+  text-align: center;
+}
+ul.dropdown.menu {
+    justify-content: center;
+}
+a.cusine-type {
+    border: 1px solid white;
+    background-color: grey;
+    color: white;
+    border-radius: 10px;
+   margin: 12px 20px 12px 0px;
+}
+div.center-grid {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
