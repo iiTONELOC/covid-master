@@ -50,7 +50,7 @@
                         </div>
 
                         <a id="add-food-btn" href="#add-food" class="button main" data-control="2">Add
-                            Cuisine</a><a href="#back-button"  class="button secondary back-btn">Back</a>
+                            Cuisine</a><a href="#back-button" id="scroll-release"  class="button secondary back-btn">Back</a>
                     </div>
                 </div>
             </section>
@@ -120,6 +120,10 @@
 
             // if a back button was clicked, remove current slide
             if(clickedBtn.classList.contains("back-btn")) {
+                if(clickedBtnId === "scroll-release") {
+                    document.querySelector("body").classList.remove("scroll-lock");
+                    document.querySelector("#home-slide").classList.remove("hide");
+                }
                 parent.classList.replace("animate__slideInUp", "animate__slideOutDown");
                 setTimeout(function() {
                     parent.classList.remove("animate__slideOutDown");
@@ -131,6 +135,11 @@
 
             if (clickedBtnId === "start-btn") {
                 document.querySelector("#dinner-slide").classList.replace("hide", "animate__slideInUp");
+                document.querySelector("body").classList.add("scroll-lock");
+                setTimeout( function() {
+                    document.querySelector("#home-slide").classList.add("hide");
+                }, 1000);
+                
             }
             if (clickedBtnId === "add-food-btn") {
                 document.querySelector("#drink-slide").classList.replace("hide", "animate__slideInUp");
@@ -142,10 +151,11 @@
                 var drinkType = document.querySelector("#drink-type").value;
                 console.log(drinkType);
             }
-            if (clickedBtnId === "add-drink-btn") {
+            if (clickedBtnId === "add-genre-btn") {
                 document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
                 var movieType = document.querySelector("#movie-type").value;
                 console.log(movieType);
+                open('results.html');
             }
         });
 

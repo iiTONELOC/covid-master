@@ -122,7 +122,32 @@ div.center-grid {
     font-size: 14px;
 
 }
-
+.btn-container {
+    padding-bottom: 20px;
+}
+.pad20 {
+    padding: 0 20px;
+}
+.plan-item {
+    background: var(--white);
+    margin-bottom: 10px;
+    padding: 20px;
+    color: var(--dark);
+    border-radius: 2px;
+    text-align: left;
+}
+.plan-item a {
+    color: var(--dark);
+}
+.plan-item:hover {
+    color:
+}
+.header-space {
+    padding-top: 40px;
+}
+.scroll-lock {
+    overflow: hidden !important;
+}
 /* ---------------------------------
 MEDIA QUERIES
 ----------------------------------*/
