@@ -45,20 +45,20 @@ var drink = function () {
       })
    })
 };
-// var function api call movies 
+// var function api call movies
 var movie = function () {
    fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
-      .then(function (response) {
+      .then(function (movieResponse) {
          if (response.ok) {
-            return response.json();
+            return movieResponse.json();
          }
          else {
             return;
          }
 
       })
-      .then(function (data) {
-         console.log(data);
+      .then(function (movieData) {
+         console.log("Movie data: "+movieData);
       })
 }
 
