@@ -73,6 +73,9 @@ h1 {
   display: inline-grid;
   text-align: center;
 }
+ul.dropdown.menu {
+    justify-content: center;
+}
 a.cusine-type {
     border: 1px solid white;
     background-color: grey;
@@ -80,7 +83,6 @@ a.cusine-type {
     border-radius: 10px;
    margin: 12px 20px 12px 0px;
 }
-
 div.center-grid {
     margin: 0;
     position: absolute;
