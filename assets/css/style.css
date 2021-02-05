@@ -48,6 +48,10 @@ section{
     padding: 15px 35px;
 
 }
+.dark, .button {
+    border: 1px solid white;
+}
+
 .intro {
     padding: 0 8rem !important;
 }
@@ -64,4 +68,24 @@ h1 {
     font-weight: 600;
     line-height: 5rem;
 
+}
+.grid-container, .fluid, .dark {
+  display: inline-grid;
+  text-align: center;
+}
+a.cusine-type {
+    border: 1px solid white;
+    background-color: grey;
+    color: white;
+    border-radius: 10px;
+   margin: 12px 20px 12px 0px;
+}
+
+div.center-grid {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
