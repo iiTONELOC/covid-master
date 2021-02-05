@@ -1,46 +1,51 @@
+:root {
+    --blue: #144692;
+    --dark: #434343;
+    --white: #fff;
+}
 * {
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
 html, body {
     height: 100%;
-    overflow: hidden;
+    
     font-size: 16px;
 }
 #main {
     padding: 0;
     height: 100%;
-    overflow: hidden;
+    
 }
 section{
    min-height: 100%;
-    width: 100%;
-    overflow: hidden;
+    width: 100%;   
     position: absolute;
     top: 0;
     left: 0;
-
-
+}
+.intro {
+    padding: 20px;
 }
 .blue {
-    background: #144692;
-    color: #fff;
+    background: var(--blue);
+    color: var(--white);
 }
 .dark {
-    background: #434343 !important;
-    color: #fff;
+    background: var(--dark) !important;
+    color: var(--white);
 }
 .secondary {
-    background: #434343 !important;
-    color: #fff;
+    background: var(--dark) !important;
+    color: var(--white);
 }
 .dark .secondary {
-    background:#144692;
-    color: #fff;
+    background:var(--blue);
+    color: var(--white);
 }
 .main {
-    background: #fff;
-    color: #434343;
+    background: var(--white);
+    color: var(--dark);
 }
 .button {
     border-radius: 50px;
@@ -48,13 +53,11 @@ section{
     padding: 15px 35px;
 
 }
-.dark, .button {
-    border: 1px solid white;
+.dark .button {
+    border: 1px solid var(--white);
 }
 
-.intro {
-    padding: 0 8rem !important;
-}
+
 .question-container {
     display: flex;
 }
@@ -64,25 +67,26 @@ section{
     height: 100vh;
 }
 h1 {
-    font-size: 5rem;
+    font-size: 3em;
     font-weight: 600;
-    line-height: 5rem;
+    line-height: 4rem;
 
+}
+#home-slide {
+    text-align: left;
 }
 .grid-container, .fluid, .dark {
   display: inline-grid;
   text-align: center;
 }
-ul.dropdown.menu {
-    justify-content: center;
-}
 a.cusine-type {
-    border: 1px solid white;
-    background-color: grey;
-    color: white;
+    border: 1px solid var(--white);
+    background-color: var(--dark);
+    color: var(--white);
     border-radius: 10px;
    margin: 12px 20px 12px 0px;
 }
+
 div.center-grid {
     margin: 0;
     position: absolute;
@@ -90,4 +94,9 @@ div.center-grid {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+}
+@media screen and (max-width: 39.9375em) {
+    section {
+        padding: 20px;
+    }
 }
