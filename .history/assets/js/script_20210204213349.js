@@ -1,0 +1,17 @@
+
+//ROOT
+
+// GLOBAL VAR
+
+// GLOBAL FUNCTIONS
+
+// COSMIDIC 
+
+// API FETCH MEAL 
+
+
+
+
+
+
+// EVENT LISTNERS
