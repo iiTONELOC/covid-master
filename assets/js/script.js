@@ -15,6 +15,9 @@ var savedPlanEl = document.getElementById("saved-plans")
 
 // DATA = []
 
+//date
+var currentDate = moment().format('LL');
+
 // WE MAY NEED THREE DATA SET
 
 // MEMORY
@@ -22,9 +25,20 @@ var storageArray = [];
 
 // VAR MEMORYSET = FUNCTION
 var save = function () {
-   localStorage.setItem("storage", JSON.stringify(storage));
+   localStorage.setItem("savedPlan", JSON.stringify(storageArray));
 }
 // VAR MEMORYGET = FUNCTION
+var loadMemory = function () {
+   var memory = JSON.parse(localStorage.getItem("savedPlan"));
+
+   if (memory != null) {
+      
+      for (let i = 0; i < memory.length; i++) {
+         storageArray.push(memory[i])
+      }
+      console.log(storageArray);
+   }
+}
 
 // GLOBAL VAR 
 var movieID = "";
@@ -166,7 +180,7 @@ movie();
 //save function
 var savePlan = function () {
    console.log("You clicked save")
-   
+
 
    //push items to array for storage
    //check for DUPES
@@ -201,11 +215,13 @@ var savePlan = function () {
       //set variables for storage
       drinkName = document.getElementById("drink-title").textContent
       movieName = document.getElementById('movie-title').textContent
-      newSave.push(drinkName, movieName, drinkID, movieID)
+      newSave.push(currentDate, drinkName, movieName, drinkID, movieID)
       console.log(newSave)
+      storageArray.push(newSave)
+      save();
    }
 }
-
+loadMemory();
 //event listener for the save plan
 document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 
