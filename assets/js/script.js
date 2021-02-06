@@ -80,9 +80,16 @@ var meal = function () {
    }
    fetch(apiUrl).then(function (response) {
       response.json().then(function (data) {
-         
-         
-         var mealId = data.meals[0].idMeal;
+         var randomNum = ""
+         var ranNumFunc = function () {
+            randomNum = Math.floor(Math.random() * 34);
+            if (data.meals[randomNum] === undefined) {
+               ranNumFunc();
+            }
+         };
+         ranNumFunc();         
+         var mealId = data.meals[randomNum].idMeal;
+         console.log(data);
          
          var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
          fetch(apiUrl2).then(function (response2) {
@@ -97,7 +104,71 @@ var meal = function () {
                   recipe.innerHTML = "Check out the recipe!";
                   document.getElementById("meal-box").appendChild(recipe)
                }
+               var ingredients = [
+                  data2.meals[0].strIngredient1,
+                  data2.meals[0].strIngredient2,
+                  data2.meals[0].strIngredient3,
+                  data2.meals[0].strIngredient4,
+                  data2.meals[0].strIngredient5,
+                  data2.meals[0].strIngredient6,
+                  data2.meals[0].strIngredient7,
+                  data2.meals[0].strIngredient8,
+                  data2.meals[0].strIngredient9,
+                  data2.meals[0].strIngredient10,
+                  data2.meals[0].strIngredient11,
+                  data2.meals[0].strIngredient12,
+                  data2.meals[0].strIngredient13,
+                  data2.meals[0].strIngredient14,
+                  data2.meals[0].strIngredient15,
+                  data2.meals[0].strIngredient16,
+                  data2.meals[0].strIngredient17,
+                  data2.meals[0].strIngredient18,
+                  data2.meals[0].strIngredient19,
+                  data2.meals[0].strIngredient20,
+               ]
+               var measure = [
+                  data2.meals[0].strMeasure1,
+                  data2.meals[0].strMeasure2,
+                  data2.meals[0].strMeasure3,
+                  data2.meals[0].strMeasure4,
+                  data2.meals[0].strMeasure5,
+                  data2.meals[0].strMeasure6,
+                  data2.meals[0].strMeasure7,
+                  data2.meals[0].strMeasure8,
+                  data2.meals[0].strMeasure9,
+                  data2.meals[0].strMeasure10,
+                  data2.meals[0].strMeasure11,
+                  data2.meals[0].strMeasure12,
+                  data2.meals[0].strMeasure13,
+                  data2.meals[0].strMeasure14,
+                  data2.meals[0].strMeasure15,
+                  data2.meals[0].strMeasure16,
+                  data2.meals[0].strMeasure17,
+                  data2.meals[0].strMeasure18,
+                  data2.meals[0].strMeasure19,
+                  data2.meals[0].strMeasure20,
+               ]
                
+               // stores the meal id
+               mealID = data.meals[0].idMeal
+               console.log("this is the drinkID: " + drinkID)
+               var mealList = document.createElement("ul");
+               document.getElementById("meal-box").appendChild(mealList)
+               var instructions = document.createElement('p')
+               instructions.textContent = data2.meals[0].strInstructions
+               console.log(instructions);
+               document.getElementById("meal-box").appendChild(instructions);
+               for (var i = 0; i < measure.length; i++) {
+                  console.log($(this));
+                  if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
+                     return;
+                  }
+                  else {
+                     var mealStuff = document.createElement("li")
+                     mealStuff.innerHTML = measure[i] + "-" + ingredients[i];
+                     mealList.appendChild(mealStuff);
+                  }
+               }
                //Currently Youtube is commented out because of an issue
                //if (data2.meals[0].strYoutube) {
                   //var video = document.createElement("iframe")
@@ -123,7 +194,18 @@ var drink = function () {
          return response.json();
       })
       .then(function (data) {
-         drinkId = data.drinks[0].idDrink;
+         
+         var randomNum = ""
+         var ranNumFunc = function () {
+            randomNum = Math.floor(Math.random() * 34);
+            if (data.drinks[randomNum] === undefined) {
+               ranNumFunc();
+            }
+         };
+         ranNumFunc();         
+         var drinkId = data.drinks[randomNum].idDrink;
+
+
          var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId
          fetch(apiUrl2).then(function (response2) {
             response2.json().then(function (data) {
