@@ -32,9 +32,29 @@ var loadMemory = function () {
    var memory = JSON.parse(localStorage.getItem("savedPlan"));
 
    if (memory != null) {
-      
+
       for (let i = 0; i < memory.length; i++) {
          storageArray.push(memory[i])
+         //creates the div
+         var newEntry = document.createElement('div');
+         newEntry.setAttribute("class", 'cell large-6 small-12 plan-item');
+         //creates the link element
+         var aE1 = document.createElement('a')
+         aE1.setAttribute('href', "")
+         aE1.textContent = '[food name]' + "+" + memory[i][1] + "+" + memory[i][2]
+         //creates the span inside the link
+         var span = document.createElement('span')
+         span.setAttribute('class', 'float-right')
+         //create the icon inside the span
+         var icon = document.createElement('i')
+         icon.setAttribute('class', 'fas fa-plus')
+         span.appendChild(icon);
+         //append the span to the link
+         aE1.appendChild(span);
+         //append link to the div
+         newEntry.appendChild(aE1);
+         //append div to page
+         savedPlanEl.appendChild(newEntry);
       }
       console.log(storageArray);
    }
