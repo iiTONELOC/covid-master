@@ -9,7 +9,7 @@
 }
 html, body {
     height: 100%;
-    
+    scroll-behavior: smooth;
     font-size: 16px;
 }
 #main {
@@ -125,9 +125,13 @@ div.center-grid {
 .btn-container {
     padding-bottom: 20px;
 }
-.pad20 {
-    padding: 0 20px;
+.padtop40 {
+    padding-top: 40px;
 }
+.pad20 {
+    padding: 20px 0;
+}
+
 .plan-item {
     background: var(--white);
     margin-bottom: 10px;
