@@ -6,6 +6,7 @@ var drinkType = dataTypes[2];
 var genreId = dataTypes[3];
 console.log(dataTypes);
 var drinkBoxEl = document.getElementById("drink-box")
+var mealBoxE1 = document.getElementById("meal-box")
 //VARIABLEs FOR SAVED PLANS
 var savedPlanEl = document.getElementById("saved-plans")
 //date
@@ -47,7 +48,7 @@ var loadMemory = function () {
          //creates the span inside the link
          var span = document.createElement('span')
          span.setAttribute('class', 'float-right')
-        
+
          //create the icon inside the span
          var icon = document.createElement('i')
          icon.setAttribute('class', 'fas fa-plus')
@@ -104,15 +105,26 @@ var meal = function () {
          var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
          fetch(apiUrl2).then(function (response2) {
             response2.json().then(function (data2) {
-               document.getElementById("meal-title").innerHTML = data2.meals[0].strMeal;
-               document.getElementById('meal-img').setAttribute("src", data2.meals[0].strMealThumb)
-               document.getElementById('meal-img').setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
+               
+               //creates the h3 element for the meal-title
+               var mealTitle = document.createElement('h3')
+               mealTitle.textContent = data2.meals[0].strMeal;
+               //document.getElementById("meal-title").textContent = data2.meals[0].strMeal;
+               //creates the img element for the meal-img
+               var mealImage = document.createElement('img')
+               mealImage.setAttribute("src", data2.meals[0].strMealThumb)
+               mealImage.setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
+               //append the title and image to page
+               mealBoxE1.appendChild(mealTitle,)
+               mealBoxE1.appendChild(mealImage)
+               //document.getElementById('meal-img').setAttribute("src", data2.meals[0].strMealThumb)
+               //document.getElementById('meal-img').setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
                console.log(data2);
                if (data2.meals[0].strSource) {
                   var recipe = document.createElement("a")
                   recipe.setAttribute("href", data2.meals[0].strSource);
-                  recipe.innerHTML = "Check out the recipe!";
-                  document.getElementById("meal-box").appendChild(recipe)
+                  recipe.textContent = "Check out the recipe!";
+                  mealBoxE1.appendChild(recipe)
                }
                var ingredients = [
                   data2.meals[0].strIngredient1,
@@ -163,21 +175,21 @@ var meal = function () {
                mealID = data.meals[0].idMeal
                console.log("this is the mealId: " + mealId)
                var mealList = document.createElement("ul");
-               document.getElementById("meal-box").appendChild(mealList)
+               mealBoxE1.appendChild(mealList)
                var instructions = document.createElement('p')
                instructions.textContent = data2.meals[0].strInstructions
                console.log(instructions);
-               document.getElementById("meal-box").appendChild(instructions);
-               dID=mealId;
-               console.log("this is the dID: "+dID)
+               mealBoxE1.appendChild(instructions);
+               dID = mealId;
+               console.log("this is the dID: " + dID)
                for (var i = 0; i < measure.length; i++) {
-                  console.log($(this));
+                  //console.log($(this));
                   if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
                      return;
                   }
                   else {
                      var mealStuff = document.createElement("li")
-                     mealStuff.innerHTML = measure[i] + "-" + ingredients[i];
+                     mealStuff.textContent = measure[i] + "-" + ingredients[i];
                      mealList.appendChild(mealStuff);
                   }
                }
@@ -257,27 +269,28 @@ var drink = function () {
                   data.drinks[0].strMeasure15,
                ]
                //add title of drink to page
-               document.getElementById("drink-title").innerHTML = data.drinks[0].strDrink
+               document.getElementById("drink-title").textContent = data.drinks[0].strDrink
                //add image to page and set alt attribute
                document.getElementById('drink-img').setAttribute("src", data.drinks[0].strDrinkThumb)
                document.getElementById('drink-img').setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
                // stores the drink id
                drinkID = data.drinks[0].idDrink
-               bevID=drinkId
+               bevID = drinkId
                console.log("this is the drinkID: " + drinkID)
                var drinkList = document.createElement("ul");
+               drinkList.setAttribute("id", "remove")
                drinkBoxEl.appendChild(drinkList)
                var instructions = document.createElement('p')
                instructions.textContent = data.drinks[0].strInstructions
                document.getElementById("drink-box").appendChild(instructions);
                for (var i = 0; i < measure.length; i++) {
-                  console.log($(this));
+                  //console.log($(this));
                   if (measure[i] === null || measure[i] === "") {
                      return;
                   }
                   else {
                      var drinkM = document.createElement("li")
-                     drinkM.innerHTML = measure[i] + "-" + ingredients[i];
+                     drinkM.textContent = measure[i] + "-" + ingredients[i];
                      drinkList.appendChild(drinkM);
                   }
                }
@@ -348,7 +361,7 @@ var savePlan = function () {
       //creates the link element
       var aE1 = document.createElement('a')
       aE1.setAttribute('href', "")
-      aE1.textContent = foodName=document.getElementById("meal-title").textContent + " & " + document.getElementById("drink-title").textContent + " & " + document.getElementById('movie-title').textContent
+      aE1.textContent = foodName = document.getElementById("meal-title").textContent + " & " + document.getElementById("drink-title").textContent + " & " + document.getElementById('movie-title').textContent
       //creates the span inside the link
       var span = document.createElement('span')
       span.setAttribute('class', 'float-right')
@@ -363,10 +376,10 @@ var savePlan = function () {
       //append div to page
       savedPlanEl.appendChild(newEntry);
       //set variables for storage
-      foodName=document.getElementById("meal-title").textContent
+      foodName = document.getElementById("meal-title").textContent
       drinkName = document.getElementById("drink-title").textContent
       movieName = document.getElementById('movie-title').textContent
-      newSave.push(currentDate, drinkName, movieName, dID, movieID,foodName,bevID)
+      newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
       console.log(newSave)
       storageArray.push(newSave)
       save();
@@ -400,7 +413,7 @@ var movieHistory = function () {
          var cover = document.createElement('img')
          cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + historyData.poster_path + "")
          cover.setAttribute('value', historyData.id)
-         cover.setAttribute('alt', "Move poster for " + historyData.original_title)
+         cover.setAttribute('alt', "Movie poster for " + historyData.original_title)
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
@@ -411,6 +424,116 @@ var movieHistory = function () {
 }
 
 //api call for mealHistory
+var mealHistory = function () {
+   console.log(mealHistoryID)
+   mealBoxE1.textContent="";
+
+   var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealHistoryID
+   fetch(apiUrl2).then(function (response2) {
+      return response2.json()
+   })
+      .then(function (data2) {
+         console.log(data2);
+
+         //creates the h3 element for the meal-title
+         var mealTitle = document.createElement('h3')
+         mealTitle.textContent = data2.meals[0].strMeal;
+         //document.getElementById("meal-title").textContent = data2.meals[0].strMeal;
+         //creates the img element for the meal-img
+         var mealImage = document.createElement('img')
+         mealImage.setAttribute("src", data2.meals[0].strMealThumb)
+         mealImage.setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
+         //append the title and image to page
+         mealBoxE1.appendChild(mealTitle,)
+         mealBoxE1.appendChild(mealImage)
+         //document.getElementById('meal-img').setAttribute("src", data2.meals[0].strMealThumb)
+         //document.getElementById('meal-img').setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
+
+         if (data2.meals[0].strSource) {
+            var recipe = document.createElement("a")
+            recipe.setAttribute("href", data2.meals[0].strSource);
+            recipe.textContent = "Check out the recipe!";
+            mealBoxE1.appendChild(recipe)
+         }
+         var ingredients = [
+            data2.meals[0].strIngredient1,
+            data2.meals[0].strIngredient2,
+            data2.meals[0].strIngredient3,
+            data2.meals[0].strIngredient4,
+            data2.meals[0].strIngredient5,
+            data2.meals[0].strIngredient6,
+            data2.meals[0].strIngredient7,
+            data2.meals[0].strIngredient8,
+            data2.meals[0].strIngredient9,
+            data2.meals[0].strIngredient10,
+            data2.meals[0].strIngredient11,
+            data2.meals[0].strIngredient12,
+            data2.meals[0].strIngredient13,
+            data2.meals[0].strIngredient14,
+            data2.meals[0].strIngredient15,
+            data2.meals[0].strIngredient16,
+            data2.meals[0].strIngredient17,
+            data2.meals[0].strIngredient18,
+            data2.meals[0].strIngredient19,
+            data2.meals[0].strIngredient20,
+         ]
+         var measure = [
+            data2.meals[0].strMeasure1,
+            data2.meals[0].strMeasure2,
+            data2.meals[0].strMeasure3,
+            data2.meals[0].strMeasure4,
+            data2.meals[0].strMeasure5,
+            data2.meals[0].strMeasure6,
+            data2.meals[0].strMeasure7,
+            data2.meals[0].strMeasure8,
+            data2.meals[0].strMeasure9,
+            data2.meals[0].strMeasure10,
+            data2.meals[0].strMeasure11,
+            data2.meals[0].strMeasure12,
+            data2.meals[0].strMeasure13,
+            data2.meals[0].strMeasure14,
+            data2.meals[0].strMeasure15,
+            data2.meals[0].strMeasure16,
+            data2.meals[0].strMeasure17,
+            data2.meals[0].strMeasure18,
+            data2.meals[0].strMeasure19,
+            data2.meals[0].strMeasure20,
+         ]
+
+         // stores the meal id
+         mealID = data2.meals[0].idMeal
+
+         
+
+         dID = mealID;
+         console.log("this is the dID: " + dID)
+         // stores the meal id
+         mealID = data2.meals[0].idMeal
+         console.log("this is the mealId: " + mealID)
+         var mealList = document.createElement("ul");
+         mealBoxE1.appendChild(mealList)
+         var instructions = document.createElement('p')
+         instructions.textContent = data2.meals[0].strInstructions
+         console.log(instructions);
+         mealBoxE1.appendChild(instructions);
+         dID = mealID;
+         console.log("this is the dID: " + dID)
+         for (var i = 0; i < measure.length; i++) {
+            //console.log($(this));
+            if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
+               return;
+            }
+            else {
+               var mealStuff = document.createElement("li")
+               mealStuff.textContent = measure[i] + "-" + ingredients[i];
+               mealList.appendChild(mealStuff);
+            }
+         }
+
+      })
+
+
+}
 
 
 
@@ -418,10 +541,15 @@ var movieHistory = function () {
 var reFetch = function (event) {
    event.preventDefault()
    console.log(event.target)
+   //if(event.target.getAttribute("data-")===null){
+   // return; 
+   //}
    movieHistoryID = event.target.getAttribute('data-movie')
-   mealHistoryID= event.target.getAttribute("data-meal")
+   mealHistoryID = event.target.getAttribute("data-meal")
+   drinkHistoryID = event.target.getAttribute("data-drink")
    //call the api
    movieHistory();
+   mealHistory();
 
 }
 loadMemory();
