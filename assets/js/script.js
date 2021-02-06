@@ -31,22 +31,29 @@ var loadMemory = function () {
          var newEntry = document.createElement('div');
          newEntry.setAttribute("class", 'cell large-6 small-12 plan-item')
          //passes the id's needed for the api as data-* attributes
-         newEntry.setAttribute('data-drink', memory[i][3])
+         newEntry.setAttribute('data-drink', memory[i][6])
          newEntry.setAttribute('data-movie', memory[i][4]);
+         newEntry.setAttribute('data-meal', memory[i][3]);
+         //newEntry.setAttribute('data-meal', memory[i][4]);
          //creates the link element
          var aE1 = document.createElement('a')
          aE1.setAttribute('href', "")
-         aE1.textContent = '[food name]' + "+" + memory[i][1] + "+" + memory[i][2]
+         aE1.textContent = memory[i][5] + " & " + memory[i][1] + " & " + memory[i][2]
          //since the whole div is clickable due to its dynamically created, we will ensure we capture the ids needed 
-         aE1.setAttribute('data-drink', memory[i][3])
+         aE1.setAttribute('data-drink', memory[i][6])
          aE1.setAttribute('data-movie', memory[i][4]);
+         aE1.setAttribute('data-meal', memory[i][3]);
 
          //creates the span inside the link
          var span = document.createElement('span')
          span.setAttribute('class', 'float-right')
+        
          //create the icon inside the span
          var icon = document.createElement('i')
          icon.setAttribute('class', 'fas fa-plus')
+         icon.setAttribute('data-drink', memory[i][6])
+         icon.setAttribute('data-movie', memory[i][4]);
+         icon.setAttribute('data-meal', memory[i][3]);
          span.appendChild(icon);
          //append the span to the link
          aE1.appendChild(span);
@@ -61,22 +68,25 @@ var loadMemory = function () {
 
 // GLOBAL VAR 
 var movieID = "";
-var drinkID = "";
+var dID = "";
+var bevID = "";
 var foodName = "";
 var drinkName = "";
 var movieName = "";
 var newSave = [];
 //VARS for RELOAD
-var movieHistoryID="";
+var movieHistoryID = "";
+var mealHistoryID = "";
+var drinkHistoryID = "";
 
 // API CALLS 
 // var function api dinner !current set up just to run a random meal!
 var meal = function () {
    if (mealType === "random") {
-       apiUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
+      apiUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
    }
    else {
-       apiUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealType;
+      apiUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealType;
    }
    fetch(apiUrl).then(function (response) {
       response.json().then(function (data) {
@@ -87,10 +97,10 @@ var meal = function () {
                ranNumFunc();
             }
          };
-         ranNumFunc();         
+         ranNumFunc();
          var mealId = data.meals[randomNum].idMeal;
          console.log(data);
-         
+
          var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
          fetch(apiUrl2).then(function (response2) {
             response2.json().then(function (data2) {
@@ -148,16 +158,18 @@ var meal = function () {
                   data2.meals[0].strMeasure19,
                   data2.meals[0].strMeasure20,
                ]
-               
+
                // stores the meal id
                mealID = data.meals[0].idMeal
-               console.log("this is the drinkID: " + drinkID)
+               console.log("this is the mealId: " + mealId)
                var mealList = document.createElement("ul");
                document.getElementById("meal-box").appendChild(mealList)
                var instructions = document.createElement('p')
                instructions.textContent = data2.meals[0].strInstructions
                console.log(instructions);
                document.getElementById("meal-box").appendChild(instructions);
+               dID=mealId;
+               console.log("this is the dID: "+dID)
                for (var i = 0; i < measure.length; i++) {
                   console.log($(this));
                   if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
@@ -171,9 +183,9 @@ var meal = function () {
                }
                //Currently Youtube is commented out because of an issue
                //if (data2.meals[0].strYoutube) {
-                  //var video = document.createElement("iframe")
-                  //video.setAttribute("src", data2.meals[0].strYoutube);
-                  //document.getElementById("meal-box").appendChild(video);
+               //var video = document.createElement("iframe")
+               //video.setAttribute("src", data2.meals[0].strYoutube);
+               //document.getElementById("meal-box").appendChild(video);
                //}
             })
          })
@@ -194,7 +206,7 @@ var drink = function () {
          return response.json();
       })
       .then(function (data) {
-         
+
          var randomNum = ""
          var ranNumFunc = function () {
             randomNum = Math.floor(Math.random() * 34);
@@ -202,75 +214,76 @@ var drink = function () {
                ranNumFunc();
             }
          };
-         ranNumFunc();         
+         ranNumFunc();
          var drinkId = data.drinks[randomNum].idDrink;
 
 
          var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId
          fetch(apiUrl2).then(function (response2) {
             response2.json().then(function (data) {
-            console.log(data);
-            var ingredients = [
-               data.drinks[0].strIngredient1,
-               data.drinks[0].strIngredient2,
-               data.drinks[0].strIngredient3,
-               data.drinks[0].strIngredient4,
-               data.drinks[0].strIngredient5,
-               data.drinks[0].strIngredient6,
-               data.drinks[0].strIngredient7,
-               data.drinks[0].strIngredient8,
-               data.drinks[0].strIngredient9,
-               data.drinks[0].strIngredient10,
-               data.drinks[0].strIngredient11,
-               data.drinks[0].strIngredient12,
-               data.drinks[0].strIngredient13,
-               data.drinks[0].strIngredient14,
-               data.drinks[0].strIngredient15,
-            ]
-            var measure = [
-               data.drinks[0].strMeasure1,
-               data.drinks[0].strMeasure2,
-               data.drinks[0].strMeasure3,
-               data.drinks[0].strMeasure4,
-               data.drinks[0].strMeasure5,
-               data.drinks[0].strMeasure6,
-               data.drinks[0].strMeasure7,
-               data.drinks[0].strMeasure8,
-               data.drinks[0].strMeasure9,
-               data.drinks[0].strMeasure10,
-               data.drinks[0].strMeasure11,
-               data.drinks[0].strMeasure12,
-               data.drinks[0].strMeasure13,
-               data.drinks[0].strMeasure14,
-               data.drinks[0].strMeasure15,
-            ]
-            //add title of drink to page
-            document.getElementById("drink-title").innerHTML = data.drinks[0].strDrink
-            //add image to page and set alt attribute
-            document.getElementById('drink-img').setAttribute("src", data.drinks[0].strDrinkThumb)
-            document.getElementById('drink-img').setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
-            // stores the drink id
-            drinkID = data.drinks[0].idDrink
-            console.log("this is the drinkID: " + drinkID)
-            var drinkList = document.createElement("ul");
-            drinkBoxEl.appendChild(drinkList)
-            var instructions = document.createElement('p')
-            instructions.textContent = data.drinks[0].strInstructions
-            document.getElementById("drink-box").appendChild(instructions);
-            for (var i = 0; i < measure.length; i++) {
-               console.log($(this));
-               if (measure[i] === null || measure[i] === "") {
-                  return;
+               console.log(data);
+               var ingredients = [
+                  data.drinks[0].strIngredient1,
+                  data.drinks[0].strIngredient2,
+                  data.drinks[0].strIngredient3,
+                  data.drinks[0].strIngredient4,
+                  data.drinks[0].strIngredient5,
+                  data.drinks[0].strIngredient6,
+                  data.drinks[0].strIngredient7,
+                  data.drinks[0].strIngredient8,
+                  data.drinks[0].strIngredient9,
+                  data.drinks[0].strIngredient10,
+                  data.drinks[0].strIngredient11,
+                  data.drinks[0].strIngredient12,
+                  data.drinks[0].strIngredient13,
+                  data.drinks[0].strIngredient14,
+                  data.drinks[0].strIngredient15,
+               ]
+               var measure = [
+                  data.drinks[0].strMeasure1,
+                  data.drinks[0].strMeasure2,
+                  data.drinks[0].strMeasure3,
+                  data.drinks[0].strMeasure4,
+                  data.drinks[0].strMeasure5,
+                  data.drinks[0].strMeasure6,
+                  data.drinks[0].strMeasure7,
+                  data.drinks[0].strMeasure8,
+                  data.drinks[0].strMeasure9,
+                  data.drinks[0].strMeasure10,
+                  data.drinks[0].strMeasure11,
+                  data.drinks[0].strMeasure12,
+                  data.drinks[0].strMeasure13,
+                  data.drinks[0].strMeasure14,
+                  data.drinks[0].strMeasure15,
+               ]
+               //add title of drink to page
+               document.getElementById("drink-title").innerHTML = data.drinks[0].strDrink
+               //add image to page and set alt attribute
+               document.getElementById('drink-img').setAttribute("src", data.drinks[0].strDrinkThumb)
+               document.getElementById('drink-img').setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
+               // stores the drink id
+               drinkID = data.drinks[0].idDrink
+               bevID=drinkId
+               console.log("this is the drinkID: " + drinkID)
+               var drinkList = document.createElement("ul");
+               drinkBoxEl.appendChild(drinkList)
+               var instructions = document.createElement('p')
+               instructions.textContent = data.drinks[0].strInstructions
+               document.getElementById("drink-box").appendChild(instructions);
+               for (var i = 0; i < measure.length; i++) {
+                  console.log($(this));
+                  if (measure[i] === null || measure[i] === "") {
+                     return;
+                  }
+                  else {
+                     var drinkM = document.createElement("li")
+                     drinkM.innerHTML = measure[i] + "-" + ingredients[i];
+                     drinkList.appendChild(drinkM);
+                  }
                }
-               else {
-                  var drinkM = document.createElement("li")
-                  drinkM.innerHTML = measure[i] + "-" + ingredients[i];
-                  drinkList.appendChild(drinkM);
-               }
-            }
+            })
          })
       })
-   })   
 };
 drink();
 // var function api call movies ! need to change the current values in html to match the ids needed for the api call
@@ -301,7 +314,7 @@ var movie = function () {
          var cover = document.createElement('img')
          cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
          cover.setAttribute('value', movieData.results[randomNum].id)
-         cover.setAttribute('alt',"Movie poster for "+movieData.results[randomNum].original_title)
+         cover.setAttribute('alt', "Movie poster for " + movieData.results[randomNum].original_title)
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
@@ -335,7 +348,7 @@ var savePlan = function () {
       //creates the link element
       var aE1 = document.createElement('a')
       aE1.setAttribute('href', "")
-      aE1.textContent = '[food name]' + "+" + document.getElementById("drink-title").textContent + "+" + document.getElementById('movie-title').textContent
+      aE1.textContent = foodName=document.getElementById("meal-title").textContent + " & " + document.getElementById("drink-title").textContent + " & " + document.getElementById('movie-title').textContent
       //creates the span inside the link
       var span = document.createElement('span')
       span.setAttribute('class', 'float-right')
@@ -350,9 +363,10 @@ var savePlan = function () {
       //append div to page
       savedPlanEl.appendChild(newEntry);
       //set variables for storage
+      foodName=document.getElementById("meal-title").textContent
       drinkName = document.getElementById("drink-title").textContent
       movieName = document.getElementById('movie-title').textContent
-      newSave.push(currentDate, drinkName, movieName, drinkID, movieID)
+      newSave.push(currentDate, drinkName, movieName, dID, movieID,foodName,bevID)
       console.log(newSave)
       storageArray.push(newSave)
       save();
@@ -362,7 +376,7 @@ var savePlan = function () {
 var movieHistory = function () {
    console.log(movieHistoryID)
 
-   fetch("https://api.themoviedb.org/3/movie/"+movieHistoryID+"?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US")
+   fetch("https://api.themoviedb.org/3/movie/" + movieHistoryID + "?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US")
       .then(function (historyResponse) {
          if (historyResponse.ok) {
             return historyResponse.json();
@@ -372,36 +386,40 @@ var movieHistory = function () {
          }
 
       })
-      .then(function (historyData){
+      .then(function (historyData) {
          console.log(historyData)
          //clear out the div 
-         document.getElementById('movie-box').textContent="";
+         document.getElementById('movie-box').textContent = "";
          //dynamically create the elements and append to page
          //create title 
          var title = document.createElement('h3')
          title.setAttribute('id', 'movie-title')
-         title.textContent =historyData.original_title
+         title.textContent = historyData.original_title
          document.getElementById('movie-box').appendChild(title)
          //create movie cover
          var cover = document.createElement('img')
          cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + historyData.poster_path + "")
          cover.setAttribute('value', historyData.id)
-         cover.setAttribute('alt', "Move poster for "+historyData.original_title)
+         cover.setAttribute('alt', "Move poster for " + historyData.original_title)
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
          summary.textContent = historyData.overview
          document.getElementById('movie-box').appendChild(summary)
 
-      })   
+      })
 }
+
+//api call for mealHistory
+
 
 
 //reFetch
 var reFetch = function (event) {
    event.preventDefault()
    console.log(event.target)
-   movieHistoryID=event.target.getAttribute('data-movie')
+   movieHistoryID = event.target.getAttribute('data-movie')
+   mealHistoryID= event.target.getAttribute("data-meal")
    //call the api
    movieHistory();
 
