@@ -105,7 +105,7 @@ var meal = function () {
          var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
          fetch(apiUrl2).then(function (response2) {
             response2.json().then(function (data2) {
-               
+
                //creates the h3 element for the meal-title
                var mealTitle = document.createElement('h3')
                mealTitle.textContent = data2.meals[0].strMeal;
@@ -177,6 +177,7 @@ var meal = function () {
                var mealList = document.createElement("ul");
                mealBoxE1.appendChild(mealList)
                var instructions = document.createElement('p')
+               instructions.setAttribute('class',"text");
                instructions.textContent = data2.meals[0].strInstructions
                console.log(instructions);
                mealBoxE1.appendChild(instructions);
@@ -331,6 +332,7 @@ var movie = function () {
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
+         summary.setAttribute("class",'text')
          summary.textContent = movieData.results[randomNum].overview
          document.getElementById('movie-box').appendChild(summary)
          // creates the variable for the movieID so we call recall out of storage
@@ -417,6 +419,7 @@ var movieHistory = function () {
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
+         summary.setAttribute("class","text")
          summary.textContent = historyData.overview
          document.getElementById('movie-box').appendChild(summary)
 
@@ -426,7 +429,7 @@ var movieHistory = function () {
 //api call for mealHistory
 var mealHistory = function () {
    console.log(mealHistoryID)
-   mealBoxE1.textContent="";
+   mealBoxE1.textContent = "";
 
    var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealHistoryID
    fetch(apiUrl2).then(function (response2) {
@@ -503,16 +506,16 @@ var mealHistory = function () {
          // stores the meal id
          mealID = data2.meals[0].idMeal
 
-         
 
-         dID = mealID;
-         console.log("this is the dID: " + dID)
+
+
          // stores the meal id
          mealID = data2.meals[0].idMeal
          console.log("this is the mealId: " + mealID)
          var mealList = document.createElement("ul");
          mealBoxE1.appendChild(mealList)
          var instructions = document.createElement('p')
+         instructions.setAttribute('class',"text");
          instructions.textContent = data2.meals[0].strInstructions
          console.log(instructions);
          mealBoxE1.appendChild(instructions);
