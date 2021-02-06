@@ -45,8 +45,11 @@ var meal = function () {
 // var function api call drink !current set up just to run a random meal!
 var drink = function () {
    var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
-   fetch(apiUrl).then(function (response) {
-      response.json().then(function (data) {
+   fetch(apiUrl)
+      .then(function (response) {
+         return response.json();
+      })
+      .then(function (data) {
          console.log(data);
          var ingredients = [
             data.drinks[0].strIngredient1,
@@ -82,8 +85,17 @@ var drink = function () {
             data.drinks[0].strMeasure14,
             data.drinks[0].strMeasure15,
          ]
+         //add title of drink to page
+         document.getElementById("drink-title").innerHTML=data.drinks[0].strDrink
+         //add image to page and set alt attribute
+         document.getElementById('drink-img').setAttribute("src",data.drinks[0].strDrinkThumb)
+         document.getElementById('drink-img').setAttribute("alt", "Picture of a "+data.drinks[0].strDrink)
+         
          var drinkList = document.createElement("ul");
          drinkBoxEl.appendChild(drinkList)
+         var instructions=document.createElement('p')
+         instructions.textContent=data.drinks[0].strInstructions
+         document.getElementById("drink-box").appendChild(instructions);
          for (var i = 0; i < measure.length; i++) {
             console.log($(this));
             if (measure[i] === null || measure[i] === "") {
@@ -96,8 +108,8 @@ var drink = function () {
             }
 
          }
+        
       })
-   })
 };
 drink();
 // var function api call movies ! need to change the current values in html to match the ids needed for the api call
@@ -119,15 +131,22 @@ var movie = function () {
          var randomNum = Math.floor(Math.random() * 20);
          console.log("selected randoStyle is: " + randomNum);
          //dynamically create the elements and append to page
+         //create title 
          var title = document.createElement('h3')
          title.setAttribute('id', 'title' + [randomNum])
          title.textContent = movieData.results[randomNum].original_title
          document.getElementById('movie-box').appendChild(title)
+         //create movie cover
          var cover = document.createElement('img')
          cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
          cover.setAttribute('value', movieData.results[randomNum].id)
          document.getElementById('movie-box').appendChild(cover)
-         var movieID=movieData.results[randomNum].id
+         //create overview
+         var summary = document.createElement('p')
+         summary.textContent = movieData.results[randomNum].overview
+         document.getElementById('movie-box').appendChild(summary)
+         // creates the variable for the movieID so we call recall out of storage
+         var movieID = movieData.results[randomNum].id
          console.log(movieID)
       })
 }
