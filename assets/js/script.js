@@ -72,89 +72,123 @@ var movieHistoryID="";
 // API CALLS 
 // var function api dinner !current set up just to run a random meal!
 var meal = function () {
-   var apiUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
+   if (mealType === "random") {
+       apiUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
+   }
+   else {
+       apiUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealType;
+   }
    fetch(apiUrl).then(function (response) {
       response.json().then(function (data) {
-         console.log(data);
-
+         
+         
          var mealId = data.meals[0].idMeal;
+         
          var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
          fetch(apiUrl2).then(function (response2) {
             response2.json().then(function (data2) {
+               document.getElementById("meal-title").innerHTML = data2.meals[0].strMeal;
+               document.getElementById('meal-img').setAttribute("src", data2.meals[0].strMealThumb)
+               document.getElementById('meal-img').setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
                console.log(data2);
+               if (data2.meals[0].strSource) {
+                  var recipe = document.createElement("a")
+                  recipe.setAttribute("href", data2.meals[0].strSource);
+                  recipe.innerHTML = "Check out the recipe!";
+                  document.getElementById("meal-box").appendChild(recipe)
+               }
+               
+               //Currently Youtube is commented out because of an issue
+               //if (data2.meals[0].strYoutube) {
+                  //var video = document.createElement("iframe")
+                  //video.setAttribute("src", data2.meals[0].strYoutube);
+                  //document.getElementById("meal-box").appendChild(video);
+               //}
             })
          })
       })
    })
 };
+meal();
 // var function api call drink !current set up just to run a random meal!
 var drink = function () {
-   var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+   if (drinkType === "random") {
+      apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+   }
+   else {
+      apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + drinkType;
+   }
    fetch(apiUrl)
       .then(function (response) {
          return response.json();
       })
       .then(function (data) {
-         console.log(data);
-         var ingredients = [
-            data.drinks[0].strIngredient1,
-            data.drinks[0].strIngredient2,
-            data.drinks[0].strIngredient3,
-            data.drinks[0].strIngredient4,
-            data.drinks[0].strIngredient5,
-            data.drinks[0].strIngredient6,
-            data.drinks[0].strIngredient7,
-            data.drinks[0].strIngredient8,
-            data.drinks[0].strIngredient9,
-            data.drinks[0].strIngredient10,
-            data.drinks[0].strIngredient11,
-            data.drinks[0].strIngredient12,
-            data.drinks[0].strIngredient13,
-            data.drinks[0].strIngredient14,
-            data.drinks[0].strIngredient15,
-         ]
-         var measure = [
-            data.drinks[0].strMeasure1,
-            data.drinks[0].strMeasure2,
-            data.drinks[0].strMeasure3,
-            data.drinks[0].strMeasure4,
-            data.drinks[0].strMeasure5,
-            data.drinks[0].strMeasure6,
-            data.drinks[0].strMeasure7,
-            data.drinks[0].strMeasure8,
-            data.drinks[0].strMeasure9,
-            data.drinks[0].strMeasure10,
-            data.drinks[0].strMeasure11,
-            data.drinks[0].strMeasure12,
-            data.drinks[0].strMeasure13,
-            data.drinks[0].strMeasure14,
-            data.drinks[0].strMeasure15,
-         ]
-         //add title of drink to page
-         document.getElementById("drink-title").innerHTML = data.drinks[0].strDrink
-         //add image to page and set alt attribute
-         document.getElementById('drink-img').setAttribute("src", data.drinks[0].strDrinkThumb)
-         document.getElementById('drink-img').setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
-         // stores the drink id
-         drinkID = data.drinks[0].idDrink
-         console.log("this is the drinkID: " + drinkID)
-         var drinkList = document.createElement("ul");
-         drinkBoxEl.appendChild(drinkList)
-         var instructions = document.createElement('p')
-         instructions.textContent = data.drinks[0].strInstructions
-         document.getElementById("drink-box").appendChild(instructions);
-         for (var i = 0; i < measure.length; i++) {
-            console.log($(this));
-            if (measure[i] === null || measure[i] === "") {
-               return;
+         drinkId = data.drinks[0].idDrink;
+         var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId
+         fetch(apiUrl2).then(function (response2) {
+            response2.json().then(function (data) {
+            console.log(data);
+            var ingredients = [
+               data.drinks[0].strIngredient1,
+               data.drinks[0].strIngredient2,
+               data.drinks[0].strIngredient3,
+               data.drinks[0].strIngredient4,
+               data.drinks[0].strIngredient5,
+               data.drinks[0].strIngredient6,
+               data.drinks[0].strIngredient7,
+               data.drinks[0].strIngredient8,
+               data.drinks[0].strIngredient9,
+               data.drinks[0].strIngredient10,
+               data.drinks[0].strIngredient11,
+               data.drinks[0].strIngredient12,
+               data.drinks[0].strIngredient13,
+               data.drinks[0].strIngredient14,
+               data.drinks[0].strIngredient15,
+            ]
+            var measure = [
+               data.drinks[0].strMeasure1,
+               data.drinks[0].strMeasure2,
+               data.drinks[0].strMeasure3,
+               data.drinks[0].strMeasure4,
+               data.drinks[0].strMeasure5,
+               data.drinks[0].strMeasure6,
+               data.drinks[0].strMeasure7,
+               data.drinks[0].strMeasure8,
+               data.drinks[0].strMeasure9,
+               data.drinks[0].strMeasure10,
+               data.drinks[0].strMeasure11,
+               data.drinks[0].strMeasure12,
+               data.drinks[0].strMeasure13,
+               data.drinks[0].strMeasure14,
+               data.drinks[0].strMeasure15,
+            ]
+            //add title of drink to page
+            document.getElementById("drink-title").innerHTML = data.drinks[0].strDrink
+            //add image to page and set alt attribute
+            document.getElementById('drink-img').setAttribute("src", data.drinks[0].strDrinkThumb)
+            document.getElementById('drink-img').setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
+            // stores the drink id
+            drinkID = data.drinks[0].idDrink
+            console.log("this is the drinkID: " + drinkID)
+            var drinkList = document.createElement("ul");
+            drinkBoxEl.appendChild(drinkList)
+            var instructions = document.createElement('p')
+            instructions.textContent = data.drinks[0].strInstructions
+            document.getElementById("drink-box").appendChild(instructions);
+            for (var i = 0; i < measure.length; i++) {
+               console.log($(this));
+               if (measure[i] === null || measure[i] === "") {
+                  return;
+               }
+               else {
+                  var drinkM = document.createElement("li")
+                  drinkM.innerHTML = measure[i] + "-" + ingredients[i];
+                  drinkList.appendChild(drinkM);
+               }
             }
-            else {
-               var drinkM = document.createElement("li")
-               drinkM.innerHTML = measure[i] + "-" + ingredients[i];
-               drinkList.appendChild(drinkM);
-            }
-         }
+         })
       })
+   })   
 };
 drink();
 // var function api call movies ! need to change the current values in html to match the ids needed for the api call
