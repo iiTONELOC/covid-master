@@ -1,8 +1,4 @@
 
-//ROOT
-//DROP JQUERY LINK
-
-// COSMIDIC
 var queryString = document.location.search;
 var dataTypes = queryString.split("=");
 var mealType = dataTypes[1];
@@ -12,12 +8,8 @@ console.log(dataTypes);
 var drinkBoxEl = document.getElementById("drink-box")
 //VARIABLEs FOR SAVED PLANS
 var savedPlanEl = document.getElementById("saved-plans")
-
-// DATA = []
-
 //date
-var currentDate = moment().format('LL');
-
+var currentDate = moment().format('LLLL');
 // WE MAY NEED THREE DATA SET
 
 // MEMORY
@@ -37,11 +29,18 @@ var loadMemory = function () {
          storageArray.push(memory[i])
          //creates the div
          var newEntry = document.createElement('div');
-         newEntry.setAttribute("class", 'cell large-6 small-12 plan-item');
+         newEntry.setAttribute("class", 'cell large-6 small-12 plan-item')
+         //passes the id's needed for the api as data-* attributes
+         newEntry.setAttribute('data-drink', memory[i][3])
+         newEntry.setAttribute('data-movie', memory[i][4]);
          //creates the link element
          var aE1 = document.createElement('a')
          aE1.setAttribute('href', "")
          aE1.textContent = '[food name]' + "+" + memory[i][1] + "+" + memory[i][2]
+         //since the whole div is clickable due to its dynamically created, we will ensure we capture the ids needed 
+         aE1.setAttribute('data-drink', memory[i][3])
+         aE1.setAttribute('data-movie', memory[i][4]);
+
          //creates the span inside the link
          var span = document.createElement('span')
          span.setAttribute('class', 'float-right')
@@ -67,9 +66,9 @@ var foodName = "";
 var drinkName = "";
 var movieName = "";
 var newSave = [];
+//VARS for RELOAD
+var movieHistoryID="";
 
-
-// MOMENT 
 // API CALLS 
 // var function api dinner !current set up just to run a random meal!
 var meal = function () {
@@ -186,6 +185,7 @@ var movie = function () {
          var cover = document.createElement('img')
          cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
          cover.setAttribute('value', movieData.results[randomNum].id)
+         cover.setAttribute('alt',"Movie poster for "+movieData.results[randomNum].original_title)
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
@@ -197,6 +197,7 @@ var movie = function () {
       })
 }
 movie();
+
 //save function
 var savePlan = function () {
    console.log("You clicked save")
@@ -241,22 +242,58 @@ var savePlan = function () {
       save();
    }
 }
+//second movie api call to fetch movie by title
+var movieHistory = function () {
+   console.log(movieHistoryID)
+
+   fetch("https://api.themoviedb.org/3/movie/"+movieHistoryID+"?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US")
+      .then(function (historyResponse) {
+         if (historyResponse.ok) {
+            return historyResponse.json();
+         }
+         else {
+            return;
+         }
+
+      })
+      .then(function (historyData){
+         console.log(historyData)
+         //clear out the div 
+         document.getElementById('movie-box').textContent="";
+         //dynamically create the elements and append to page
+         //create title 
+         var title = document.createElement('h3')
+         title.setAttribute('id', 'movie-title')
+         title.textContent =historyData.original_title
+         document.getElementById('movie-box').appendChild(title)
+         //create movie cover
+         var cover = document.createElement('img')
+         cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + historyData.poster_path + "")
+         cover.setAttribute('value', historyData.id)
+         cover.setAttribute('alt', "Move poster for "+historyData.original_title)
+         document.getElementById('movie-box').appendChild(cover)
+         //create overview
+         var summary = document.createElement('p')
+         summary.textContent = historyData.overview
+         document.getElementById('movie-box').appendChild(summary)
+
+      })   
+}
+
+
+//reFetch
+var reFetch = function (event) {
+   event.preventDefault()
+   console.log(event.target)
+   movieHistoryID=event.target.getAttribute('data-movie')
+   //call the api
+   movieHistory();
+
+}
 loadMemory();
+//event listener for the savedPlan click
+document.getElementById('saved-plans').addEventListener("click", reFetch)
 //event listener for the save plan
 document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 
-// GLOBAL FUNCTIONS
-//DYNAMIC ADD ELEMENTS FOR THREE COLUM DATE: MEAL, DRINK, MOVIE 
-// VAR 
-// FUNCTION MEAL FUNCTION
-// FUNCTION DRINK FUNCTION
-// FOR LOOP AND RENDERING THE DATA
-// MOVIE FUNCTION
-
-// API FETCH MEAL 
-// API FETCH DRINKS
-// API FETCH MEALS
-
-// Functions to record choice from dropdown options
-//meal
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
