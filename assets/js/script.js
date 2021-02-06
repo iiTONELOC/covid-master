@@ -108,6 +108,7 @@ var meal = function () {
 
                //creates the h3 element for the meal-title
                var mealTitle = document.createElement('h3')
+               mealTitle.setAttribute("class","results-title")
                mealTitle.textContent = data2.meals[0].strMeal;
                //document.getElementById("meal-title").textContent = data2.meals[0].strMeal;
                //creates the img element for the meal-img
@@ -321,7 +322,7 @@ var movie = function () {
          //dynamically create the elements and append to page
          //create title 
          var title = document.createElement('h3')
-         title.setAttribute('id', 'movie-title')
+         title.setAttribute('class', 'results-title')
          title.textContent = movieData.results[randomNum].original_title
          document.getElementById('movie-box').appendChild(title)
          //create movie cover
@@ -408,7 +409,7 @@ var movieHistory = function () {
          //dynamically create the elements and append to page
          //create title 
          var title = document.createElement('h3')
-         title.setAttribute('id', 'movie-title')
+         title.setAttribute('class', 'results-title')
          title.textContent = historyData.original_title
          document.getElementById('movie-box').appendChild(title)
          //create movie cover
@@ -440,6 +441,7 @@ var mealHistory = function () {
 
          //creates the h3 element for the meal-title
          var mealTitle = document.createElement('h3')
+         mealTitle.setAttribute('class',"results-title")
          mealTitle.textContent = data2.meals[0].strMeal;
          //document.getElementById("meal-title").textContent = data2.meals[0].strMeal;
          //creates the img element for the meal-img
