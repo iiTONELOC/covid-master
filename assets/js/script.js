@@ -10,17 +10,29 @@ var drinkType = dataTypes[2];
 var genreId = dataTypes[3];
 console.log(dataTypes);
 var drinkBoxEl = document.getElementById("drink-box")
+//VARIABLEs FOR SAVED PLANS
+var savedPlanEl = document.getElementById("saved-plans")
+
 // DATA = []
 
 // WE MAY NEED THREE DATA SET
 
 // MEMORY
+var storageArray = [];
 
 // VAR MEMORYSET = FUNCTION
+var save = function () {
+   localStorage.setItem("storage", JSON.stringify(storage));
+}
 // VAR MEMORYGET = FUNCTION
 
 // GLOBAL VAR 
-//global movie id variable 
+var movieID = "";
+var drinkID = "";
+var foodName = "";
+var drinkName = "";
+var movieName = "";
+var newSave = [];
 
 
 // MOMENT 
@@ -86,15 +98,17 @@ var drink = function () {
             data.drinks[0].strMeasure15,
          ]
          //add title of drink to page
-         document.getElementById("drink-title").innerHTML=data.drinks[0].strDrink
+         document.getElementById("drink-title").innerHTML = data.drinks[0].strDrink
          //add image to page and set alt attribute
-         document.getElementById('drink-img').setAttribute("src",data.drinks[0].strDrinkThumb)
-         document.getElementById('drink-img').setAttribute("alt", "Picture of a "+data.drinks[0].strDrink)
-         
+         document.getElementById('drink-img').setAttribute("src", data.drinks[0].strDrinkThumb)
+         document.getElementById('drink-img').setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
+         // stores the drink id
+         drinkID = data.drinks[0].idDrink
+         console.log("this is the drinkID: " + drinkID)
          var drinkList = document.createElement("ul");
          drinkBoxEl.appendChild(drinkList)
-         var instructions=document.createElement('p')
-         instructions.textContent=data.drinks[0].strInstructions
+         var instructions = document.createElement('p')
+         instructions.textContent = data.drinks[0].strInstructions
          document.getElementById("drink-box").appendChild(instructions);
          for (var i = 0; i < measure.length; i++) {
             console.log($(this));
@@ -106,9 +120,7 @@ var drink = function () {
                drinkM.innerHTML = measure[i] + "-" + ingredients[i];
                drinkList.appendChild(drinkM);
             }
-
          }
-        
       })
 };
 drink();
@@ -133,7 +145,7 @@ var movie = function () {
          //dynamically create the elements and append to page
          //create title 
          var title = document.createElement('h3')
-         title.setAttribute('id', 'title' + [randomNum])
+         title.setAttribute('id', 'movie-title')
          title.textContent = movieData.results[randomNum].original_title
          document.getElementById('movie-box').appendChild(title)
          //create movie cover
@@ -146,11 +158,56 @@ var movie = function () {
          summary.textContent = movieData.results[randomNum].overview
          document.getElementById('movie-box').appendChild(summary)
          // creates the variable for the movieID so we call recall out of storage
-         var movieID = movieData.results[randomNum].id
-         console.log(movieID)
+         movieID = movieData.results[randomNum].id
+         console.log("this is the movieID: " + movieID)
       })
 }
 movie();
+//save function
+var savePlan = function () {
+   console.log("You clicked save")
+   
+
+   //push items to array for storage
+   //check for DUPES
+   var duplicate = false;
+   for (let i = 0; i < newSave.length; i++) {
+      const element = newSave[i];
+      if (element === drinkName || element === movieName || element === foodName) {
+         duplicate = true;
+      }
+   }
+   if (!duplicate) {
+      //creates the div
+      var newEntry = document.createElement('div');
+      newEntry.setAttribute("class", 'cell large-6 small-12 plan-item');
+      //creates the link element
+      var aE1 = document.createElement('a')
+      aE1.setAttribute('href', "")
+      aE1.textContent = '[food name]' + "+" + document.getElementById("drink-title").textContent + "+" + document.getElementById('movie-title').textContent
+      //creates the span inside the link
+      var span = document.createElement('span')
+      span.setAttribute('class', 'float-right')
+      //create the icon inside the span
+      var icon = document.createElement('i')
+      icon.setAttribute('class', 'fas fa-plus')
+      span.appendChild(icon);
+      //append the span to the link
+      aE1.appendChild(span);
+      //append link to the div
+      newEntry.appendChild(aE1);
+      //append div to page
+      savedPlanEl.appendChild(newEntry);
+      //set variables for storage
+      drinkName = document.getElementById("drink-title").textContent
+      movieName = document.getElementById('movie-title').textContent
+      newSave.push(drinkName, movieName, drinkID, movieID)
+      console.log(newSave)
+   }
+}
+
+//event listener for the save plan
+document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 
 // GLOBAL FUNCTIONS
 //DYNAMIC ADD ELEMENTS FOR THREE COLUM DATE: MEAL, DRINK, MOVIE 
@@ -166,3 +223,4 @@ movie();
 
 // Functions to record choice from dropdown options
 //meal
+//IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
