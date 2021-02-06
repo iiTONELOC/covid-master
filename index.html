@@ -107,9 +107,11 @@
 
     <script src="./Foundation-Sites-6.6.3-CSS/Foundation-Sites-6.6.3-CSS/assets/js/vendor.js"></script>
     <script src="./Foundation-Sites-6.6.3-CSS/Foundation-Sites-6.6.3-CSS/assets/js/foundation.js"></script>
-    <script src="./assets/js/script.js"></script>
+    
     <script>
-
+        var foodType = "";
+        var drinkType = "";
+        var movieType = "";
         document.querySelector('main').addEventListener("click", function() {
             event.preventDefault();
 
@@ -132,6 +134,7 @@
             }
 
             
+            
 
             if (clickedBtnId === "start-btn") {
                 document.querySelector("#dinner-slide").classList.replace("hide", "animate__slideInUp");
@@ -143,19 +146,21 @@
             }
             if (clickedBtnId === "add-food-btn") {
                 document.querySelector("#drink-slide").classList.replace("hide", "animate__slideInUp");
-                var foodType = document.querySelector("#cuisine-type").value;
+                foodType = document.querySelector("#cuisine-type").value;
                 console.log(foodType);
             }
             if (clickedBtnId === "add-drink-btn") {
                 document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
-                var drinkType = document.querySelector("#drink-type").value;
+                drinkType = document.querySelector("#drink-type").value;
                 console.log(drinkType);
             }
             if (clickedBtnId === "add-genre-btn") {
                 document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
-                var movieType = document.querySelector("#movie-type").value;
+                movieType = document.querySelector("#movie-type").value;
                 console.log(movieType);
-                open('results.html');
+                console.log(foodType);
+                console.log(drinkType);
+                open('results.html?para=' + foodType + '=' + drinkType + '=' + movieType);
             }
         });
 

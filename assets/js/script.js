@@ -3,7 +3,12 @@
 //DROP JQUERY LINK
 
 // COSMIDIC
-
+var queryString = document.location.search;
+var dataTypes = queryString.split("=");
+var mealType = dataTypes[1];
+var drinkType = dataTypes[2];
+var genreId = dataTypes[3];
+console.log(dataTypes);
 // DATA = []
 
 // WE MAY NEED THREE DATA SET
@@ -15,7 +20,7 @@
 
 // GLOBAL VAR 
 //global movie id variable 
-var genreId = "";
+
 
 // MOMENT 
 // API CALLS 
@@ -76,27 +81,3 @@ var movie = function () {
 
 // Functions to record choice from dropdown options
 //meal
-var mealChoice = function () {
-      var mealType = $("#cuisine-type").val()
-      console.log(mealType);
-   };
-   //drink currently all select options have same id so its not working properly
-   var drinkChoice = function () {
-      var drinkType = $("#drink-type").val()
-      console.log(drinkType);
-   };
-   //movie genre
-   var movieChoice = function () {
-      let genreId = $("#movie-type").val()
-      console.log("selected genre id is: "+genreId);
-      //return genreId;
-   }
-
-
-   // EVENT LISTNERS
-   // FOR MEAL 
-   $("#add-food-btn").on("click", mealChoice);
-   // FOR DRINK
-   $("#add-drink-btn").on("click", drinkChoice);
-   // FOR Movie
-   $("#add-genre-btn").on("click", movieChoice);
