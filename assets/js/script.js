@@ -48,7 +48,7 @@ var drink = function () {
    fetch(apiUrl).then(function (response) {
       response.json().then(function (data) {
          console.log(data);
-         var ingredients= [
+         var ingredients = [
             data.drinks[0].strIngredient1,
             data.drinks[0].strIngredient2,
             data.drinks[0].strIngredient3,
@@ -63,7 +63,8 @@ var drink = function () {
             data.drinks[0].strIngredient12,
             data.drinks[0].strIngredient13,
             data.drinks[0].strIngredient14,
-            data.drinks[0].strIngredient15,]
+            data.drinks[0].strIngredient15,
+         ]
          var measure = [
             data.drinks[0].strMeasure1,
             data.drinks[0].strMeasure2,
@@ -79,7 +80,8 @@ var drink = function () {
             data.drinks[0].strMeasure12,
             data.drinks[0].strMeasure13,
             data.drinks[0].strMeasure14,
-            data.drinks[0].strMeasure15,]
+            data.drinks[0].strMeasure15,
+         ]
          var drinkList = document.createElement("ul");
          drinkBoxEl.appendChild(drinkList)
          for (var i = 0; i < measure.length; i++) {
@@ -92,17 +94,18 @@ var drink = function () {
                drinkM.innerHTML = measure[i] + "-" + ingredients[i];
                drinkList.appendChild(drinkM);
             }
-               
-         } 
+
+         }
       })
    })
 };
 drink();
 // var function api call movies ! need to change the current values in html to match the ids needed for the api call
 var movie = function () {
-   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres="+ genreId + "")
+   console.log(genreId);
+   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
       .then(function (movieResponse) {
-         if (response.ok) {
+         if (movieResponse.ok) {
             return movieResponse.json();
          }
          else {
@@ -111,9 +114,24 @@ var movie = function () {
 
       })
       .then(function (movieData) {
-         console.log("Movie data: "+movieData);
+         console.log(movieData);
+         // random result from list of results
+         var randomNum = Math.floor(Math.random() * 20);
+         console.log("selected randoStyle is: " + randomNum);
+         //dynamically create the elements and append to page
+         var title = document.createElement('h3')
+         title.setAttribute('id', 'title' + [randomNum])
+         title.textContent = movieData.results[randomNum].original_title
+         document.getElementById('movie-box').appendChild(title)
+         var cover = document.createElement('img')
+         cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
+         cover.setAttribute('value', movieData.results[randomNum].id)
+         document.getElementById('movie-box').appendChild(cover)
+         var movieID=movieData.results[randomNum].id
+         console.log(movieID)
       })
 }
+movie();
 
 // GLOBAL FUNCTIONS
 //DYNAMIC ADD ELEMENTS FOR THREE COLUM DATE: MEAL, DRINK, MOVIE 
