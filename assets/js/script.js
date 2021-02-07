@@ -728,3 +728,8 @@ document.getElementById('saved-plans').addEventListener("click", reFetch)
 document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
+
+document.querySelector("#reload-btn").addEventListener('click', function() {
+   event.preventDefault();
+   location.reload();
+});
