@@ -176,6 +176,9 @@ div.center-grid {
     justify-content: center;
     margin: 15px;
 }
+.saved-div {
+    border-radius: 10px;
+}
 /* ---------------------------------
 MEDIA QUERIES
 ----------------------------------*/
