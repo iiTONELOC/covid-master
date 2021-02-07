@@ -203,7 +203,9 @@
                 console.log(movieType);
                 console.log(foodType);
                 console.log(drinkType);
-                open('results.html?para=' + foodType + '=' + drinkType + '=' + movieType);
+                window.location="./results.html?para=" + foodType + '=' + drinkType + '=' + movieType
+                //open('results.html?para=' + foodType + '=' + drinkType + '=' + movieType);
+                
             }
         });
 
