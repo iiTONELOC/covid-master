@@ -122,6 +122,7 @@ var meal = function () {
                if (data2.meals[0].strSource) {
                   var recipe = document.createElement("a")
                   recipe.setAttribute("href", data2.meals[0].strSource);
+                  recipe.setAttribute("target","_blank")
                   recipe.textContent = "Check out the recipe!";
                   mealBoxE1.appendChild(recipe)
                }
@@ -473,6 +474,7 @@ var mealHistory = function () {
          if (data2.meals[0].strSource) {
             var recipe = document.createElement("a")
             recipe.setAttribute("href", data2.meals[0].strSource);
+            recipe.setAttribute("target","_blank")
             recipe.textContent = "Check out the recipe!";
             mealBoxE1.appendChild(recipe)
          }
