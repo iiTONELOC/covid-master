@@ -28,7 +28,7 @@
                         Need spontaneity? Go RANDO Style.
                     </p>
                     <a id="start-btn" href="#dinner" class="button main start-btn" data-control="1">Start a Plan</a><a
-                        href="./results.html" class="button secondary" id="history-btn">Plans History</a>
+                        href="./results.html#saved-plans" class="button secondary" id="history-btn">Plans History</a>
                 </div>
                 <div class="cell large-6 hero small-12 small-order-1 medium-order-2">
                     <img src="./assets/images/man-bored.jpg" class="img-responsive" />
@@ -204,8 +204,10 @@
                 console.log(foodType);
                 console.log(drinkType);
                 window.location="./results.html?para=" + foodType + '=' + drinkType + '=' + movieType
-                //open('results.html?para=' + foodType + '=' + drinkType + '=' + movieType);
-                
+                //open('results.html?para=' + foodType + '=' + drinkType + '=' + movieType);                
+            }
+            if (clickedBtnId === "history-btn"){
+                window.location="./results.html#saved-plans"
             }
         });
 
