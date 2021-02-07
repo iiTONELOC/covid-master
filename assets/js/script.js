@@ -108,25 +108,24 @@ var meal = function () {
 
                //creates the h3 element for the meal-title
                var mealTitle = document.createElement('h3')
-               mealTitle.setAttribute("class","results-title")
+               mealTitle.setAttribute("class", "results-title")
+               mealTitle.setAttribute("id", "meal-title")
                mealTitle.textContent = data2.meals[0].strMeal;
-               //document.getElementById("meal-title").textContent = data2.meals[0].strMeal;
-               //creates the img element for the meal-img
                var mealImage = document.createElement('img')
                mealImage.setAttribute("src", data2.meals[0].strMealThumb)
                mealImage.setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
                //append the title and image to page
                mealBoxE1.appendChild(mealTitle,)
                mealBoxE1.appendChild(mealImage)
-               //document.getElementById('meal-img').setAttribute("src", data2.meals[0].strMealThumb)
-               //document.getElementById('meal-img').setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
                console.log(data2);
+               //check for link
                if (data2.meals[0].strSource) {
                   var recipe = document.createElement("a")
                   recipe.setAttribute("href", data2.meals[0].strSource);
                   recipe.textContent = "Check out the recipe!";
                   mealBoxE1.appendChild(recipe)
                }
+               //arrays for ingredients
                var ingredients = [
                   data2.meals[0].strIngredient1,
                   data2.meals[0].strIngredient2,
@@ -178,7 +177,7 @@ var meal = function () {
                var mealList = document.createElement("ul");
                mealBoxE1.appendChild(mealList)
                var instructions = document.createElement('p')
-               instructions.setAttribute('class',"text");
+               instructions.setAttribute('class', "text");
                instructions.textContent = data2.meals[0].strInstructions
                console.log(instructions);
                mealBoxE1.appendChild(instructions);
@@ -207,6 +206,7 @@ var meal = function () {
    })
 };
 meal();
+
 // var function api call drink !current set up just to run a random meal!
 var drink = function () {
    if (drinkType === "random") {
@@ -271,20 +271,34 @@ var drink = function () {
                   data.drinks[0].strMeasure15,
                ]
                //add title of drink to page
-               document.getElementById("drink-title").textContent = data.drinks[0].strDrink
+               var drinkTitle = document.createElement("h3")
+               drinkTitle.textContent = data.drinks[0].strDrink
+               drinkTitle.setAttribute("class", "results-title")
+               drinkTitle.setAttribute("id", "drink-title")
+
+               //append title
+               drinkBoxEl.appendChild(drinkTitle)
+
                //add image to page and set alt attribute
-               document.getElementById('drink-img').setAttribute("src", data.drinks[0].strDrinkThumb)
-               document.getElementById('drink-img').setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
+               var drinkImg = document.createElement("img")
+               drinkImg.setAttribute("src", data.drinks[0].strDrinkThumb)
+               drinkImg.setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
+
+               //append image
+               drinkBoxEl.appendChild(drinkImg)
+
+
                // stores the drink id
                drinkID = data.drinks[0].idDrink
                bevID = drinkId
                console.log("this is the drinkID: " + drinkID)
                var drinkList = document.createElement("ul");
-               drinkList.setAttribute("id", "remove")
+
                drinkBoxEl.appendChild(drinkList)
                var instructions = document.createElement('p')
+               instructions.setAttribute("class", "text")
                instructions.textContent = data.drinks[0].strInstructions
-               document.getElementById("drink-box").appendChild(instructions);
+               drinkBoxEl.appendChild(instructions);
                for (var i = 0; i < measure.length; i++) {
                   //console.log($(this));
                   if (measure[i] === null || measure[i] === "") {
@@ -323,6 +337,7 @@ var movie = function () {
          //create title 
          var title = document.createElement('h3')
          title.setAttribute('class', 'results-title')
+         title.setAttribute('id', "movie-title")
          title.textContent = movieData.results[randomNum].original_title
          document.getElementById('movie-box').appendChild(title)
          //create movie cover
@@ -333,7 +348,7 @@ var movie = function () {
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
-         summary.setAttribute("class",'text')
+         summary.setAttribute("class", 'text')
          summary.textContent = movieData.results[randomNum].overview
          document.getElementById('movie-box').appendChild(summary)
          // creates the variable for the movieID so we call recall out of storage
@@ -410,6 +425,7 @@ var movieHistory = function () {
          //create title 
          var title = document.createElement('h3')
          title.setAttribute('class', 'results-title')
+         title.setAttribute("id", "movie-title")
          title.textContent = historyData.original_title
          document.getElementById('movie-box').appendChild(title)
          //create movie cover
@@ -420,7 +436,7 @@ var movieHistory = function () {
          document.getElementById('movie-box').appendChild(cover)
          //create overview
          var summary = document.createElement('p')
-         summary.setAttribute("class","text")
+         summary.setAttribute("class", "text")
          summary.textContent = historyData.overview
          document.getElementById('movie-box').appendChild(summary)
 
@@ -441,7 +457,7 @@ var mealHistory = function () {
 
          //creates the h3 element for the meal-title
          var mealTitle = document.createElement('h3')
-         mealTitle.setAttribute('class',"results-title")
+         mealTitle.setAttribute('class', "results-title")
          mealTitle.textContent = data2.meals[0].strMeal;
          //document.getElementById("meal-title").textContent = data2.meals[0].strMeal;
          //creates the img element for the meal-img
@@ -517,7 +533,7 @@ var mealHistory = function () {
          var mealList = document.createElement("ul");
          mealBoxE1.appendChild(mealList)
          var instructions = document.createElement('p')
-         instructions.setAttribute('class',"text");
+         instructions.setAttribute('class', "text");
          instructions.textContent = data2.meals[0].strInstructions
          console.log(instructions);
          mealBoxE1.appendChild(instructions);
@@ -540,21 +556,110 @@ var mealHistory = function () {
 
 }
 
+//drinkHistory
+var drinkHistory= function(){
+   console.log(drinkHistoryID)
+   var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkHistoryID
+         fetch(apiUrl2).then(function (response2) {
+            response2.json().then(function (data) {
+               console.log(data);
+               var ingredients = [
+                  data.drinks[0].strIngredient1,
+                  data.drinks[0].strIngredient2,
+                  data.drinks[0].strIngredient3,
+                  data.drinks[0].strIngredient4,
+                  data.drinks[0].strIngredient5,
+                  data.drinks[0].strIngredient6,
+                  data.drinks[0].strIngredient7,
+                  data.drinks[0].strIngredient8,
+                  data.drinks[0].strIngredient9,
+                  data.drinks[0].strIngredient10,
+                  data.drinks[0].strIngredient11,
+                  data.drinks[0].strIngredient12,
+                  data.drinks[0].strIngredient13,
+                  data.drinks[0].strIngredient14,
+                  data.drinks[0].strIngredient15,
+               ]
+               var measure = [
+                  data.drinks[0].strMeasure1,
+                  data.drinks[0].strMeasure2,
+                  data.drinks[0].strMeasure3,
+                  data.drinks[0].strMeasure4,
+                  data.drinks[0].strMeasure5,
+                  data.drinks[0].strMeasure6,
+                  data.drinks[0].strMeasure7,
+                  data.drinks[0].strMeasure8,
+                  data.drinks[0].strMeasure9,
+                  data.drinks[0].strMeasure10,
+                  data.drinks[0].strMeasure11,
+                  data.drinks[0].strMeasure12,
+                  data.drinks[0].strMeasure13,
+                  data.drinks[0].strMeasure14,
+                  data.drinks[0].strMeasure15,
+               ]
+               drinkBoxEl.textContent=""
+               //add title of drink to page
+               var drinkTitle = document.createElement("h3")
+               drinkTitle.textContent = data.drinks[0].strDrink
+               drinkTitle.setAttribute("class", "results-title")
+               drinkTitle.setAttribute("id", "drink-title")
+
+               //append title
+               drinkBoxEl.appendChild(drinkTitle)
+
+               //add image to page and set alt attribute
+               var drinkImg = document.createElement("img")
+               drinkImg.setAttribute("src", data.drinks[0].strDrinkThumb)
+               drinkImg.setAttribute("alt", "Picture of a " + data.drinks[0].strDrink)
+
+               //append image
+               drinkBoxEl.appendChild(drinkImg)
+
+
+               // stores the drink id
+               drinkID = data.drinks[0].idDrink
+              
+               console.log("this is the drinkID: " + drinkID)
+               var drinkList = document.createElement("ul");
+
+               drinkBoxEl.appendChild(drinkList)
+               var instructions = document.createElement('p')
+               instructions.setAttribute("class", "text")
+               instructions.textContent = data.drinks[0].strInstructions
+               drinkBoxEl.appendChild(instructions);
+               for (var i = 0; i < measure.length; i++) {
+                  //console.log($(this));
+                  if (measure[i] === null || measure[i] === "") {
+                     return;
+                  }
+                  else {
+                     var drinkM = document.createElement("li")
+                     drinkM.textContent = measure[i] + "-" + ingredients[i];
+                     drinkList.appendChild(drinkM);
+                  }
+               }
+            })
+         })
+}
+
 
 
 //reFetch
 var reFetch = function (event) {
    event.preventDefault()
    console.log(event.target)
-   //if(event.target.getAttribute("data-")===null){
-   // return; 
-   //}
+   if (event.target.getAttribute("data-movie") === null
+      || event.target.getAttribute("data-meal") === null
+      || event.target.getAttribute("data-drink") === null) {
+      return;
+   }
    movieHistoryID = event.target.getAttribute('data-movie')
    mealHistoryID = event.target.getAttribute("data-meal")
    drinkHistoryID = event.target.getAttribute("data-drink")
    //call the api
    movieHistory();
    mealHistory();
+   drinkHistory();
 
 }
 loadMemory();
