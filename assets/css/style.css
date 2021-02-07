@@ -162,6 +162,13 @@ div.center-grid {
 .scroll-lock {
     overflow: hidden !important;
 }
+
+.results-title {
+    font-size: 25px;
+}
+.text {
+    text-shadow: none;
+}
 /* ---------------------------------
 MEDIA QUERIES
 ----------------------------------*/
