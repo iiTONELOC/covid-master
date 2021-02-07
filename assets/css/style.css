@@ -171,6 +171,8 @@ div.center-grid {
     text-shadow: none;
 }
 .saved-styles {
+    display: flex;
+    justify-content: center;
     margin: 20px;
 }
 /* ---------------------------------
