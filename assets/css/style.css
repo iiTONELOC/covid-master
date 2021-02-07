@@ -192,4 +192,8 @@ MEDIA QUERIES
     .img-responsive {
         height: auto;
     }
+    .box {
+        max-height: none;
+        margin: 10px;
+    }
 }
