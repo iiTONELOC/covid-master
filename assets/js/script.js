@@ -30,7 +30,7 @@ var loadMemory = function () {
          storageArray.push(memory[i])
          //creates the div
          var newEntry = document.createElement('div');
-         newEntry.setAttribute("class", 'cell large-6 small-12 plan-item')
+         newEntry.setAttribute("class", 'cell large-6 small-12 plan-item saved-div')
          //passes the id's needed for the api as data-* attributes
          newEntry.setAttribute('data-drink', memory[i][6])
          newEntry.setAttribute('data-movie', memory[i][4]);
@@ -39,7 +39,7 @@ var loadMemory = function () {
          //creates the link element
          var aE1 = document.createElement('a')
          aE1.setAttribute('href', "")
-         aE1.textContent = memory[i][5] + " & " + memory[i][1] + " & " + memory[i][2]
+         aE1.textContent ="Enjoying a "+ memory[i][5] + ", with a " + memory[i][1] + ", while watching " + memory[i][2]
          //since the whole div is clickable due to its dynamically created, we will ensure we capture the ids needed 
          aE1.setAttribute('data-drink', memory[i][6])
          aE1.setAttribute('data-movie', memory[i][4]);
@@ -375,11 +375,11 @@ var savePlan = function () {
    if (!duplicate) {
       //creates the div
       var newEntry = document.createElement('div');
-      newEntry.setAttribute("class", 'cell large-6 small-12 plan-item');
+      newEntry.setAttribute("class", 'cell large-6 small-12 plan-item saved-div');
       //creates the link element
       var aE1 = document.createElement('a')
       aE1.setAttribute('href', "")
-      aE1.textContent = foodName = document.getElementById("meal-title").textContent + " & " + document.getElementById("drink-title").textContent + " & " + document.getElementById('movie-title').textContent
+      aE1.textContent ="Enjoying a "+ document.getElementById("meal-title").textContent + ", with a " + document.getElementById("drink-title").textContent + ", while watching " + document.getElementById('movie-title').textContent
       //creates the span inside the link
       var span = document.createElement('span')
       span.setAttribute('class', 'float-right')
