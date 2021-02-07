@@ -128,7 +128,7 @@ div.center-grid {
     padding: 20px;
     font-weight: 500;
     text-align: start;
-
+    box-shadow:  3px 0px 7px 5px rgb(255 255 255 / 34%);
 }
 .box, h3 {
     font-size: 14px;
@@ -164,7 +164,8 @@ div.center-grid {
 }
 
 .results-title {
-    font-size: 25px;
+    font-size: 30px;
+    font-family: fantasy;
 }
 .text {
     text-shadow: none;
