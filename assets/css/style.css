@@ -47,7 +47,7 @@ section{
     border-radius: 50px;
     margin-right: 20px;
     padding: 15px 35px;
-    box-shadow: 5px 3px 15px 1px black;
+    box-shadow: 0px 0px 10px 0px black;
     overflow: hidden;
 }
 .button:focus {
@@ -123,12 +123,13 @@ div.center-grid {
 
 .box {
     background-color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     color: black;
     padding: 20px;
     font-weight: 500;
     text-align: start;
-
+    box-shadow:  3px 0px 7px 5px rgb(0 0 0 / 79%);
+    max-height: 100vh;
 }
 .box, h3 {
     font-size: 14px;
@@ -162,6 +163,22 @@ div.center-grid {
 .scroll-lock {
     overflow: hidden !important;
 }
+
+.results-title {
+    font-size: 22px;
+    font-family: fantasy;
+}
+.text {
+    text-shadow: none;
+}
+.saved-styles {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+.saved-div {
+    border-radius: 10px;
+}
 /* ---------------------------------
 MEDIA QUERIES
 ----------------------------------*/
@@ -174,5 +191,9 @@ MEDIA QUERIES
     }
     .img-responsive {
         height: auto;
+    }
+    .box {
+        max-height: none;
+        margin: 10px;
     }
 }
