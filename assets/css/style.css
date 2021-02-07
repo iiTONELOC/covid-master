@@ -166,9 +166,8 @@ div.center-grid {
 
 .results-title {
     font-size: 22px;
-    font-family: fantasy, 'Montserrat', sans-serif;
+    font-family: fantasy;
 }
-
 .text {
     text-shadow: none;
 }
@@ -196,5 +195,8 @@ MEDIA QUERIES
     .box {
         max-height: none;
         margin: 10px;
+    }
+    .results-title {
+        font-family: 'Montserrat', sans-serif;
     }
 }
