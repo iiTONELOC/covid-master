@@ -10,7 +10,7 @@ var mealBoxE1 = document.getElementById("meal-box")
 //VARIABLEs FOR SAVED PLANS
 var savedPlanEl = document.getElementById("saved-plans")
 //date
-var currentDate = moment().format('LLLL');
+var currentDate = moment().format(' Do [of] MMMM ');
 // WE MAY NEED THREE DATA SET
 
 // MEMORY
@@ -39,7 +39,7 @@ var loadMemory = function () {
          //creates the link element
          var aE1 = document.createElement('a')
          aE1.setAttribute('href', "")
-         aE1.textContent ="Enjoying a "+ memory[i][5] + ", with a " + memory[i][1] + ", while watching " + memory[i][2]
+         aE1.textContent =" Wow! " + "On the " + memory[i][0]+" I wasn't Bored in the House after all! "+" I Enjoyed a "+ memory[i][5] + ", with a " + memory[i][1] + ", while watching " + memory[i][2]
          //since the whole div is clickable due to its dynamically created, we will ensure we capture the ids needed 
          aE1.setAttribute('data-drink', memory[i][6])
          aE1.setAttribute('data-movie', memory[i][4]);
