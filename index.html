@@ -17,18 +17,16 @@
     <main class="grid-container fluid">
         <section id="home-slide" class="blue">
             <div class="grid-x align-middle">
-                <div class="cell small-12 large-6 intro small-order-2 medium-order-1">
-                    <h1>BORED IN THE HOUSE</h1>
-                    <p>Let’s just face it, we’re stuck. We are flat out bored and craving something new. Day after day,
-                        it the same old thing. Same food, same drinks, same movie.
-                        <br><br>
-                        Well, that's about to change. It is as simple as 1, 2, 3.<br>
-                        Pick a meal, pick a drink, and pick a
-                        movie.<br>
-                        Need spontaneity? Go RANDO Style.
+                <div class="cell small-12 large-6 small-order-2 medium-order-1">
+                    <div class="intro">                    
+                        <h1>BORED IN THE HOUSE</h1>
+                    <p>Let’s just face it, we’re stuck. We are flat out bored and craving something new. Day after day, it is the same old thing. The same food, same drinks, and same movies. Well, that's all about to change. It is as simple as 1, 2, 3. Pick a meal, pick a drink, and pick a movie. Need spontaneity? Go RANDO Style.
                     </p>
+                
+
                     <a id="start-btn" href="#dinner" class="button main start-btn" data-control="1">Start a Plan</a><a
                         href="./results.html#saved-plans" class="button secondary" id="history-btn">Plans History</a>
+
                 </div>
                 <div class="cell large-6 hero small-12 small-order-1 medium-order-2">
                     <img src="./assets/images/man-bored.jpg" class="img-responsive" />
@@ -38,13 +36,13 @@
         <!-- begin second page-->
         <section id="dinner-slide" class="dark animate__animated hide">
             <div class="grid-x align-middle align-center">
-                <div class="cell medium-4 choices">
+                <div class="cell large-5 choices">
                     <img src="./assets/images/dinner.png" />
                     <h2>Let's plan a meal. Tell me, what food are you in the mood for?</h2>
-                    <div class="grid-x align-center">
+                    <div class="grid-x align-center pad20">
                         <div class="cell medium-8">
                             <select name="cuisine-type" id="cuisine-type">
-                                <option disabled value="">Please Select a cuisine type</option>
+                                <option disabled selected value="">Please Select a cuisine type</option>
                                 <option value="random">Random</option>
                                 <option value="Beef">Beef</option>
                                 <option value="Chicken">Chicken</option>
@@ -71,13 +69,13 @@
         <!-- begin third page-->
         <section id="drink-slide" class="blue animate__animated hide">
             <div class="grid-x align-middle align-center">
-                <div class="cell medium-4 choices">
+                <div class="cell large-5 choices">
                     <img src="./assets/images/drink.png" />
-                    <h2>[cusineType],great choice! Let's Pair that with a drink. Pick your poision.</h2>
-                    <div class="grid-x align-center">
+                    <h2><span>[cusineType]</span>, great choice! Let's Pair that with a drink. Pick your poision.</h2>
+                    <div class="grid-x align-center pad20">
                         <div class="cell medium-8">
                             <select name="drink-type" id="drink-type">
-                                <option disabled value="">Select an Alcohol type</option>
+                                <option disabled selected value="">Select an Alcohol type</option>
                                 <option value="random">Random</option>
                                 <option value="Whiskey">Whiskey</option>
                                 <option value="Vodka">Vodka</option>
@@ -109,12 +107,13 @@
         <section id="genre-slide" class="dark animate__animated hide">
             <div class="grid-x align-middle align-center">
                 <div class="cell medium-4 choices">
-                    <h2>Great, let's pick a genre.</h2>
-                    <div class="grid-x align-center">
+                    <img src="./assets/images/movie.png" />
+                    <h2><span>[Drink type]</span> sounds good, now let's pick a movie genre.</h2>
+                    <div class="grid-x align-center pad20">
                         <div class="cell medium-8">
-                            <img src="./assets/images/movie.png" />
+                            
                             <select name="movie-type" id="movie-type">
-                                <option disabled value="">Select a Movie genre</option>
+                                <option disabled selected value="">Select a Movie genre</option>
                                 <option value="28">Action</option>
                                 <option value="12">Adventure</option>
                                 <option value="16">Animation</option>
@@ -151,68 +150,6 @@
     <script src="./Foundation-Sites-6.6.3-CSS/Foundation-Sites-6.6.3-CSS/assets/js/vendor.js"></script>
     <script src="./Foundation-Sites-6.6.3-CSS/Foundation-Sites-6.6.3-CSS/assets/js/foundation.js"></script>
 
-    <script>
-        var foodType = "";
-        var drinkType = "";
-        var movieType = "";
-        document.querySelector('main').addEventListener("click", function () {
-            event.preventDefault();
-
-            // find which button was click
-            var clickedBtn = event.target;
-            var clickedBtnId = clickedBtn.getAttribute("id");
-            var parent = clickedBtn.closest("section");
-
-            // if a back button was clicked, remove current slide
-            if (clickedBtn.classList.contains("back-btn")) {
-                if (clickedBtnId === "scroll-release") {
-                    document.querySelector("body").classList.remove("scroll-lock");
-                    document.querySelector("#home-slide").classList.remove("hide");
-                }
-                parent.classList.replace("animate__slideInUp", "animate__slideOutDown");
-                setTimeout(function () {
-                    parent.classList.remove("animate__slideOutDown");
-                    parent.classList.add("hide");
-                }, 500);
-            }
-
-
-
-
-            if (clickedBtnId === "start-btn") {
-                document.querySelector("#dinner-slide").classList.replace("hide", "animate__slideInUp");
-                document.querySelector("body").classList.add("scroll-lock");
-                setTimeout(function () {
-                    document.querySelector("#home-slide").classList.add("hide");
-                }, 1000);
-
-            }
-            if (clickedBtnId === "add-food-btn") {
-                document.querySelector("#drink-slide").classList.replace("hide", "animate__slideInUp");
-                foodType = document.querySelector("#cuisine-type").value;
-                console.log(foodType);
-            }
-            if (clickedBtnId === "add-drink-btn") {
-                document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
-                drinkType = document.querySelector("#drink-type").value;
-                console.log(drinkType);
-            }
-            if (clickedBtnId === "add-genre-btn") {
-                document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
-                movieType = document.querySelector("#movie-type").value;
-                console.log(movieType);
-                console.log(foodType);
-                console.log(drinkType);
-                window.location="./results.html?para=" + foodType + '=' + drinkType + '=' + movieType
-                //open('results.html?para=' + foodType + '=' + drinkType + '=' + movieType);                
-            }
-            if (clickedBtnId === "history-btn"){
-                window.location="./results.html#saved-plans"
-            }
-        });
-
-
-    </script>
 </body>
 
 </html>
