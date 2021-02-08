@@ -108,7 +108,7 @@ var mealHistoryID = "";
 var drinkHistoryID = "";
 
 // API CALLS 
-// var function api dinner !current set up just to run a random meal!
+// var function api meal
 var meal = function () {
 
    if (mealType === "random") {
