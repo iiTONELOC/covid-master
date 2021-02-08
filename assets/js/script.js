@@ -4,7 +4,7 @@ var dataTypes = queryString.split("=");
 var mealType = dataTypes[1];
 var drinkType = dataTypes[2];
 var genreId = dataTypes[3];
-console.log(dataTypes);
+//console.log(dataTypes);
 var drinkBoxEl = document.getElementById("drink-box")
 var mealBoxE1 = document.getElementById("meal-box")
 //VARIABLEs FOR SAVED PLANS
@@ -15,6 +15,18 @@ var currentDate = moment().format(' Do [of] MMMM ');
 
 // MEMORY
 var storageArray = [];
+//var hideHistory
+var hideHistory = function () {
+   if (document.querySelector("#saved-plans").classList.contains('hide')) {
+      return false;
+   } else {
+      setTimeout(function () {
+         document.querySelector("#saved-plans").classList.replace("open", "hide");
+         document.querySelector("#saved-plans").classList.remove("animate_slideInUp");
+         document.querySelector("#his").innerHTML="";
+      }, 0);
+   }
+}
 
 // VAR MEMORYSET = FUNCTION
 var save = function () {
@@ -63,7 +75,7 @@ var loadMemory = function () {
          //append div to page
          savedPlanEl.appendChild(newEntry);
       }
-      console.log(storageArray);
+      //console.log(storageArray);
    }
 }
 
@@ -83,6 +95,7 @@ var drinkHistoryID = "";
 // API CALLS 
 // var function api dinner !current set up just to run a random meal!
 var meal = function () {
+
    if (mealType === "random") {
       apiUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
    }
@@ -91,11 +104,17 @@ var meal = function () {
    }
    fetch(apiUrl).then(function (response) {
       response.json().then(function (data) {
+         if (data.meals === null) {
+            ; return;
+         }
          var randomNum = ""
          var ranNumFunc = function () {
             randomNum = Math.floor(Math.random() * 34);
             if (data.meals[randomNum] === undefined) {
                ranNumFunc();
+            }
+            if (data.meals === null) {
+               return;
             }
          };
          ranNumFunc();
@@ -222,6 +241,9 @@ meal();
 
 // var function api call drink !current set up just to run a random meal!
 var drink = function () {
+   if (drinkType === null || drinkType === undefined) {
+      return
+   }
    if (drinkType === "random") {
       apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
    }
@@ -342,67 +364,59 @@ var drink = function () {
 drink();
 // var function api call movies ! need to change the current values in html to match the ids needed for the api call
 var movie = function () {
-   console.log(genreId);
-   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
-      .then(function (movieResponse) {
-         if (movieResponse.ok) {
-            return movieResponse.json();
-         }
-         else {
-            return;
-         }
 
-      })
-      .then(function (movieData) {
-         console.log(movieData);
-         // random result from list of results
-         var randomNum = Math.floor(Math.random() * 20);
-         console.log("selected randoStyle is: " + randomNum);
-         //dynamically create the elements and append to page
-         //create title 
-         var title = document.createElement('h3')
-         title.setAttribute('class', 'results-title')
-         title.setAttribute('id', "movie-title")
-         title.textContent = movieData.results[randomNum].original_title
-         document.getElementById('movie-box').appendChild(title)
-         //create movie cover
-         var cover = document.createElement('img')
-         cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
-         cover.setAttribute('value', movieData.results[randomNum].id)
-         cover.setAttribute('alt', "Movie poster for " + movieData.results[randomNum].original_title)
-         document.getElementById('movie-box').appendChild(cover)
-         //create overview title
-         var summaryTitle = document.createElement('h3')
-         summaryTitle.setAttribute("class", "results-title")
-         summaryTitle.textContent = "What's it about?"
-         document.getElementById('movie-box').appendChild(summaryTitle)
-         //create overview
-         var summary = document.createElement('p')
-         summary.setAttribute("class", 'text')
-         summary.textContent = movieData.results[randomNum].overview
-         document.getElementById('movie-box').appendChild(summary)
-         // creates the variable for the movieID so we call recall out of storage
-         movieID = movieData.results[randomNum].id
-         console.log("this is the movieID: " + movieID)
-      })
+   if (genreId != undefined) {
+      fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
+         .then(function (movieResponse) {
+            if (movieResponse.ok) {
+               return movieResponse.json();
+            }
+            else {
+               return;
+            }
+
+         })
+         .then(function (movieData) {
+            console.log(movieData);
+            // random result from list of results
+            var randomNum = Math.floor(Math.random() * 20);
+            console.log("selected randoStyle is: " + randomNum);
+            //dynamically create the elements and append to page
+            //create title 
+            var title = document.createElement('h3')
+            title.setAttribute('class', 'results-title')
+            title.setAttribute('id', "movie-title")
+            title.textContent = movieData.results[randomNum].original_title
+            document.getElementById('movie-box').appendChild(title)
+            //create movie cover
+            var cover = document.createElement('img')
+            cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
+            cover.setAttribute('value', movieData.results[randomNum].id)
+            cover.setAttribute('alt', "Movie poster for " + movieData.results[randomNum].original_title)
+            document.getElementById('movie-box').appendChild(cover)
+            //create overview title
+            var summaryTitle = document.createElement('h3')
+            summaryTitle.setAttribute("class", "results-title")
+            summaryTitle.textContent = "What's it about?"
+            document.getElementById('movie-box').appendChild(summaryTitle)
+            //create overview
+            var summary = document.createElement('p')
+            summary.setAttribute("class", 'text')
+            summary.textContent = movieData.results[randomNum].overview
+            document.getElementById('movie-box').appendChild(summary)
+            // creates the variable for the movieID so we call recall out of storage
+            movieID = movieData.results[randomNum].id
+            console.log("this is the movieID: " + movieID)
+            hideHistory();
+         })
+   }
+
 }
 movie();
 
 //save function
 var savePlan = function () {
-   console.log("You clicked save");
-
-   if(document.querySelector("#saved-plans").classList.contains('open')) {
-      return false;
-   } else {
-      setTimeout(function() {
-         document.querySelector("#saved-plans").classList.replace("hide", "animate__slideInUp");
-         document.querySelector("#saved-plans").classList.add("open");
-      }, 500);
-      
-   }
-
-
+   //console.log("You clicked save");
    //push items to array for storage
    //check for DUPES
    var duplicate = false;
@@ -731,27 +745,42 @@ var reFetch = function (event) {
    drinkHistory();
 
 }
+//var showHistory
+var showHistory = function () {
+   if (document.querySelector("#saved-plans").classList.contains('open')) {
+      return false;
+   } else {
+      setTimeout(function () {
+         document.querySelector("#saved-plans").classList.replace("hide", "open");
+         document.querySelector("#saved-plans").classList.add("animate__slideInUp");
+         document.querySelector("#his").innerHTML="History";
+      }, 0);
+   }
+
+}
 loadMemory();
 //event listener for the savedPlan click
 document.getElementById('saved-plans').addEventListener("click", reFetch)
 //event listener for the save plan
 document.getElementById('save-plan-btn').addEventListener("click", savePlan)
+//event listener for the view saved plans
+document.getElementById('view-saved-btn').addEventListener("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-document.querySelector("#reload-btn").addEventListener('click', function() {
+document.querySelector("#reload-btn").addEventListener('click', function () {
    event.preventDefault();
    location.reload();
 });
 
-document.querySelector("#view-saved-btn").addEventListener("click", function() {
-   if(document.querySelector("#saved-plans").classList.contains('open')) {
-      return false;
-   } else {
-      setTimeout(function() {
-         document.querySelector("#saved-plans").classList.replace("hide", "animate__slideInUp");
-         document.querySelector("#saved-plans").classList.add("open");
-      }, 500);
-      
-   }
-});
+//document.querySelector("#view-saved-btn").addEventListener("click", function () {
+   //if (document.querySelector("#saved-plans").classList.contains('open')) {
+      //return false;
+   //} else {
+      //setTimeout(function () {
+         //document.querySelector("#saved-plans").classList.replace("hide", "animate_slideInUp");
+        // document.querySelector("#saved-plans").classList.add("open");
+      //}, 500);
+
+  // }
+//});
