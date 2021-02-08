@@ -48,7 +48,7 @@ document.querySelector('main').addEventListener("click", function() {
         console.log(movieType);
         console.log(foodType);
         console.log(drinkType);
-        open('results.html?para=' + foodType + '=' + drinkType + '=' + movieType);
+        window.location='./results.html?para=' + foodType + '=' + drinkType + '=' + movieType
     }
     if (clickedBtnId === "history-btn"){
         window.location="./results.html#saved-plans"
