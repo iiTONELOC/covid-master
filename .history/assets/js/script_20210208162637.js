@@ -798,13 +798,13 @@ var reFetch = function (event) {
 //var showHistory
 var showHistory = function () {
    removeButton()
-   if ($("#saved-plans").classList.contains('open')) {
+   if (document.$("#saved-plans").classList.contains('open')) {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").classList.replace("hide", "open");
-         $("#saved-plans").classList.add("animate__slideInUp");
-         $("#his").innerHTML = "History";
+         document.$("#saved-plans").classList.replace("hide", "open");
+         document.$("#saved-plans").classList.add("animate__slideInUp");
+         document.$("#his").innerHTML = "History";
       }, 0);
 
    }
@@ -813,15 +813,15 @@ var showHistory = function () {
 
 loadMemory();
 //event listener for the savedPlan click
-$('#saved-plans').addEventListener("click", reFetch,)
+document.getElementById('saved-plans').addEventListener("click", reFetch,)
 //event listener for the save plan
-$('#save-plan-btn').addEventListener("click", savePlan)
+document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 //event listener for the view saved plans
-$('#view-saved-btn').addEventListener("click", showHistory)
+document.getElementById('view-saved-btn').addEventListener("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-$("#reload-btn").addEventListener('click', function () {
+document.$("#reload-btn").addEventListener('click', function () {
    event.preventDefault();
    location.reload();
 });

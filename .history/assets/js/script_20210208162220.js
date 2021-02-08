@@ -54,13 +54,13 @@ var storageArray = [];
 //var hideHistory
 var hideHistory = function () {
    showButton()
-   if (document.$("#saved-plans").classList.contains('hide')) {
+   if (document.querySelector("#saved-plans").classList.contains('hide')) {
       return false;
    } else {
       setTimeout(function () {
-         document.$("#saved-plans").classList.replace("open", "hide");
-         document.$("#saved-plans").classList.remove("animate_slideInUp");
-         document.$("#his").innerHTML = "";
+         document.querySelector("#saved-plans").classList.replace("open", "hide");
+         document.querySelector("#saved-plans").classList.remove("animate_slideInUp");
+         document.querySelector("#his").innerHTML = "";
       }, 0);
    }
 }
@@ -460,6 +460,48 @@ var movie = function () {
 }
 movie();
 
+
+// if (genreId != undefined) {
+//    fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
+//       .then(function (movieResponse) {
+//          if (movieResponse.ok) {
+//             return movieResponse.json();
+//          }
+//          else {
+//             return;
+//          }
+
+//       })
+//       .then(function (movieData) {
+//          console.log(movieData);
+//          // random result from list of results
+//          var randomNum = Math.floor(Math.random() * 20);
+//          console.log("selected randoStyle is: " + randomNum);
+//          //dynamically create the elements and append to page
+//          //create title 
+//          var title = document.createElement('h3')
+//          title.setAttribute('class', 'results-title')
+//          title.setAttribute('id', "movie-title")
+//          title.textContent = movieData.results[randomNum].original_title
+//          document.getElementById('movie-box').appendChild(title)
+//          //create movie cover
+//          var cover = document.createElement('img')
+//          cover.setAttribute('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
+//          cover.setAttribute('value', movieData.results[randomNum].id)
+//          cover.setAttribute('alt', "Movie poster for " + movieData.results[randomNum].original_title)
+//          document.getElementById('movie-box').appendChild(cover)
+//          //create overview title
+//          var summaryTitle = document.createElement('h3')
+//          summaryTitle.setAttribute("class", "results-title")
+//          summaryTitle.textContent = "What's it about?"
+//          document.getElementById('movie-box').appendChild(summaryTitle)
+//          //create overview
+//          var summary = document.createElement('p')
+//          summary.setAttribute("class", 'text')
+//          summary.textContent = movieData.results[randomNum].overview
+//          document.getElementById('movie-box').appendChild(summary)
+//          // creates the variable for the movieID so we call recall out of storage
+//          movieID = movieData.results[randomNum].id
 console.log("this is the movieID: " + movieID)
 
 
@@ -798,13 +840,13 @@ var reFetch = function (event) {
 //var showHistory
 var showHistory = function () {
    removeButton()
-   if ($("#saved-plans").classList.contains('open')) {
+   if (document.querySelector("#saved-plans").classList.contains('open')) {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").classList.replace("hide", "open");
-         $("#saved-plans").classList.add("animate__slideInUp");
-         $("#his").innerHTML = "History";
+         document.querySelector("#saved-plans").classList.replace("hide", "open");
+         document.querySelector("#saved-plans").classList.add("animate__slideInUp");
+         document.querySelector("#his").innerHTML = "History";
       }, 0);
 
    }
@@ -813,26 +855,26 @@ var showHistory = function () {
 
 loadMemory();
 //event listener for the savedPlan click
-$('#saved-plans').addEventListener("click", reFetch,)
+document.getElementById('saved-plans').addEventListener("click", reFetch,)
 //event listener for the save plan
-$('#save-plan-btn').addEventListener("click", savePlan)
+document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 //event listener for the view saved plans
-$('#view-saved-btn').addEventListener("click", showHistory)
+document.getElementById('view-saved-btn').addEventListener("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-$("#reload-btn").addEventListener('click', function () {
+document.querySelector("#reload-btn").addEventListener('click', function () {
    event.preventDefault();
    location.reload();
 });
 
-//document.$("#view-saved-btn").addEventListener("click", function () {
-   //if (document.$("#saved-plans").classList.contains('open')) {
+//document.querySelector("#view-saved-btn").addEventListener("click", function () {
+   //if (document.querySelector("#saved-plans").classList.contains('open')) {
       //return false;
    //} else {
       //setTimeout(function () {
-         //document.$("#saved-plans").classList.replace("hide", "animate_slideInUp");
-        // document.$("#saved-plans").classList.add("open");
+         //document.querySelector("#saved-plans").classList.replace("hide", "animate_slideInUp");
+        // document.querySelector("#saved-plans").classList.add("open");
       //}, 500);
 
   // }

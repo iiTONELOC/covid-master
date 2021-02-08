@@ -54,13 +54,13 @@ var storageArray = [];
 //var hideHistory
 var hideHistory = function () {
    showButton()
-   if (document.$("#saved-plans").classList.contains('hide')) {
+   if (document.querySelector("#saved-plans").classList.contains('hide')) {
       return false;
    } else {
       setTimeout(function () {
-         document.$("#saved-plans").classList.replace("open", "hide");
-         document.$("#saved-plans").classList.remove("animate_slideInUp");
-         document.$("#his").innerHTML = "";
+         document.querySelector("#saved-plans").classList.replace("open", "hide");
+         document.querySelector("#saved-plans").classList.remove("animate_slideInUp");
+         document.querySelector("#his").innerHTML = "";
       }, 0);
    }
 }
@@ -798,13 +798,13 @@ var reFetch = function (event) {
 //var showHistory
 var showHistory = function () {
    removeButton()
-   if ($("#saved-plans").classList.contains('open')) {
+   if (document.querySelector("#saved-plans").classList.contains('open')) {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").classList.replace("hide", "open");
-         $("#saved-plans").classList.add("animate__slideInUp");
-         $("#his").innerHTML = "History";
+         document.querySelector("#saved-plans").classList.replace("hide", "open");
+         document.querySelector("#saved-plans").classList.add("animate__slideInUp");
+         document.querySelector("#his").innerHTML = "History";
       }, 0);
 
    }
@@ -813,26 +813,26 @@ var showHistory = function () {
 
 loadMemory();
 //event listener for the savedPlan click
-$('#saved-plans').addEventListener("click", reFetch,)
+document.getElementById('saved-plans').addEventListener("click", reFetch,)
 //event listener for the save plan
-$('#save-plan-btn').addEventListener("click", savePlan)
+document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 //event listener for the view saved plans
-$('#view-saved-btn').addEventListener("click", showHistory)
+document.getElementById('view-saved-btn').addEventListener("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-$("#reload-btn").addEventListener('click', function () {
+document.querySelector("#reload-btn").addEventListener('click', function () {
    event.preventDefault();
    location.reload();
 });
 
-//document.$("#view-saved-btn").addEventListener("click", function () {
-   //if (document.$("#saved-plans").classList.contains('open')) {
+//document.querySelector("#view-saved-btn").addEventListener("click", function () {
+   //if (document.querySelector("#saved-plans").classList.contains('open')) {
       //return false;
    //} else {
       //setTimeout(function () {
-         //document.$("#saved-plans").classList.replace("hide", "animate_slideInUp");
-        // document.$("#saved-plans").classList.add("open");
+         //document.querySelector("#saved-plans").classList.replace("hide", "animate_slideInUp");
+        // document.querySelector("#saved-plans").classList.add("open");
       //}, 500);
 
   // }

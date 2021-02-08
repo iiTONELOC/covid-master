@@ -5,16 +5,23 @@ var dataTypes = queryString.split("=");
 var mealType = dataTypes[1];
 var drinkType = dataTypes[2];
 var genreId = dataTypes[3];
+<<<<<<< HEAD
 
 //console.log(dataTypes);
 
 var drinkBoxEl = $("#drink-box")
 var mealBoxE1 = $("#meal-box")
+=======
+//console.log(dataTypes);
+var drinkBoxEl = document.getElementById("drink-box")
+var mealBoxE1 = document.getElementById("meal-box")
+>>>>>>> 364e7fd0c2f5e13d02dfab9989828940135accf6
 //VARIABLEs FOR SAVED PLANS
 var savedPlanEl = $("#saved-plans")
 
 // DATE INFORMATIONS USING MOMENT.JS
 var currentDate = moment().format(' Do [of] MMMM ');
+<<<<<<< HEAD
 
 // MEMORY
 var storageArray = [];
@@ -33,16 +40,17 @@ var movieHistoryID = "";
 var mealHistoryID = "";
 var drinkHistoryID = "";
 
+=======
 // WE MAY NEED THREE DATA SET
-var removeButton = function () {
-
+var removeButton =function(){
+   
    $("#save-plan-btn").hide()
    $("#reload-btn").hide();
    $("#view-saved-btn").hide();
    $("#contain").hide();
 }
-var showButton = function () {
-
+var showButton =function(){
+   
    $("#save-plan-btn").show()
    $("#reload-btn").show();
    $("#view-saved-btn").show();
@@ -54,20 +62,19 @@ var storageArray = [];
 //var hideHistory
 var hideHistory = function () {
    showButton()
-   if (document.$("#saved-plans").classList.contains('hide')) {
+   if (document.querySelector("#saved-plans").classList.contains('hide')) {
       return false;
    } else {
       setTimeout(function () {
-         document.$("#saved-plans").classList.replace("open", "hide");
-         document.$("#saved-plans").classList.remove("animate_slideInUp");
-         document.$("#his").innerHTML = "";
+         document.querySelector("#saved-plans").classList.replace("open", "hide");
+         document.querySelector("#saved-plans").classList.remove("animate_slideInUp");
+         document.querySelector("#his").innerHTML="";
       }, 0);
    }
 }
 removeButton();
-
+>>>>>>> 364e7fd0c2f5e13d02dfab9989828940135accf6
 // VAR MEMORYSET = FUNCTION
-
 var save = function () {
    localStorage.setItem("savedPlan", JSON.stringify(storageArray));
 }
@@ -229,10 +236,10 @@ var renderMeal = function (data, data2) {
 //BEGINING OF DRINK FUNCTION (REFATOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL
 var drinkRender = function (data, measure, ingredients) {
    var drinkTitle = $("<h3>")
-   drinkTitle.text(data.drinks[0].strDrink)
+   drinkTitle.textContent = data.drinks[0].strDrink
    drinkTitle.attr("class", "results-title")
    drinkTitle.attr("id", "drink-title")
-console.log(drinkTitle)
+
    //append title
    drinkBoxEl.append(drinkTitle)
 
@@ -320,9 +327,14 @@ var movieRender = function (movieData) {
 
 // END OF MOVIE RENDER DYNAMIC(KH)
 
+<<<<<<< HEAD
 // BEGINGING OF API CALLS (KH)
 
 // VAR FUNCTION FOR API MEAL(KH)(!current set up just to run a random meal!)(AT)
+=======
+// API CALLS 
+// var function api meal
+>>>>>>> 364e7fd0c2f5e13d02dfab9989828940135accf6
 var meal = function () {
 
    if (mealType === "random") {
@@ -331,6 +343,7 @@ var meal = function () {
    else {
       apiUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealType;
    }
+<<<<<<< HEAD
    fetch(apiUrl)
       .then(function (response) {
          response.json().then(function (data) {
@@ -339,6 +352,131 @@ var meal = function () {
                randomNum = Math.floor(Math.random() * 34);
                if (data.meals[randomNum] === undefined) {
                   ranNumFunc();
+=======
+   fetch(apiUrl).then(function (response) {
+      response.json().then(function (data) {
+         if (data.meals === null) {
+            ; return;
+         }
+         var randomNum = ""
+         var ranNumFunc = function () {
+            randomNum = Math.floor(Math.random() * 34);
+            if (data.meals[randomNum] === undefined) {
+               ranNumFunc();
+            }
+            if (data.meals === null) {
+               return;
+            }
+         };
+         ranNumFunc();
+         var mealId = data.meals[randomNum].idMeal;
+         console.log(data);
+
+         var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
+         fetch(apiUrl2).then(function (response2) {
+            response2.json().then(function (data2) {
+
+               //creates the h3 element for the meal-title
+               var mealTitle = document.createElement('h3')
+               mealTitle.setAttribute("class", "results-title")
+               mealTitle.setAttribute("id", "meal-title")
+               mealTitle.textContent = data2.meals[0].strMeal;
+               var mealImage = document.createElement('img')
+               mealImage.setAttribute("src", data2.meals[0].strMealThumb)
+               mealImage.setAttribute("alt", "Picture of a " + data2.meals[0].strMeal)
+               //append the title and image to page
+               mealBoxE1.appendChild(mealTitle,)
+               mealBoxE1.appendChild(mealImage)
+               console.log(data2);
+               //check for link
+               if (data2.meals[0].strSource) {
+                  var recipe = document.createElement("a")
+                  recipe.setAttribute("href", data2.meals[0].strSource);
+                  recipe.setAttribute("target", "_blank")
+                  recipe.textContent = "Check out the recipe!";
+                  mealBoxE1.appendChild(recipe)
+               }
+               //arrays for ingredients
+               var ingredients = [
+                  data2.meals[0].strIngredient1,
+                  data2.meals[0].strIngredient2,
+                  data2.meals[0].strIngredient3,
+                  data2.meals[0].strIngredient4,
+                  data2.meals[0].strIngredient5,
+                  data2.meals[0].strIngredient6,
+                  data2.meals[0].strIngredient7,
+                  data2.meals[0].strIngredient8,
+                  data2.meals[0].strIngredient9,
+                  data2.meals[0].strIngredient10,
+                  data2.meals[0].strIngredient11,
+                  data2.meals[0].strIngredient12,
+                  data2.meals[0].strIngredient13,
+                  data2.meals[0].strIngredient14,
+                  data2.meals[0].strIngredient15,
+                  data2.meals[0].strIngredient16,
+                  data2.meals[0].strIngredient17,
+                  data2.meals[0].strIngredient18,
+                  data2.meals[0].strIngredient19,
+                  data2.meals[0].strIngredient20,
+               ]
+               var measure = [
+                  data2.meals[0].strMeasure1,
+                  data2.meals[0].strMeasure2,
+                  data2.meals[0].strMeasure3,
+                  data2.meals[0].strMeasure4,
+                  data2.meals[0].strMeasure5,
+                  data2.meals[0].strMeasure6,
+                  data2.meals[0].strMeasure7,
+                  data2.meals[0].strMeasure8,
+                  data2.meals[0].strMeasure9,
+                  data2.meals[0].strMeasure10,
+                  data2.meals[0].strMeasure11,
+                  data2.meals[0].strMeasure12,
+                  data2.meals[0].strMeasure13,
+                  data2.meals[0].strMeasure14,
+                  data2.meals[0].strMeasure15,
+                  data2.meals[0].strMeasure16,
+                  data2.meals[0].strMeasure17,
+                  data2.meals[0].strMeasure18,
+                  data2.meals[0].strMeasure19,
+                  data2.meals[0].strMeasure20,
+               ]
+
+               // stores the meal id
+               mealID = data.meals[0].idMeal
+               console.log("this is the mealId: " + mealId)
+               //creates ingredients header
+               var ingredientsHeader = document.createElement("h3")
+               ingredientsHeader.setAttribute("class", "results-title")
+               ingredientsHeader.textContent = "Ingredients"
+               //append to page
+               mealBoxE1.appendChild(ingredientsHeader)
+               var mealList = document.createElement("ul");
+               mealBoxE1.appendChild(mealList)
+               //creates instructions header
+               var instructionsHeader = document.createElement("h3")
+               instructionsHeader.setAttribute("class", "results-title")
+               instructionsHeader.textContent = "Instructions"
+               //append to page
+               mealBoxE1.appendChild(instructionsHeader)
+               var instructions = document.createElement('p')
+               instructions.setAttribute('class', "text");
+               instructions.textContent = data2.meals[0].strInstructions
+               console.log(instructions);
+               mealBoxE1.appendChild(instructions);
+               dID = mealId;
+               console.log("this is the dID: " + dID)
+               for (var i = 0; i < measure.length; i++) {
+                  //console.log($(this));
+                  if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
+                     return;
+                  }
+                  else {
+                     var mealStuff = document.createElement("li")
+                     mealStuff.textContent = measure[i] + "-" + ingredients[i];
+                     mealList.appendChild(mealStuff);
+                  }
+>>>>>>> 364e7fd0c2f5e13d02dfab9989828940135accf6
                }
             };
             ranNumFunc();
@@ -439,15 +577,6 @@ drink();
 
 // VAR FUNCTION FOR API MOVIE(KH)(! need to change the current values in html to match the ids!)
 var movie = function () {
-   console.log(genreId);
-   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
-      .then(function (movieResponse) {
-         if (movieResponse.ok) {
-            return movieResponse.json();
-         }
-         else {
-            return;
-         }
 
       })
       .then(function (movieData) {
@@ -455,13 +584,9 @@ var movie = function () {
          // random result from list of results
 
          movieRender(movieData);
-         hideHistory();
       })
 }
 movie();
-
-console.log("this is the movieID: " + movieID)
-
 
 //save function
 var savePlan = function () {
@@ -523,30 +648,30 @@ var movieHistory = function () {
       .then(function (historyData) {
          console.log(historyData)
          //clear out the div 
-         $('#movie-box').text("");
+        $('#movie-box').text("");
          //dynamically create the elements and append to page
          //create title 
          var title = $('<h3>')
          title.attr('class', 'results-title')
          title.attr("id", "movie-title")
          title.text(historyData.original_title)
-         $('#movie-box').append(title)
+        $('#movie-box').append(title)
          //create movie cover
          var cover = $('<img>')
          cover.attr('src', "https://image.tmdb.org/t/p/w500/" + historyData.poster_path + "")
          cover.attr('value', historyData.id)
          cover.attr('alt', "Movie poster for " + historyData.original_title)
-         $('#movie-box').append(cover)
+        $('#movie-box').append(cover)
          //create overview title
          var summaryTitle = $('<h3>')
          summaryTitle.attr("class", "results-title")
          summaryTitle.text("What's it about?")
-         $('#movie-box').append(summaryTitle)
+        $('#movie-box').append(summaryTitle)
          //create overview
          var summary = $('<p>')
          summary.attr("class", "text")
          summary.text(historyData.overview)
-         $('#movie-box').append(summary)
+        $('#movie-box').append(summary)
 
       })
 }
@@ -757,7 +882,7 @@ var drinkHistory = function () {
          drinkBoxEl.append(instructionsHeader)
          var instructions = $('<p>')
          instructions.attr("class", "text")
-         instructions.text(data.drinks[0].strInstructions)
+         instructions.text(data.drinks[0].strInstructions) 
          drinkBoxEl.append(instructions);
          for (var i = 0; i < measure.length; i++) {
             //console.log($(this));
@@ -798,41 +923,41 @@ var reFetch = function (event) {
 //var showHistory
 var showHistory = function () {
    removeButton()
-   if ($("#saved-plans").classList.contains('open')) {
+   if (document.querySelector("#saved-plans").classList.contains('open')) {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").classList.replace("hide", "open");
-         $("#saved-plans").classList.add("animate__slideInUp");
-         $("#his").innerHTML = "History";
+         document.querySelector("#saved-plans").classList.replace("hide", "open");
+         document.querySelector("#saved-plans").classList.add("animate__slideInUp");
+         document.querySelector("#his").innerHTML="History";
       }, 0);
-
+      
    }
 }
 // hides the elements when when are viewing history
 
 loadMemory();
 //event listener for the savedPlan click
-$('#saved-plans').addEventListener("click", reFetch,)
+document.getElementById('saved-plans').addEventListener("click", reFetch,)
 //event listener for the save plan
-$('#save-plan-btn').addEventListener("click", savePlan)
+document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 //event listener for the view saved plans
-$('#view-saved-btn').addEventListener("click", showHistory)
+document.getElementById('view-saved-btn').addEventListener("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-$("#reload-btn").addEventListener('click', function () {
+document.querySelector("#reload-btn").addEventListener('click', function () {
    event.preventDefault();
    location.reload();
 });
 
-//document.$("#view-saved-btn").addEventListener("click", function () {
-   //if (document.$("#saved-plans").classList.contains('open')) {
+//document.querySelector("#view-saved-btn").addEventListener("click", function () {
+   //if (document.querySelector("#saved-plans").classList.contains('open')) {
       //return false;
    //} else {
       //setTimeout(function () {
-         //document.$("#saved-plans").classList.replace("hide", "animate_slideInUp");
-        // document.$("#saved-plans").classList.add("open");
+         //document.querySelector("#saved-plans").classList.replace("hide", "animate_slideInUp");
+        // document.querySelector("#saved-plans").classList.add("open");
       //}, 500);
 
   // }

@@ -813,7 +813,7 @@ var showHistory = function () {
 
 loadMemory();
 //event listener for the savedPlan click
-$('#saved-plans').addEventListener("click", reFetch,)
+$('saved-plans').addEventListener("click", reFetch,)
 //event listener for the save plan
 $('#save-plan-btn').addEventListener("click", savePlan)
 //event listener for the view saved plans

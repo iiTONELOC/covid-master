@@ -813,11 +813,11 @@ var showHistory = function () {
 
 loadMemory();
 //event listener for the savedPlan click
-$('#saved-plans').addEventListener("click", reFetch,)
+$('saved-plans').addEventListener("click", reFetch,)
 //event listener for the save plan
-$('#save-plan-btn').addEventListener("click", savePlan)
+$('save-plan-btn').addEventListener("click", savePlan)
 //event listener for the view saved plans
-$('#view-saved-btn').addEventListener("click", showHistory)
+$('view-saved-btn').addEventListener("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
