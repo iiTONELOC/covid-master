@@ -512,7 +512,7 @@ var savePlan = function () {
       drinkName = $("#drink-title").text()
       movieName = $('#movie-title').text()
       newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
-      console.log("fuckoff", newSave)
+      console.log("fuckof", newSave)
       storageArray.push(newSave)
       save();
    }
@@ -833,7 +833,7 @@ $('#view-saved-btn').on("click", showHistory)
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
 $("#reload-btn").on('click', function (
-
+   
 ) {
    event.preventDefault();
    location.reload();

@@ -115,7 +115,7 @@ var loadMemory = function () {
          //append div to page
          savedPlanEl.append(newEntry);
       }
-      console.log(storageArray);
+      //console.log(storageArray);
    }
 }
 // END VAR MEMORYGET = FUNCTION
@@ -233,7 +233,7 @@ var drinkRender = function (data, measure, ingredients) {
    drinkTitle.text(data.drinks[0].strDrink)
    drinkTitle.attr("class", "results-title")
    drinkTitle.attr("id", "drink-title")
-   console.log(drinkTitle)
+console.log(drinkTitle)
    //append title
    drinkBoxEl.append(drinkTitle)
 
@@ -336,19 +336,12 @@ var meal = function () {
    fetch(apiUrl)
       .then(function (response) {
          response.json().then(function (data) {
-            if (data.meals === null) {
-               return;
-            }
             var randomNum = ""
             var ranNumFunc = function () {
                randomNum = Math.floor(Math.random() * 34);
                if (data.meals[randomNum] === undefined) {
                   ranNumFunc();
                }
-               if (data.meals === null) {
-                  return;
-               }
-
             };
             ranNumFunc();
             var mealId = data.meals[randomNum].idMeal;
@@ -448,26 +441,24 @@ drink();
 
 // VAR FUNCTION FOR API MOVIE(KH)(! need to change the current values in html to match the ids!)
 var movie = function () {
-   if (genreId != undefined) {
-      console.log("genreFucker", genreId);
-      fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
-         .then(function (movieResponse) {
-            if (movieResponse.ok) {
-               return movieResponse.json();
-            }
-            else {
-               return;
-            }
+   console.log("genre", genreId);
+   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
+      .then(function (movieResponse) {
+         if (movieResponse.ok) {
+            return movieResponse.json();
+         }
+         else {
+            return;
+         }
 
-         })
-         .then(function (movieData) {
-            console.log(movieData);
-            // random result from list of results
+      })
+      .then(function (movieData) {
+         console.log(movieData);
+         // random result from list of results
 
-            movieRender(movieData);
-            hideHistory();
-         })
-   }
+         movieRender(movieData);
+         hideHistory();
+      })
 }
 movie();
 
@@ -493,7 +484,7 @@ var savePlan = function () {
       //creates the link element
       var aE1 = $('<a>')
       aE1.attr('href', "")
-      aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
+      aE1.text("Enjoying a " + $("#meal-title").textContent + ", with a " + $("#drink-title").textContent + ", while watching " + $('#movie-title').textContent)
       //creates the span inside the link
       var span = $('<span>')
       span.attr('class', 'float-right')
@@ -508,11 +499,11 @@ var savePlan = function () {
       //append div to page
       savedPlanEl.append(newEntry);
       //set variables for storage
-      foodName = $("#meal-title").text()
-      drinkName = $("#drink-title").text()
-      movieName = $('#movie-title').text()
+      foodName = $("#meal-title").textContent
+      drinkName = $("#drink-title").textContent
+      movieName = $('#movie-title').textContent
       newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
-      console.log("fuckoff", newSave)
+      console.log("fuckofnewSave)
       storageArray.push(newSave)
       save();
    }
@@ -791,15 +782,15 @@ var drinkHistory = function () {
 var reFetch = function (event) {
    showButton();
    event.preventDefault()
-   //console.log(event.target)
-   if ($(this).attr("data-movie") === null
-      || $(this).attr("data-meal") === null
-      || $(this).attr("data-drink") === null) {
+   console.log(event.target)
+   if (event.target.$("#data-movie") === null
+      || event.target.$("#data-meal") === null
+      || event.target.$("#data-drink") === null) {
       return;
    }
-   movieHistoryID = $(this).attr('data-movie')
-   mealHistoryID = $(this).attr("data-meal")
-   drinkHistoryID = $(this).attr("data-drink")
+   movieHistoryID = event.target.$('#data-movie')
+   mealHistoryID = event.target.$("#data-meal")
+   drinkHistoryID = event.target.$("#data-drink")
    //call the api
    movieHistory();
    mealHistory();
@@ -824,7 +815,7 @@ var showHistory = function () {
 
 loadMemory();
 //event listener for the savedPlan click
-$('#saved-plans').on("click", reFetch)
+$('#saved-plans').on("click", reFetch,)
 //event listener for the save plan
 $('#save-plan-btn').on("click", savePlan)
 //event listener for the view saved plans
@@ -832,9 +823,7 @@ $('#view-saved-btn').on("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-$("#reload-btn").on('click', function (
-
-) {
+$("#reload-btn").on('click', function () {
    event.preventDefault();
    location.reload();
 });

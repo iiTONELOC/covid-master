@@ -115,7 +115,7 @@ var loadMemory = function () {
          //append div to page
          savedPlanEl.append(newEntry);
       }
-      console.log(storageArray);
+      //console.log(storageArray);
    }
 }
 // END VAR MEMORYGET = FUNCTION
@@ -233,7 +233,7 @@ var drinkRender = function (data, measure, ingredients) {
    drinkTitle.text(data.drinks[0].strDrink)
    drinkTitle.attr("class", "results-title")
    drinkTitle.attr("id", "drink-title")
-   console.log(drinkTitle)
+console.log(drinkTitle)
    //append title
    drinkBoxEl.append(drinkTitle)
 
@@ -336,19 +336,13 @@ var meal = function () {
    fetch(apiUrl)
       .then(function (response) {
          response.json().then(function (data) {
-            if (data.meals === null) {
-               return;
-            }
+            if (data.meals === null
             var randomNum = ""
             var ranNumFunc = function () {
                randomNum = Math.floor(Math.random() * 34);
                if (data.meals[randomNum] === undefined) {
                   ranNumFunc();
                }
-               if (data.meals === null) {
-                  return;
-               }
-
             };
             ranNumFunc();
             var mealId = data.meals[randomNum].idMeal;
@@ -450,25 +444,24 @@ drink();
 var movie = function () {
    if (genreId != undefined) {
       console.log("genreFucker", genreId);
-      fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
-         .then(function (movieResponse) {
-            if (movieResponse.ok) {
-               return movieResponse.json();
-            }
-            else {
-               return;
-            }
+   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
+      .then(function (movieResponse) {
+         if (movieResponse.ok) {
+            return movieResponse.json();
+         }
+         else {
+            return;
+         }
 
-         })
-         .then(function (movieData) {
-            console.log(movieData);
-            // random result from list of results
+      })
+      .then(function (movieData) {
+         console.log(movieData);
+         // random result from list of results
 
-            movieRender(movieData);
-            hideHistory();
-         })
-   }
-}
+         movieRender(movieData);
+         hideHistory();
+      })
+}}
 movie();
 
 console.log("this is the movieID: " + movieID)
@@ -512,7 +505,7 @@ var savePlan = function () {
       drinkName = $("#drink-title").text()
       movieName = $('#movie-title').text()
       newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
-      console.log("fuckoff", newSave)
+      console.log("fuckof", newSave)
       storageArray.push(newSave)
       save();
    }
@@ -832,9 +825,7 @@ $('#view-saved-btn').on("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-$("#reload-btn").on('click', function (
-
-) {
+$("#reload-btn").on('click', function () {
    event.preventDefault();
    location.reload();
 });
