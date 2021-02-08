@@ -6,7 +6,7 @@
 * {
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif !important;
-    font: 100;
+    font-weight: 100;
 }
 
 html, body {
@@ -145,10 +145,15 @@ div.center-grid {
 .pad20 {
     padding: 20px 0;
 }
-
+.mb-6 {
+    margin-bottom: 60px;
+}
+.pb-6 {
+    padding-bottom: 60px;
+}
 .plan-item {
     background: var(--white);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 20px;
     color: var(--dark);
     border-radius: 2px;

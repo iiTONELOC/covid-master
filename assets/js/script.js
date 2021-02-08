@@ -390,7 +390,17 @@ movie();
 
 //save function
 var savePlan = function () {
-   console.log("You clicked save")
+   console.log("You clicked save");
+
+   if(document.querySelector("#saved-plans").classList.contains('open')) {
+      return false;
+   } else {
+      setTimeout(function() {
+         document.querySelector("#saved-plans").classList.replace("hide", "animate__slideInUp");
+         document.querySelector("#saved-plans").classList.add("open");
+      }, 500);
+      
+   }
 
 
    //push items to array for storage
@@ -732,4 +742,16 @@ document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 document.querySelector("#reload-btn").addEventListener('click', function() {
    event.preventDefault();
    location.reload();
+});
+
+document.querySelector("#view-saved-btn").addEventListener("click", function() {
+   if(document.querySelector("#saved-plans").classList.contains('open')) {
+      return false;
+   } else {
+      setTimeout(function() {
+         document.querySelector("#saved-plans").classList.replace("hide", "animate__slideInUp");
+         document.querySelector("#saved-plans").classList.add("open");
+      }, 500);
+      
+   }
 });
