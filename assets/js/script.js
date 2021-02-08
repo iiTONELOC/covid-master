@@ -12,11 +12,26 @@ var savedPlanEl = document.getElementById("saved-plans")
 //date
 var currentDate = moment().format(' Do [of] MMMM ');
 // WE MAY NEED THREE DATA SET
+var removeButton =function(){
+   
+   $("#save-plan-btn").hide()
+   $("#reload-btn").hide();
+   $("#view-saved-btn").hide();
+   $("#contain").hide();
+}
+var showButton =function(){
+   
+   $("#save-plan-btn").show()
+   $("#reload-btn").show();
+   $("#view-saved-btn").show();
+   $("#contain").show();
+}
 
 // MEMORY
 var storageArray = [];
 //var hideHistory
 var hideHistory = function () {
+   showButton()
    if (document.querySelector("#saved-plans").classList.contains('hide')) {
       return false;
    } else {
@@ -27,7 +42,7 @@ var hideHistory = function () {
       }, 0);
    }
 }
-
+removeButton();
 // VAR MEMORYSET = FUNCTION
 var save = function () {
    localStorage.setItem("savedPlan", JSON.stringify(storageArray));
@@ -433,7 +448,7 @@ var savePlan = function () {
       //creates the link element
       var aE1 = document.createElement('a')
       aE1.setAttribute('href', "")
-      aE1.textContent = "Enjoying a " + document.getElementById("meal-title").textContent + ", with a " + document.getElementById("drink-title").textContent + ", while watching " + document.getElementById('movie-title').textContent
+      aE1.textContent = "Looks like I won't be bored in the house tonight after all! With " + document.getElementById("meal-title").textContent + ", and a(n) " + document.getElementById("drink-title").textContent+" to wash it all down" + ", followed by " + document.getElementById('movie-title').textContent +". This just turned into a perfect evening!"
       //creates the span inside the link
       var span = document.createElement('span')
       span.setAttribute('class', 'float-right')
@@ -729,6 +744,7 @@ var drinkHistory = function () {
 
 //reFetch
 var reFetch = function (event) {
+   showButton();
    event.preventDefault()
    console.log(event.target)
    if (event.target.getAttribute("data-movie") === null
@@ -747,6 +763,7 @@ var reFetch = function (event) {
 }
 //var showHistory
 var showHistory = function () {
+   removeButton()
    if (document.querySelector("#saved-plans").classList.contains('open')) {
       return false;
    } else {
@@ -755,12 +772,14 @@ var showHistory = function () {
          document.querySelector("#saved-plans").classList.add("animate__slideInUp");
          document.querySelector("#his").innerHTML="History";
       }, 0);
+      
    }
-
 }
+// hides the elements when when are viewing history
+
 loadMemory();
 //event listener for the savedPlan click
-document.getElementById('saved-plans').addEventListener("click", reFetch)
+document.getElementById('saved-plans').addEventListener("click", reFetch,)
 //event listener for the save plan
 document.getElementById('save-plan-btn').addEventListener("click", savePlan)
 //event listener for the view saved plans
