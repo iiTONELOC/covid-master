@@ -59,8 +59,8 @@ var hideHistory = function () {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").addClass("hide");
-         $("#saved-plans").removeClass("animate_slideInUp open");
+         $("#saved-plans").removeClass("hide");
+         $("#saved-plans").addClass("animate_slideInUp open");
          $("#his").empty();
       }, 0);
    }

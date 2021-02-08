@@ -59,7 +59,7 @@ var hideHistory = function () {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").addClass("hide");
+         $("#saved-plans").removeClass("hide");
          $("#saved-plans").removeClass("animate_slideInUp open");
          $("#his").empty();
       }, 0);
