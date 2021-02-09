@@ -734,7 +734,7 @@ var drinkHistory = function () {
          drinkBoxEl.text("")
          //add title of drink to page
          var drinkTitle = $("<h3>")
-         drinkTitle.text() = data.drinks[0].strDrink
+         drinkTitle.text(data.drinks[0].strDrink);
          drinkTitle.attr("class", "results-title")
          drinkTitle.attr("id", "drink-title")
 
@@ -755,9 +755,9 @@ var drinkHistory = function () {
 
          console.log("this is the drinkID: " + drinkID)
          //ingredientsHeader
-         var ingredientsHeader = $("h3")
+         var ingredientsHeader = $("<h3>")
          ingredientsHeader.attr("class", "results-title")
-         ingredientsHeader.text() = "Ingredients"
+         ingredientsHeader.text("Ingredients")
          //append to page
          drinkBoxEl.append(ingredientsHeader)
          var drinkList = $("<ul>");
@@ -765,7 +765,7 @@ var drinkHistory = function () {
          //creates instructions header
          var instructionsHeader = $("<h3>")
          instructionsHeader.attr("class", "results-title")
-         instructionsHeader.text() = "Instructions"
+         instructionsHeader.text("Instructions")
          //append to page
          drinkBoxEl.append(instructionsHeader)
          var instructions = $('<p>')
@@ -778,8 +778,8 @@ var drinkHistory = function () {
                return;
             }
             else {
-               var drinkM = $("li")
-               drinkM.text() = measure[i] + "-" + ingredients[i];
+               var drinkM = $("<li>")
+               drinkM.text(measure[i] + "-" + ingredients[i]);
                drinkList.append(drinkM);
             }
          }
@@ -787,27 +787,48 @@ var drinkHistory = function () {
    })
 }
 
-
-
-//reFetch
 var reFetch = function (event) {
    showButton();
    event.preventDefault()
-   //console.log(event.target)
-   if ($(this).attr("data-movie") === null
-      || $(this).attr("data-meal") === null
-      || $(this).attr("data-drink") === null) {
+   console.log(event.target)
+   if (event.target.getAttribute("data-movie") === null
+      || event.target.getAttribute("data-meal") === null
+      || event.target.getAttribute("data-drink") === null) {
       return;
    }
-   movieHistoryID = $(this).attr('data-movie')
-   mealHistoryID = $(this).attr("data-meal")
-   drinkHistoryID = $(this).attr("data-drink")
+   movieHistoryID = event.target.getAttribute('data-movie')
+   mealHistoryID = event.target.getAttribute("data-meal")
+   drinkHistoryID = event.target.getAttribute("data-drink")
    //call the api
    movieHistory();
    mealHistory();
    drinkHistory();
 
 }
+
+//reFetch
+//var reFetch = function (event) {
+   //showButton();
+   //event.preventDefault()
+   //console.log(event.target)
+   //if ($(this).attr("data-movie") === null
+      //|| $(this).attr("data-meal") === null
+      //|| $(this).attr("data-drink") === null) {
+      //return;
+   //}
+   //movieHistoryID = $(this).attr('data-movie')
+   //mealHistoryID = $(this).attr("data-meal")
+   //drinkHistoryID = $(this).attr("data-drink")
+   //console.log(movieHistoryID);
+   //console.log(mealHistoryID);
+   //console.log(drinkHistoryID);
+   
+   //call the api
+   //movieHistory();
+   //mealHistory();
+   //drinkHistory();
+
+//}
 //var showHistory
 var showHistory = function () {
    removeButton()
