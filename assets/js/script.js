@@ -119,7 +119,7 @@ var loadMemory = function () {
 // END VAR MEMORYGET = FUNCTION
 
 // RENDER FUNCTION DYNAMIC ELEMENT (REFATOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL> 
-var renderMeal = function (data, data2) {
+var renderMeal = function (data2) {
    var mealTitle = $('<h3>')
    mealTitle.attr("class", "results-title")
    mealTitle.attr("id", "meal-title")
@@ -183,9 +183,9 @@ var renderMeal = function (data, data2) {
       data2.meals[0].strMeasure19,
       data2.meals[0].strMeasure20,
    ]
-   console.log(ingredients)
+   
    // HAD TO DEFIND MEAL ID AS VAR (REFRACTOR)
-   let mealId = data.meals[0].idMeal
+   let mealId = data2.meals[0].idMeal
    //console.log("this is the mealId: " + mealId)
    //creates ingredients header
    let ingredientsHeader = $("<h3>")
@@ -226,7 +226,7 @@ var renderMeal = function (data, data2) {
 //END OF MEAL RENDER FUNCTION
 
 //BEGINING OF DRINK FUNCTION (REFATOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL
-var drinkRender = function (data, measure, ingredients) {
+var drinkRender = function (data) {
    var drinkTitle = $("<h3>")
    drinkTitle.text(data.drinks[0].strDrink)
    drinkTitle.attr("class", "results-title")
@@ -249,8 +249,42 @@ var drinkRender = function (data, measure, ingredients) {
    bevID = drinkId
 
    //console.log("this is the drinkID: " + drinkId)
-
-
+   var ingredients = [
+      data.drinks[0].strIngredient1,
+      data.drinks[0].strIngredient2,
+      data.drinks[0].strIngredient3,
+      data.drinks[0].strIngredient4,
+      data.drinks[0].strIngredient5,
+      data.drinks[0].strIngredient6,
+      data.drinks[0].strIngredient7,
+      data.drinks[0].strIngredient8,
+      data.drinks[0].strIngredient9,
+      data.drinks[0].strIngredient10,
+      data.drinks[0].strIngredient11,
+      data.drinks[0].strIngredient12,
+      data.drinks[0].strIngredient13,
+      data.drinks[0].strIngredient14,
+      data.drinks[0].strIngredient15,
+   ]
+   var measure = [
+      data.drinks[0].strMeasure1,
+      data.drinks[0].strMeasure2,
+      data.drinks[0].strMeasure3,
+      data.drinks[0].strMeasure4,
+      data.drinks[0].strMeasure5,
+      data.drinks[0].strMeasure6,
+      data.drinks[0].strMeasure7,
+      data.drinks[0].strMeasure8,
+      data.drinks[0].strMeasure9,
+      data.drinks[0].strMeasure10,
+      data.drinks[0].strMeasure11,
+      data.drinks[0].strMeasure12,
+      data.drinks[0].strMeasure13,
+      data.drinks[0].strMeasure14,
+      data.drinks[0].strMeasure15,
+   ]
+   console.log(measure);
+   console.log(ingredients);
    //ingredientsHeader
    var ingredientsHeader = $("<h3>")
    ingredientsHeader.attr("class", "results-title")
@@ -357,7 +391,7 @@ var meal = function () {
                .then(function (response2) {
                   response2.json().then(function (data2) {
 
-                     renderMeal(data, data2);
+                     renderMeal(data2);
 
                   })
                })
@@ -401,42 +435,9 @@ var drink = function () {
                response2.json()
                   .then(function (data) {
                      console.log(data);
-                     var ingredients = [
-                        data.drinks[0].strIngredient1,
-                        data.drinks[0].strIngredient2,
-                        data.drinks[0].strIngredient3,
-                        data.drinks[0].strIngredient4,
-                        data.drinks[0].strIngredient5,
-                        data.drinks[0].strIngredient6,
-                        data.drinks[0].strIngredient7,
-                        data.drinks[0].strIngredient8,
-                        data.drinks[0].strIngredient9,
-                        data.drinks[0].strIngredient10,
-                        data.drinks[0].strIngredient11,
-                        data.drinks[0].strIngredient12,
-                        data.drinks[0].strIngredient13,
-                        data.drinks[0].strIngredient14,
-                        data.drinks[0].strIngredient15,
-                     ]
-                     var measure = [
-                        data.drinks[0].strMeasure1,
-                        data.drinks[0].strMeasure2,
-                        data.drinks[0].strMeasure3,
-                        data.drinks[0].strMeasure4,
-                        data.drinks[0].strMeasure5,
-                        data.drinks[0].strMeasure6,
-                        data.drinks[0].strMeasure7,
-                        data.drinks[0].strMeasure8,
-                        data.drinks[0].strMeasure9,
-                        data.drinks[0].strMeasure10,
-                        data.drinks[0].strMeasure11,
-                        data.drinks[0].strMeasure12,
-                        data.drinks[0].strMeasure13,
-                        data.drinks[0].strMeasure14,
-                        data.drinks[0].strMeasure15,
-                     ]
+                     
                      //WILL PASS FUNCTION
-                     drinkRender(data, measure, ingredients)
+                     drinkRender(data)
                   })
             })
       })
@@ -485,35 +486,36 @@ var savePlan = function () {
       }
    }
    if (!duplicate) {
-      // //creates the div
-      // var newEntry = $('<div>');
-      // newEntry.attr("class", 'cell large-6 small-12 plan-item saved-div');
-      // //creates the link element
-      // var aE1 = $('<a>')
-      // aE1.attr('href', "")
-      // aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
-      // //creates the span inside the link
-      // var span = $('<span>')
-      // span.attr('class', 'float-right')
-      // //create the icon inside the span
-      // var icon = $('<i>')
-      // icon.attr('class', 'fas fa-plus')
-      // span.append(icon);
-      // //append the span to the link
-      // aE1.append(span);
-      // //append link to the div
-      // newEntry.append(aE1);
-      // //append div to page
-      // savedPlanEl.append(newEntry);
-      // //set variables for storage
+      //creates the div
+       var newEntry = $('<div>');
+       newEntry.attr("class", 'cell large-6 small-12 plan-item saved-div');
+       //creates the link element
+       var aE1 = $('<a>')
+       aE1.attr('href', "")
+       aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
+       //creates the span inside the link
+       var span = $('<span>')
+       span.attr('class', 'float-right')
+       //create the icon inside the span
+       var icon = $('<i>')
+       icon.attr('class', 'fas fa-plus')
+       span.append(icon);
+       //append the span to the link
+       aE1.append(span);
+       //append link to the div
+       newEntry.append(aE1);
+       //append div to page
+       savedPlanEl.append(newEntry);
+       //set variables for storage
       foodName = $("#meal-title").text()
       drinkName = $("#drink-title").text()
       movieName = $('#movie-title').text()
       newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
       console.log("fuckoff", newSave)
       storageArray.push(newSave)
+      //loadMemory();
       save();
-      loadMemory();
+      
    }
 }
 //second movie api call to fetch movie by title
@@ -692,12 +694,13 @@ var mealHistory = function () {
 
 //drinkHistory (Code reduction Redunancy maybe fractering. )
 var drinkHistory = function () {
-   //console.log(drinkHistoryID)
+   console.log(drinkHistoryID)
    var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkHistoryID
    fetch(apiUrl2).then(function (response2) {
-      response2.json().then(function (data) {
+     return response2.json()
+   }) .then(function (data) {
          console.log(data);
-         var ingredients = [
+         var ingredientsd = [
             data.drinks[0].strIngredient1,
             data.drinks[0].strIngredient2,
             data.drinks[0].strIngredient3,
@@ -714,7 +717,7 @@ var drinkHistory = function () {
             data.drinks[0].strIngredient14,
             data.drinks[0].strIngredient15,
          ]
-         var measure = [
+         var measured = [
             data.drinks[0].strMeasure1,
             data.drinks[0].strMeasure2,
             data.drinks[0].strMeasure3,
@@ -737,7 +740,7 @@ var drinkHistory = function () {
          drinkTitle.text(data.drinks[0].strDrink);
          drinkTitle.attr("class", "results-title")
          drinkTitle.attr("id", "drink-title")
-
+         
          //append title
          drinkBoxEl.append(drinkTitle)
 
@@ -772,19 +775,21 @@ var drinkHistory = function () {
          instructions.attr("class", "text")
          instructions.text(data.drinks[0].strInstructions)
          drinkBoxEl.append(instructions);
-         for (var i = 0; i < measure.length; i++) {
+         console.log(measured)
+         console.log(ingredientsd)
+         for (let i = 0; i < measured.length; i++) {
             //console.log($(this));
-            if (measure[i] === null || measure[i] === "") {
+            if (measured[i] === null || measured[i] === "") {
                return;
             }
             else {
-               var drinkM = $("<li>")
-               drinkM.text(measure[i] + "-" + ingredients[i]);
+               let drinkM = $("<li>")
+               drinkM.text(measured[i] + "-" + ingredientsd[i]);
                drinkList.append(drinkM);
             }
          }
       })
-   })
+   
 }
 
 var reFetch = function (event) {
