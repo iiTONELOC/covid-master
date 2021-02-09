@@ -118,7 +118,7 @@ var loadMemory = function () {
 }
 // END VAR MEMORYGET = FUNCTION
 
-// RENDER FUNCTION DYNAMIC ELEMENT (REFATOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL> 
+// RENDER FUNCTION DYNAMIC ELEMENT (REFACTOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL> 
 var renderMeal = function (data2) {
    var mealTitle = $('<h3>')
    mealTitle.attr("class", "results-title")
@@ -183,7 +183,7 @@ var renderMeal = function (data2) {
       data2.meals[0].strMeasure19,
       data2.meals[0].strMeasure20,
    ]
-   
+
    // HAD TO DEFIND MEAL ID AS VAR (REFRACTOR)
    let mealId = data2.meals[0].idMeal
    //console.log("this is the mealId: " + mealId)
@@ -225,7 +225,7 @@ var renderMeal = function (data2) {
 }
 //END OF MEAL RENDER FUNCTION
 
-//BEGINING OF DRINK FUNCTION (REFATOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL
+//BEGINNING OF DRINK FUNCTION (REFCATOR) EASIER TO READ SEPARATING FUNCTION FOR FETCH/API CALL
 var drinkRender = function (data) {
    var drinkTitle = $("<h3>")
    drinkTitle.text(data.drinks[0].strDrink)
@@ -318,7 +318,7 @@ var drinkRender = function (data) {
 }
 //END DRINK RENDER DYNAMIC
 
-//BEGINING OF MOVIE RENDER DYNAMIC
+//BEGINNING OF MOVIE RENDER DYNAMIC
 var movieRender = function (movieData) {
    var randomNum = Math.floor(Math.random() * 20);
    //console.log("selected randoStyle is: " + randomNum);
@@ -354,7 +354,7 @@ var movieRender = function (movieData) {
 
 // END OF MOVIE RENDER DYNAMIC(KH)
 
-// BEGINGING OF API CALLS (KH)
+// BEGINNING OF API CALLS (KH)
 
 // VAR FUNCTION FOR API MEAL(KH)(!current set up just to run a random meal!)(AT)
 var meal = function () {
@@ -435,7 +435,7 @@ var drink = function () {
                response2.json()
                   .then(function (data) {
                      console.log(data);
-                     
+
                      //WILL PASS FUNCTION
                      drinkRender(data)
                   })
@@ -487,26 +487,26 @@ var savePlan = function () {
    }
    if (!duplicate) {
       //creates the div
-       var newEntry = $('<div>');
-       newEntry.attr("class", 'cell large-6 small-12 plan-item saved-div');
-       //creates the link element
-       var aE1 = $('<a>')
-       aE1.attr('href', "")
-       aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
-       //creates the span inside the link
-       var span = $('<span>')
-       span.attr('class', 'float-right')
-       //create the icon inside the span
-       var icon = $('<i>')
-       icon.attr('class', 'fas fa-plus')
-       span.append(icon);
-       //append the span to the link
-       aE1.append(span);
-       //append link to the div
-       newEntry.append(aE1);
-       //append div to page
-       savedPlanEl.append(newEntry);
-       //set variables for storage
+      var newEntry = $('<div>');
+      newEntry.attr("class", 'cell large-6 small-12 plan-item saved-div');
+      //creates the link element
+      var aE1 = $('<a>')
+      aE1.attr('href', "")
+      aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
+      //creates the span inside the link
+      var span = $('<span>')
+      span.attr('class', 'float-right')
+      //create the icon inside the span
+      var icon = $('<i>')
+      icon.attr('class', 'fas fa-plus')
+      span.append(icon);
+      //append the span to the link
+      aE1.append(span);
+      //append link to the div
+      newEntry.append(aE1);
+      //append div to page
+      savedPlanEl.append(newEntry);
+      //set variables for storage
       foodName = $("#meal-title").text()
       drinkName = $("#drink-title").text()
       movieName = $('#movie-title').text()
@@ -515,7 +515,7 @@ var savePlan = function () {
       storageArray.push(newSave)
       //loadMemory();
       save();
-      
+
    }
 }
 //second movie api call to fetch movie by title
@@ -660,7 +660,7 @@ var mealHistory = function () {
          ingredientsHeader.text("Ingredients")
          //append to page
          mealBoxE1.append(ingredientsHeader)
-         var mealList = $("ul");
+         var mealList = $("<ul>");
          mealBoxE1.append(mealList)
          //creates instructions header
          var instructionsHeader = $("<h3>")
@@ -697,99 +697,99 @@ var drinkHistory = function () {
    console.log(drinkHistoryID)
    var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkHistoryID
    fetch(apiUrl2).then(function (response2) {
-     return response2.json()
-   }) .then(function (data) {
-         console.log(data);
-         var ingredientsd = [
-            data.drinks[0].strIngredient1,
-            data.drinks[0].strIngredient2,
-            data.drinks[0].strIngredient3,
-            data.drinks[0].strIngredient4,
-            data.drinks[0].strIngredient5,
-            data.drinks[0].strIngredient6,
-            data.drinks[0].strIngredient7,
-            data.drinks[0].strIngredient8,
-            data.drinks[0].strIngredient9,
-            data.drinks[0].strIngredient10,
-            data.drinks[0].strIngredient11,
-            data.drinks[0].strIngredient12,
-            data.drinks[0].strIngredient13,
-            data.drinks[0].strIngredient14,
-            data.drinks[0].strIngredient15,
-         ]
-         var measured = [
-            data.drinks[0].strMeasure1,
-            data.drinks[0].strMeasure2,
-            data.drinks[0].strMeasure3,
-            data.drinks[0].strMeasure4,
-            data.drinks[0].strMeasure5,
-            data.drinks[0].strMeasure6,
-            data.drinks[0].strMeasure7,
-            data.drinks[0].strMeasure8,
-            data.drinks[0].strMeasure9,
-            data.drinks[0].strMeasure10,
-            data.drinks[0].strMeasure11,
-            data.drinks[0].strMeasure12,
-            data.drinks[0].strMeasure13,
-            data.drinks[0].strMeasure14,
-            data.drinks[0].strMeasure15,
-         ]
-         drinkBoxEl.text("")
-         //add title of drink to page
-         var drinkTitle = $("<h3>")
-         drinkTitle.text(data.drinks[0].strDrink);
-         drinkTitle.attr("class", "results-title")
-         drinkTitle.attr("id", "drink-title")
-         
-         //append title
-         drinkBoxEl.append(drinkTitle)
+      return response2.json()
+   }).then(function (data) {
+      console.log(data);
+      var ingredientsd = [
+         data.drinks[0].strIngredient1,
+         data.drinks[0].strIngredient2,
+         data.drinks[0].strIngredient3,
+         data.drinks[0].strIngredient4,
+         data.drinks[0].strIngredient5,
+         data.drinks[0].strIngredient6,
+         data.drinks[0].strIngredient7,
+         data.drinks[0].strIngredient8,
+         data.drinks[0].strIngredient9,
+         data.drinks[0].strIngredient10,
+         data.drinks[0].strIngredient11,
+         data.drinks[0].strIngredient12,
+         data.drinks[0].strIngredient13,
+         data.drinks[0].strIngredient14,
+         data.drinks[0].strIngredient15,
+      ]
+      var measured = [
+         data.drinks[0].strMeasure1,
+         data.drinks[0].strMeasure2,
+         data.drinks[0].strMeasure3,
+         data.drinks[0].strMeasure4,
+         data.drinks[0].strMeasure5,
+         data.drinks[0].strMeasure6,
+         data.drinks[0].strMeasure7,
+         data.drinks[0].strMeasure8,
+         data.drinks[0].strMeasure9,
+         data.drinks[0].strMeasure10,
+         data.drinks[0].strMeasure11,
+         data.drinks[0].strMeasure12,
+         data.drinks[0].strMeasure13,
+         data.drinks[0].strMeasure14,
+         data.drinks[0].strMeasure15,
+      ]
+      drinkBoxEl.text("")
+      //add title of drink to page
+      var drinkTitle = $("<h3>")
+      drinkTitle.text(data.drinks[0].strDrink);
+      drinkTitle.attr("class", "results-title")
+      drinkTitle.attr("id", "drink-title")
 
-         //add image to page and set alt attribute
-         var drinkImg = $("<img>")
-         drinkImg.attr("src", data.drinks[0].strDrinkThumb)
-         drinkImg.attr("alt", "Picture of a " + data.drinks[0].strDrink)
+      //append title
+      drinkBoxEl.append(drinkTitle)
 
-         //append image
-         drinkBoxEl.append(drinkImg)
+      //add image to page and set alt attribute
+      var drinkImg = $("<img>")
+      drinkImg.attr("src", data.drinks[0].strDrinkThumb)
+      drinkImg.attr("alt", "Picture of a " + data.drinks[0].strDrink)
+
+      //append image
+      drinkBoxEl.append(drinkImg)
 
 
-         // stores the drink id
-         drinkID = data.drinks[0].idDrink
+      // stores the drink id
+      drinkID = data.drinks[0].idDrink
 
-         console.log("this is the drinkID: " + drinkID)
-         //ingredientsHeader
-         var ingredientsHeader = $("<h3>")
-         ingredientsHeader.attr("class", "results-title")
-         ingredientsHeader.text("Ingredients")
-         //append to page
-         drinkBoxEl.append(ingredientsHeader)
-         var drinkList = $("<ul>");
-         drinkBoxEl.append(drinkList)
-         //creates instructions header
-         var instructionsHeader = $("<h3>")
-         instructionsHeader.attr("class", "results-title")
-         instructionsHeader.text("Instructions")
-         //append to page
-         drinkBoxEl.append(instructionsHeader)
-         var instructions = $('<p>')
-         instructions.attr("class", "text")
-         instructions.text(data.drinks[0].strInstructions)
-         drinkBoxEl.append(instructions);
-         console.log(measured)
-         console.log(ingredientsd)
-         for (let i = 0; i < measured.length; i++) {
-            //console.log($(this));
-            if (measured[i] === null || measured[i] === "") {
-               return;
-            }
-            else {
-               let drinkM = $("<li>")
-               drinkM.text(measured[i] + "-" + ingredientsd[i]);
-               drinkList.append(drinkM);
-            }
+      console.log("this is the drinkID: " + drinkID)
+      //ingredientsHeader
+      var ingredientsHeader = $("<h3>")
+      ingredientsHeader.attr("class", "results-title")
+      ingredientsHeader.text("Ingredients")
+      //append to page
+      drinkBoxEl.append(ingredientsHeader)
+      var drinkList = $("<ul>");
+      drinkBoxEl.append(drinkList)
+      //creates instructions header
+      var instructionsHeader = $("<h3>")
+      instructionsHeader.attr("class", "results-title")
+      instructionsHeader.text("Instructions")
+      //append to page
+      drinkBoxEl.append(instructionsHeader)
+      var instructions = $('<p>')
+      instructions.attr("class", "text")
+      instructions.text(data.drinks[0].strInstructions)
+      drinkBoxEl.append(instructions);
+      console.log(measured)
+      console.log(ingredientsd)
+      for (let i = 0; i < measured.length; i++) {
+         //console.log($(this));
+         if (measured[i] === null || measured[i] === "") {
+            return;
          }
-      })
-   
+         else {
+            let drinkM = $("<li>")
+            drinkM.text(measured[i] + "-" + ingredientsd[i]);
+            drinkList.append(drinkM);
+         }
+      }
+   })
+
 }
 
 var reFetch = function (event) {
@@ -813,25 +813,25 @@ var reFetch = function (event) {
 
 //reFetch
 //var reFetch = function (event) {
-   //showButton();
-   //event.preventDefault()
-   //console.log(event.target)
-   //if ($(this).attr("data-movie") === null
-      //|| $(this).attr("data-meal") === null
-      //|| $(this).attr("data-drink") === null) {
-      //return;
-   //}
-   //movieHistoryID = $(this).attr('data-movie')
-   //mealHistoryID = $(this).attr("data-meal")
-   //drinkHistoryID = $(this).attr("data-drink")
-   //console.log(movieHistoryID);
-   //console.log(mealHistoryID);
-   //console.log(drinkHistoryID);
-   
-   //call the api
-   //movieHistory();
-   //mealHistory();
-   //drinkHistory();
+//showButton();
+//event.preventDefault()
+//console.log(event.target)
+//if ($(this).attr("data-movie") === null
+//|| $(this).attr("data-meal") === null
+//|| $(this).attr("data-drink") === null) {
+//return;
+//}
+//movieHistoryID = $(this).attr('data-movie')
+//mealHistoryID = $(this).attr("data-meal")
+//drinkHistoryID = $(this).attr("data-drink")
+//console.log(movieHistoryID);
+//console.log(mealHistoryID);
+//console.log(drinkHistoryID);
+
+//call the api
+//movieHistory();
+//mealHistory();
+//drinkHistory();
 
 //}
 //var showHistory
