@@ -45,6 +45,7 @@ section{
 .button, select, .box {
     border-radius: 4px;
 }
+
 .button {
     margin-right: 20px;
     padding: 15px 35px;
