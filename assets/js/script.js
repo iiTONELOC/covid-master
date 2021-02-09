@@ -485,27 +485,27 @@ var savePlan = function () {
       }
    }
    if (!duplicate) {
-      //creates the div
-      var newEntry = $('<div>');
-      newEntry.attr("class", 'cell large-6 small-12 plan-item saved-div');
-      //creates the link element
-      var aE1 = $('<a>')
-      aE1.attr('href', "")
-      aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
-      //creates the span inside the link
-      var span = $('<span>')
-      span.attr('class', 'float-right')
-      //create the icon inside the span
-      var icon = $('<i>')
-      icon.attr('class', 'fas fa-plus')
-      span.append(icon);
-      //append the span to the link
-      aE1.append(span);
-      //append link to the div
-      newEntry.append(aE1);
-      //append div to page
-      savedPlanEl.append(newEntry);
-      //set variables for storage
+      // //creates the div
+      // var newEntry = $('<div>');
+      // newEntry.attr("class", 'cell large-6 small-12 plan-item saved-div');
+      // //creates the link element
+      // var aE1 = $('<a>')
+      // aE1.attr('href', "")
+      // aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
+      // //creates the span inside the link
+      // var span = $('<span>')
+      // span.attr('class', 'float-right')
+      // //create the icon inside the span
+      // var icon = $('<i>')
+      // icon.attr('class', 'fas fa-plus')
+      // span.append(icon);
+      // //append the span to the link
+      // aE1.append(span);
+      // //append link to the div
+      // newEntry.append(aE1);
+      // //append div to page
+      // savedPlanEl.append(newEntry);
+      // //set variables for storage
       foodName = $("#meal-title").text()
       drinkName = $("#drink-title").text()
       movieName = $('#movie-title').text()
@@ -513,6 +513,7 @@ var savePlan = function () {
       console.log("fuckoff", newSave)
       storageArray.push(newSave)
       save();
+      loadMemory();
    }
 }
 //second movie api call to fetch movie by title
