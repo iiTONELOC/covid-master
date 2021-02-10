@@ -4,7 +4,7 @@
 ## Bored In The House
 is a web application that was created around a defined user criteria:  
 ```  
-As a user,  
+As a User:
 I want to plan a night in.  
 I want to be given dinner, drinks and entertainment options.  
 When I click the start button  

@@ -478,6 +478,7 @@ var savePlan = function () {
    //console.log("You clicked save");
    //push items to array for storage
    //check for DUPES
+   //loadMemory();
    var duplicate = false;
    for (let i = 0; i < newSave.length; i++) {
       const element = newSave[i];
@@ -513,8 +514,8 @@ var savePlan = function () {
       newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
       console.log("fuckoff", newSave)
       storageArray.push(newSave)
-      //loadMemory();
       save();
+      
 
    }
 }
