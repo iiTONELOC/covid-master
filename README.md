@@ -1,8 +1,8 @@
 # Bored In The House
 ![GitHub language count](https://img.shields.io/github/languages/count/iiTONELOC/covid-master?style=flat-square) ![GitHub](https://img.shields.io/github/license/iiTONELOC/covid-master?color=informational&label=Licene&style=flat-square)
 
-## Bored In The House
-is a web application that was created around a defined user criteria:  
+## Description 
+Bored in the House is an interactive web application that presents meal recipes, drink recipes, and movies based on user input. The user story is as follows:  
 ```  
 As a User:
 I want to plan a night in.  
@@ -18,6 +18,8 @@ I am then presented with my dinner recipe, drink recipe, and movie
 My plan is then stored in the history to be pulled up again.  
 ```
 
+## Features
+This application uses local storage for persistance. [Foundation](https://get.foundation/), [Moment.js](https://momentjs.com/), [jQuery](https://jquery.com/), [Google Font](https://fonts.google.com/), [Animate CSS](https://animate.style/), [TheMealDB](https://www.themealdb.com/), [TheCocktailDB](https://www.thecocktaildb.com/), and [TMDB](https://developers.themoviedb.org/3/getting-started/introduction) third party API's were used to build Bored in the House. 
 
 Screenshot/GIF 
 
@@ -37,7 +39,7 @@ Link to URL With GIF
 |![HTML](https://img.shields.io/static/v1?label=HTML&message=22%&color=orange&style=flat-square)| Hyper Text MarkUp Language |
 
 # Usage
-Provide Instructions for use
+When you choose start a plan you are presented with meal catagories to choose from. After you choose your meal you are presented with drink catagories to choose from. After you choose your drink you are presented with movie catagories to choose from. After you choose your movie you are presented with the results of your choices. The meal includes a picture, a link to the online recipe if applicable, an ingredients list, and directions for the recipe. The drink includes a picture, ingredients for the recipe, and directions for the recipe. The movie includes the movie poster, and a short description of the movie. You have the ability to save your current result, view your saved results, start a new plan, or shuffle, which renders a new plan with your current inputs. When you choose view saved plans you will be taken to a list of your saved results that include the dya you saved the pla, the name of the meal, name of the drink, and name of the movie you saved.
 
 # Collaborators
 | Username   | Link ↘️                |
