@@ -2,7 +2,21 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/iiTONELOC/covid-master?style=flat-square) ![GitHub](https://img.shields.io/github/license/iiTONELOC/covid-master?color=informational&label=Licene&style=flat-square)
 
 ## Bored In The House
-is a web application that....
+is a web application that was created around a defined user criteria:  
+```  
+As a user,  
+I want to plan a night in.  
+I want to be given dinner, drinks and entertainment options.  
+When I click the start button  
+I'm able to search for a dinner recipe  
+When I choose dinner  
+I am presented with drink options.  
+When I choose a drink  
+I am then able to choose a movie to watch  
+After I made all the choices  
+I am then presented with my dinner recipe, drink recipe, and movie  
+My plan is then stored in the history to be pulled up again.  
+```
 
 
 Screenshot/GIF 
