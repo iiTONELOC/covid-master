@@ -45,6 +45,7 @@ section{
 .button, select, .box {
     border-radius: 4px;
 }
+
 .button {
     margin-right: 20px;
     padding: 15px 35px;
@@ -75,9 +76,7 @@ section{
     margin-bottom: 20px;
 }
 
-.question-container {
-    display: flex;
-}
+
 .hero {
     height: 100vh;
 }
@@ -181,6 +180,15 @@ div.center-grid {
     display: flex;
     justify-content: center;
     margin: 15px;
+}
+
+.alert h5 {
+    font-weight: 800;
+}
+.alert {
+    border: 2px solid #f5c2c7;
+    color: #842029 !important;
+    border-radius: .25rem;
 }
 
 /* ---------------------------------
