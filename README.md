@@ -29,7 +29,9 @@ My plan is then stored in the history to be pulled up again.
 
 # Features  
 
-This application uses local storage for persistance. [Foundation](https://get.foundation/), [Moment.js](https://momentjs.com/), [jQuery](https://jquery.com/), [Google Font](https://fonts.google.com/), [Animate CSS](https://animate.style/), [TheMealDB](https://www.themealdb.com/), [TheCocktailDB](https://www.thecocktaildb.com/), and [TMDB](https://developers.themoviedb.org/3/getting-started/introduction) third party APIs were used to build Bored in the House. 
+This application uses localStorage for persistance of user data.  
+ [Foundation](https://get.foundation/), [Moment.js](https://momentjs.com/), [jQuery](https://jquery.com/), [Google Font](https://fonts.google.com/), and [Animate CSS](https://animate.style/), for third-party APIs.  
+ [TheMealDB](https://www.themealdb.com/), [TheCocktailDB](https://www.thecocktaildb.com/), and [TMDB](https://developers.themoviedb.org/3/getting-started/introduction) server-side APIs were used to build Bored in the House. 
 
 # Screenshot  
 
