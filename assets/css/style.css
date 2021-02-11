@@ -45,14 +45,18 @@ section{
 .button, select, .box {
     border-radius: 4px;
 }
+
 .button {
-    margin-right: 20px;
+
     padding: 15px 35px;
     box-shadow: 0px 0px 10px 0px black;
     width: 200px;
 }
 .button:focus {
     box-shadow: 0 0 0 1px orange;
+}
+.button-container a {
+    margin-right: 10px;
 }
 .blue .secondary {
     background:var(--dark);
@@ -75,9 +79,7 @@ section{
     margin-bottom: 20px;
 }
 
-.question-container {
-    display: flex;
-}
+
 .hero {
     height: 100vh;
 }
@@ -183,6 +185,15 @@ div.center-grid {
     margin: 15px;
 }
 
+.alert h5 {
+    font-weight: 800;
+}
+.alert {
+    border: 2px solid #f5c2c7;
+    color: #842029 !important;
+    border-radius: .25rem;
+}
+
 /* ---------------------------------
 MEDIA QUERIES
 ----------------------------------*/
@@ -215,5 +226,8 @@ MEDIA QUERIES
     }
     .results-title {
         font-family: 'Montserrat', sans-serif;
+    }
+    .button-container {
+        padding: 0 25px;
     }
 }

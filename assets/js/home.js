@@ -1,7 +1,9 @@
 var foodType = "";
 var drinkType = "";
 var movieType = "";
+
 document.querySelector('main').addEventListener("click", function() {
+
     event.preventDefault();
 
     // find which button was click
@@ -11,8 +13,9 @@ document.querySelector('main').addEventListener("click", function() {
 
     // if a back button was clicked, remove current slide
     if (clickedBtn.classList.contains("back-btn")) {
+        removeAlert();
         if (clickedBtnId === "scroll-release") {
-            document.querySelector("body").classList.remove("scroll-lock");
+            // document.querySelector("body").classList.remove("scroll-lock");
             document.querySelector("#home-slide").classList.remove("hide");
         }
         parent.classList.replace("animate__slideInUp", "animate__slideOutDown");
@@ -24,31 +27,43 @@ document.querySelector('main').addEventListener("click", function() {
 
     if (clickedBtnId === "start-btn") {
         document.querySelector("#dinner-slide").classList.replace("hide", "animate__slideInUp");
-        document.querySelector("body").classList.add("scroll-lock");
-        setTimeout(function() {
-            document.querySelector("#home-slide").classList.add("hide");
-        }, 1000);
-
     }
     if (clickedBtnId === "add-food-btn") {
-        document.querySelector("#drink-slide").classList.replace("hide", "animate__slideInUp");
+        removeAlert();
         foodType = document.querySelector("#cuisine-type").value;
-        document.querySelector("#drink-slide h2 span").textContent = foodType;
-        console.log(foodType);
+        if(foodType === "") {
+            displayAlertMessage();
+        } else {
+            document.querySelector("#drink-slide").classList.replace("hide", "animate__slideInUp");   
+            document.querySelector("#drink-slide h2 span").textContent = foodType;
+            console.log(foodType);
+        }
     }
     if (clickedBtnId === "add-drink-btn") {
-        document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
+        removeAlert();
         drinkType = document.querySelector("#drink-type").value;
-        document.querySelector("#genre-slide h2 span").textContent = drinkType;
-        console.log(drinkType);
+        if(drinkType === "") {
+            displayAlertMessage();
+        } else {
+            document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
+            document.querySelector("#genre-slide h2 span").textContent = drinkType;
+            console.log(drinkType);
+        }
+        
     }
     if (clickedBtnId === "add-genre-btn") {
-        document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
+        removeAlert();
         movieType = document.querySelector("#movie-type").value;
-        console.log(movieType);
-        console.log(foodType);
-        console.log(drinkType);
-        window.location='./results.html?para=' + foodType + '=' + drinkType + '=' + movieType
+        if(movieType === "") {
+            displayAlertMessage();
+        } else {
+            document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
+            console.log(movieType);
+            console.log(foodType);
+            console.log(drinkType);
+            window.location='./results.html?para=' + foodType + '=' + drinkType + '=' + movieType
+        }
+        
     }
     if (clickedBtnId === "history-btn"){
         window.location="./results.html#saved-plans"
@@ -76,3 +91,22 @@ windowSizeCheck();
 window.addEventListener("resize", function() {
     windowSizeCheck();
 });
+
+
+//ALERT MESSAGE
+var displayAlertMessage = function() {
+    var alertBox = document.createElement("div");
+    alertBox.classList = "callout alert text-left";
+    alertBox.setAttribute('data-closable', ""); 
+    alertBox.innerHTML = '<h5>Alert</h5> <p>Please select an input valid value</p> <button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button>';
+    if($('div').hasClass('question-container')) {
+        $('.question-container').append(alertBox);
+    }
+    
+}
+// remove alert
+var removeAlert = function() {
+    if($('div').hasClass('callout')) {
+        $('.callout').remove();
+    }
+}
