@@ -33,7 +33,7 @@ var movieHistoryID = "";
 var mealHistoryID = "";
 var drinkHistoryID = "";
 
-// WE MAY NEED THREE DATA SET
+// FUNCTION TO REMOVE AND HIDE THE BUTTONS ON THE PAGE (AT). 
 var removeButton = function () {
 
    $("#save-plan-btn").hide()
@@ -49,30 +49,29 @@ var showButton = function () {
    $("#contain").show();
 }
 
-// MEMORY
-//var storageArray = [];
 
-//var hideHistory
+//VAR DIE HIDEHISTORY (AT, JM)  /NEED TO CONVERT TO JQUERY / (THIS MORE A CSS JAVA SCRIPT FOUNDATION LOGIC)(?).
 var hideHistory = function () {
    showButton()
-   if ($("#saved-plans").hasClass('hide')) {
+   if (document.querySelector("#saved-plans").classList.contains('hide')) {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").addClass("hide");
-         $("#saved-plans").removeClass("animate_slideInUp open");
-         $("#his").empty();
+         document.querySelector("#saved-plans").classList.replace("open", "hide");
+         document.querySelector("#saved-plans").classList.remove("animate_slideInUp");
+         document.querySelector("#his").innerHTML = "";
       }, 0);
    }
 }
 removeButton();
 
-// VAR MEMORYSET = FUNCTION
+// VAR MEMORYSET = FUNCTION 
 
 var save = function () {
    localStorage.setItem("savedPlan", JSON.stringify(storageArray));
 }
-// VAR MEMORYGET = FUNCTION
+
+// VAR MEMORYGET = FUNCTION (AT)(KH)
 var loadMemory = function () {
    var memory = JSON.parse(localStorage.getItem("savedPlan"));
 
@@ -87,11 +86,11 @@ var loadMemory = function () {
          newEntry.attr('data-drink', memory[i][6])
          newEntry.attr('data-movie', memory[i][4]);
          newEntry.attr('data-meal', memory[i][3]);
-         //newEntry.attr('data-meal', memory[i][4]);
+        
          //creates the link element
          var aE1 = $('<a>')
          aE1.attr('href', "")
-         aE1.textContent = " Wow! " + "On the " + memory[i][0] + " I wasn't Bored in the House after all! " + " I Enjoyed a " + memory[i][5] + ", with a " + memory[i][1] + ", while watching " + memory[i][2]
+         aE1.text(" Wow! " + "On the " + memory[i][0] + " I wasn't Bored in the House after all! " + " I Enjoyed a " + memory[i][5] + ", with a " + memory[i][1] + ", while watching " + memory[i][2])
          //since the whole div is clickable due to its dynamically created, we will ensure we capture the ids needed 
          aE1.attr('data-drink', memory[i][6])
          aE1.attr('data-movie', memory[i][4]);
@@ -115,12 +114,11 @@ var loadMemory = function () {
          //append div to page
          savedPlanEl.append(newEntry);
       }
-      //console.log(storageArray);
-   }
+    }
 }
 // END VAR MEMORYGET = FUNCTION
 
-// RENDER FUNCTION DYNAMIC ELEMENT (REFATOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL> 
+// RENDER FUNCTION DYNAMIC ELEMENT (REFACTOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL (AT)(MH)(KH) 
 var renderMeal = function (data, data2) {
    var mealTitle = $('<h3>')
    mealTitle.attr("class", "results-title")
@@ -140,7 +138,7 @@ var renderMeal = function (data, data2) {
       recipe.textContent = "Check out the recipe!";
       mealBoxE1.append(recipe)
    }
-   //ARRAY COULD BE CONDENCES DO TO THE NATURE OF API DESIGN. 
+   //ARRAY COULD BE CONDENCES DO TO THE NATURE OF API DESIGN. SET UP AS AN ARRAY SO A FOR LOOP COULD BE USED TO RENDER (MH)
    var ingredients = [
       data2.meals[0].strIngredient1,
       data2.meals[0].strIngredient2,
@@ -185,11 +183,9 @@ var renderMeal = function (data, data2) {
       data2.meals[0].strMeasure19,
       data2.meals[0].strMeasure20,
    ]
-   console.log(ingredients)
-   // HAD TO DEFIND MEAL ID AS VAR (REFRACTOR)
+   // HAD TO DEFIND MEAL ID AS VAR (REFRACTOR) (KH)
    let mealId = data.meals[0].idMeal
-   //console.log("this is the mealId: " + mealId)
-   //creates ingredients header
+   //creates HEADER ON INGREDIENTSHEADER (MH) (AT)
    let ingredientsHeader = $("<h3>")
    ingredientsHeader.attr("class", "results-title")
    ingredientsHeader.text("Ingredients")
@@ -213,13 +209,13 @@ var renderMeal = function (data, data2) {
    dID = mealId;
 
    //console.log("this is the dID: " + dID)//
-   for (var i = 0; i < measure.length; i++) {
+   for (let i = 0; i < measure.length; i++) {
       //console.log($(this));
       if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
          return;
       }
       else {
-         var mealStuff = $("<li>")
+         let mealStuff = $("<li>")
          mealStuff.text(measure[i] + "-" + ingredients[i]);
          mealList.append(mealStuff);
       }
@@ -227,18 +223,18 @@ var renderMeal = function (data, data2) {
 }
 //END OF MEAL RENDER FUNCTION
 
-//BEGINING OF DRINK FUNCTION (REFATOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL
+//BEGINING OF DRINK FUNCTION (REFACTOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL (MH)(AT)(HK)
 var drinkRender = function (data, measure, ingredients) {
-   var drinkTitle = $("<h3>")
+   let drinkTitle = $("<h3>")
    drinkTitle.text(data.drinks[0].strDrink)
    drinkTitle.attr("class", "results-title")
    drinkTitle.attr("id", "drink-title")
-console.log(drinkTitle)
+   console.log(drinkTitle)
    //append title
    drinkBoxEl.append(drinkTitle)
 
    //add image to page and set alt attribute
-   var drinkImg = $("<img>")
+   let drinkImg = $("<img>")
    drinkImg.attr("src", data.drinks[0].strDrinkThumb)
    drinkImg.attr("alt", "Picture of a " + data.drinks[0].strDrink)
 
@@ -247,38 +243,38 @@ console.log(drinkTitle)
 
 
    // stores the drink id
-   var drinkId = data.drinks[0].idDrink
+   let drinkId = data.drinks[0].idDrink
    bevID = drinkId
 
    //console.log("this is the drinkID: " + drinkId)
 
 
    //ingredientsHeader
-   var ingredientsHeader = $("<h3>")
+   let ingredientsHeader = $("<h3>")
    ingredientsHeader.attr("class", "results-title")
    ingredientsHeader.text("Ingredients")
    //append to page
    drinkBoxEl.append(ingredientsHeader)
-   var drinkList = $("<ul>");
+   let drinkList = $("<ul>");
    drinkBoxEl.append(drinkList)
    //creates instructions header
-   var instructionsHeader = $("<h3>")
+   let instructionsHeader = $("<h3>")
    instructionsHeader.attr("class", "results-title")
    instructionsHeader.text("Instructions")
    //append to page
    drinkBoxEl.append(instructionsHeader)
 
-   var instructions = $('<p>')
+   let instructions = $('<p>')
    instructions.attr("class", "text")
    instructions.text(data.drinks[0].strInstructions)
    drinkBoxEl.append(instructions);
-   for (var i = 0; i < measure.length; i++) {
+   for (let i = 0; i < measure.length; i++) {
       //console.log($(this));
       if (measure[i] === null || measure[i] === "") {
          return;
       }
       else {
-         var drinkM = $("<li>")
+         let drinkM = $("<li>")
          drinkM.text(measure[i] + "-" + ingredients[i]);
          drinkList.append(drinkM);
       }
@@ -286,32 +282,30 @@ console.log(drinkTitle)
 }
 //END DRINK RENDER DYNAMIC
 
-//BEGINING OF MOVIE RENDER DYNAMIC
+//BEGINING OF MOVIE RENDER DYNAMIC (AT)(KH)
 var movieRender = function (movieData) {
    var randomNum = Math.floor(Math.random() * 20);
-   //console.log("selected randoStyle is: " + randomNum);
-
-   console.log(movieData)
+ 
    //CREATE DYNAMICALLY APPEND TO PAGE>  
-   var title = $('<h3>')
+   let title = $('<h3>')
    title.attr('class', 'results-title')
    title.attr('id', "movie-title")
    title.text(movieData.results[randomNum].original_title)
 
    $('#movie-box').append(title)
    //create movie cover
-   var cover = $('<img>')
+   let cover = $('<img>')
    cover.attr('src', "https://image.tmdb.org/t/p/w500/" + movieData.results[randomNum].poster_path + "")
    cover.attr('value', movieData.results[randomNum].id)
    cover.attr('alt', "Movie poster for " + movieData.results[randomNum].original_title)
    $('#movie-box').append(cover)
    //create overview title
-   var summaryTitle = $('<h3>')
+   let summaryTitle = $('<h3>')
    summaryTitle.attr("class", "results-title")
    summaryTitle.text("What's it about?")
    $('#movie-box').append(summaryTitle)
    //create overview
-   var summary = $('<p>')
+   let summary = $('<p>')
    summary.attr("class", 'text')
    summary.text(movieData.results[randomNum].overview)
    $('#movie-box').append(summary)
@@ -319,10 +313,9 @@ var movieRender = function (movieData) {
    movieID = movieData.results[randomNum].id
    // console.log("this is the movieID: " + movieID)
 }
+// END OF MOVIE RENDER DYNAMIC
 
-// END OF MOVIE RENDER DYNAMIC(KH)
-
-// BEGINGING OF API CALLS (KH)
+// BEGINGING OF API CALLS (MH)(AT)(KH)
 
 // VAR FUNCTION FOR API MEAL(KH)(!current set up just to run a random meal!)(AT)
 var meal = function () {
@@ -336,18 +329,23 @@ var meal = function () {
    fetch(apiUrl)
       .then(function (response) {
          response.json().then(function (data) {
-            if (data.meals === null)
+            if (data.meals === null) {
+               return;
+            }
             var randomNum = ""
             var ranNumFunc = function () {
                randomNum = Math.floor(Math.random() * 34);
                if (data.meals[randomNum] === undefined) {
                   ranNumFunc();
                }
+               if (data.meals === null) {
+                  return;
+               }
+
             };
             ranNumFunc();
             var mealId = data.meals[randomNum].idMeal;
-            //console.log(data);
-
+  
             var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
             fetch(apiUrl2)
                .then(function (response2) {
@@ -363,7 +361,7 @@ var meal = function () {
 meal();
 // END VAR FUNCTION FOR API MEAL(KH)
 
-// VAR FUNCTION FOR API DRINKS(KH)(!current set up just to run a random meal!)(AT)
+// VAR FUNCTION FOR API DRINKS(KH)(!current set up just to run a random meal!)(MH)(AT)
 var drink = function () {
    if (drinkType === null || drinkType === undefined) {
       return
@@ -438,41 +436,35 @@ var drink = function () {
       })
 };
 drink();
-// END OF VAR FUNCTION FOR API DRINKS(KH)
+// END OF VAR FUNCTION FOR API DRINKS (AT)(KH)
 
 // VAR FUNCTION FOR API MOVIE(KH)(! need to change the current values in html to match the ids!)
 var movie = function () {
    if (genreId != undefined) {
       console.log("genreFucker", genreId);
-   fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
-      .then(function (movieResponse) {
-         if (movieResponse.ok) {
-            return movieResponse.json();
-         }
-         else {
-            return;
-         }
+      fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
+         .then(function (movieResponse) {
+            if (movieResponse.ok) {
+               return movieResponse.json();
+            }
+            else {
+               return;
+            }
 
-      })
-      .then(function (movieData) {
-         console.log(movieData);
-         // random result from list of results
-
-         movieRender(movieData);
-         hideHistory();
-      })
-}}
+         })
+         .then(function (movieData) {
+        
+            movieRender(movieData);
+            hideHistory();
+         })
+   }
+}
 movie();
 
-console.log("this is the movieID: " + movieID)
-
-
-//save function
+//SAVE PLAN BUTTON HANDLER FUNCTION (AT)
 var savePlan = function () {
-   //console.log("You clicked save");
-   //push items to array for storage
-   //check for DUPES
-   var duplicate = false;
+   //push items to array for storage/check for DUPES
+    var duplicate = false;
    for (let i = 0; i < newSave.length; i++) {
       const element = newSave[i];
       if (element === drinkName || element === movieName || element === foodName) {
@@ -480,82 +472,62 @@ var savePlan = function () {
       }
    }
    if (!duplicate) {
-      //creates the div
-      var newEntry = $('<div>');
-      newEntry.attr("class", 'cell large-6 small-12 plan-item saved-div');
-      //creates the link element
-      var aE1 = $('<a>')
-      aE1.attr('href', "")
-      aE1.text("Enjoying a " + $("#meal-title").text() + ", with a " + $("#drink-title").text() + ", while watching " + $('#movie-title').text())
-      //creates the span inside the link
-      var span = $('<span>')
-      span.attr('class', 'float-right')
-      //create the icon inside the span
-      var icon = $('<i>')
-      icon.attr('class', 'fas fa-plus')
-      span.append(icon);
-      //append the span to the link
-      aE1.append(span);
-      //append link to the div
-      newEntry.append(aE1);
-      //append div to page
-      savedPlanEl.append(newEntry);
-      //set variables for storage
       foodName = $("#meal-title").text()
       drinkName = $("#drink-title").text()
       movieName = $('#movie-title').text()
       newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
-      console.log("fuckof", newSave)
       storageArray.push(newSave)
       save();
+      loadMemory();
    }
 }
-//second movie api call to fetch movie by title
+//SECONd MOVIE API CALL TO FETCH HISTORY BY SAVE TITLE (AT)(KH)
 var movieHistory = function () {
    console.log(movieHistoryID)
+   if (movieHistoryID != undefined) {
+      fetch("https://api.themoviedb.org/3/movie/" + movieHistoryID + "?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US")
+         .then(function (historyResponse) {
+            if (historyResponse.ok) {
+               return historyResponse.json();
+            }
+            else {
+               return;
+            }
 
-   fetch("https://api.themoviedb.org/3/movie/" + movieHistoryID + "?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US")
-      .then(function (historyResponse) {
-         if (historyResponse.ok) {
-            return historyResponse.json();
-         }
-         else {
-            return;
-         }
+         })
+         .then(function (historyData) {
+            //clear out the div 
+            $('#movie-box').text("");
+            //dynamically create the elements and append to page (AT)
+            //create title 
+            var title = $('<h3>')
+            title.attr('class', 'results-title')
+            title.attr("id", "movie-title")
+            title.text(historyData.original_title)
+            $('#movie-box').append(title)
+            //create movie cover
+            var cover = $('<img>')
+            cover.attr('src', "https://image.tmdb.org/t/p/w500/" + historyData.poster_path + "")
+            cover.attr('value', historyData.id)
+            cover.attr('alt', "Movie poster for " + historyData.original_title)
+            $('#movie-box').append(cover)
+            //create overview title
+            var summaryTitle = $('<h3>')
+            summaryTitle.attr("class", "results-title")
+            summaryTitle.text("What's it about?")
+            $('#movie-box').append(summaryTitle)
+            //create overview
+            var summary = $('<p>')
+            summary.attr("class", "text")
+            summary.text(historyData.overview)
+            $('#movie-box').append(summary)
 
-      })
-      .then(function (historyData) {
-         console.log(historyData)
-         //clear out the div 
-         $('#movie-box').text("");
-         //dynamically create the elements and append to page
-         //create title 
-         var title = $('<h3>')
-         title.attr('class', 'results-title')
-         title.attr("id", "movie-title")
-         title.text(historyData.original_title)
-         $('#movie-box').append(title)
-         //create movie cover
-         var cover = $('<img>')
-         cover.attr('src', "https://image.tmdb.org/t/p/w500/" + historyData.poster_path + "")
-         cover.attr('value', historyData.id)
-         cover.attr('alt', "Movie poster for " + historyData.original_title)
-         $('#movie-box').append(cover)
-         //create overview title
-         var summaryTitle = $('<h3>')
-         summaryTitle.attr("class", "results-title")
-         summaryTitle.text("What's it about?")
-         $('#movie-box').append(summaryTitle)
-         //create overview
-         var summary = $('<p>')
-         summary.attr("class", "text")
-         summary.text(historyData.overview)
-         $('#movie-box').append(summary)
+         })
+   }
 
-      })
 }
 
-//api call for mealHistory
+//API CALL FOR MEAL HISTORY
 var mealHistory = function () {
    console.log(mealHistoryID)
    mealBoxE1.text("");
@@ -659,7 +631,7 @@ var mealHistory = function () {
          mealBoxE1.append(instructionsHeader)
          var instructions = $('<p>')
          instructions.attr('class', "text");
-         instructions.textdata2.meals[0].strInstructions
+         instructions.text(data2.meals[0].strInstructions)
          console.log(instructions);
          mealBoxE1.append(instructions);
          dID = mealID;
@@ -806,7 +778,7 @@ var showHistory = function () {
       return false;
    } else {
       setTimeout(function () {
-         $("#saved-plans").remove("hide");
+         $("#saved-plans").removeClass("hide");
          $("#saved-plans").addClass("animate__slideInUp open");
          $("#his").append("History");
       }, 0);
@@ -825,7 +797,9 @@ $('#view-saved-btn').on("click", showHistory)
 
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
 
-$("#reload-btn").on('click', function () {
+$("#reload-btn").on('click', function (
+
+) {
    event.preventDefault();
    location.reload();
 });

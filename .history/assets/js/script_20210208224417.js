@@ -336,8 +336,8 @@ var meal = function () {
    fetch(apiUrl)
       .then(function (response) {
          response.json().then(function (data) {
-            if (data.meals === null)
-            var randomNum = ""
+            if (data.meals === null
+            var randomNum = "";
             var ranNumFunc = function () {
                randomNum = Math.floor(Math.random() * 34);
                if (data.meals[randomNum] === undefined) {
