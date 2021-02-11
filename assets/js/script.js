@@ -306,13 +306,19 @@ var drinkRender = function (data) {
    drinkBoxEl.append(instructions);
    for (var i = 0; i < measure.length; i++) {
       //console.log($(this));
-      if (measure[i] === null || measure[i] === "") {
+      if (ingredients[i] === null || ingredients[i] === "") {
          return;
       }
       else {
          var drinkM = $("<li>")
+         if (measure[i] === null || measure[i] === "") {
+            drinkM.text(ingredients[i]);
+            drinkList.append(drinkM);
+         }
+         else {
          drinkM.text(measure[i] + "-" + ingredients[i]);
          drinkList.append(drinkM);
+         }
       }
    }
 }
@@ -780,13 +786,19 @@ var drinkHistory = function () {
       console.log(ingredientsd)
       for (let i = 0; i < measured.length; i++) {
          //console.log($(this));
-         if (measured[i] === null || measured[i] === "") {
+         if (ingredientsd[i] === null || ingredientsd[i] === "") {
             return;
          }
          else {
-            let drinkM = $("<li>")
+            var drinkM = $("<li>")
+            if (measured[i] === null || measured[i] === "") {
+               drinkM.text(ingredientsd[i]);
+               drinkList.append(drinkM);
+            }
+            else {
             drinkM.text(measured[i] + "-" + ingredientsd[i]);
             drinkList.append(drinkM);
+            }
          }
       }
    })
