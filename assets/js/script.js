@@ -361,15 +361,23 @@ var drink = function () {
                instructions.setAttribute("class", "text")
                instructions.textContent = data.drinks[0].strInstructions
                drinkBoxEl.appendChild(instructions);
+               console.log(ingredients);
+               console.log(measure);
                for (var i = 0; i < measure.length; i++) {
                   //console.log($(this));
-                  if (measure[i] === null || measure[i] === "") {
+                  if (ingredients[i] === null || ingredients[i] === "") {
                      return;
                   }
                   else {
                      var drinkM = document.createElement("li")
+                     if (measure[i] == null || measure[i] === "") {
+                        drinkM.textContent = ingredients[i];
+                        drinkList.appendChild(drinkM);
+                     }
+                     else {
                      drinkM.textContent = measure[i] + "-" + ingredients[i];
                      drinkList.appendChild(drinkM);
+                     }
                   }
                }
             })
