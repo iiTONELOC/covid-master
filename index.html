@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bored in the House is an interactive web application that presents meal recipes, drink recipes, and movies based on user input. ">
+    <meta name= "author" content="Julius Maxwell, Cody Lewis, Anthony Tropeano, Michael Humpherys, Kip Hudakoz">
     <title>Bored in the House</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,25 +21,29 @@
         <section id="home-slide" class="blue">
             <div class="grid-x align-middle">
                 <div class="cell small-12 large-6 small-order-2 medium-order-1">
-                    <div class="intro">                    
+                    <div class="intro">
                         <h1>BORED IN THE HOUSE</h1>
-                    <p>Let’s just face it, we’re stuck. We are flat out bored and craving something new. Day after day, it is the same old thing. The same food, same drinks, and same movies. Well, that's all about to change. It is as simple as 1, 2, 3. Pick a meal, pick a drink, and pick a movie. Need spontaneity? Go RANDO Style.
-                    </p>
-                    <div class="button-container">
-                    <a id="start-btn" href="#dinner" class="button main start-btn" data-control="1">Start a Plan</a><a
-                        href="./results.html#saved-plans" class="button secondary" id="history-btn">Plans History</a>
+                        <p>Let’s just face it, we’re stuck. We are flat out bored and craving something new. Day after
+                            day, it is the same old thing. The same food, same drinks, and same movies. Well, that's all
+                            about to change. It is as simple as 1, 2, 3. Pick a meal, pick a drink, and pick a movie.
+                            Need spontaneity? Go RANDO Style.
+                        </p>
+                        <div class="button-container">
+                            <a id="start-btn" href="#dinner" class="button main start-btn" data-control="1">Start a
+                                Plan</a><a href="./results.html#saved-plans" class="button secondary"
+                                id="history-btn">Plans History</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
-            <div class="cell large-6 hero small-12 small-order-1 medium-order-2">
-                <img src="./assets/images/man-bored.jpg" class="img-responsive" />
-            </div>
+                <div class="cell large-6 hero small-12 small-order-1 medium-order-2">
+                    <img src="./assets/images/man-bored.jpg" alt="Man bored sitting on couch" class="img-responsive" />
+                </div>
         </section>
         <!-- begin second page-->
         <section id="dinner-slide" class="dark animate__animated hide">
             <div class="grid-x align-middle align-center">
                 <div class="cell large-5 choices">
-                    <img src="./assets/images/dinner.png" />
+                    <img src="./assets/images/dinner.png" alt="" />
                     <h2>Let's plan a meal. Tell me, what food are you in the mood for?</h2>
                     <div class="grid-x align-center pad20">
                         <div class="cell medium-8 question-container">
@@ -61,17 +67,18 @@
                         </div>
                     </div>
                     <div class="button-container">
-                    <a id="add-food-btn" href="#add-food" class="button main" data-control="2">Add
-                        Cuisine</a><a href="#back-button" id="scroll-release" class="button secondary back-btn">Back</a>
+                        <a id="add-food-btn" href="#add-food" class="button main" data-control="2">Add
+                            Cuisine</a><a href="#back-button" id="scroll-release"
+                            class="button secondary back-btn">Back</a>
                     </div>
-                    </div>
+                </div>
             </div>
         </section>
         <!-- begin third page-->
         <section id="drink-slide" class="blue animate__animated hide">
             <div class="grid-x align-middle align-center">
                 <div class="cell large-5 choices">
-                    <img src="./assets/images/drink.png" />
+                    <img src="./assets/images/drink.png" alt="" />
                     <h2><span>[cusineType]</span>, great choice! Let's Pair that with a drink. Pick your poision.</h2>
                     <div class="grid-x align-center pad20">
                         <div class="cell medium-8 question-container">
@@ -99,8 +106,8 @@
                         </div>
                     </div>
                     <div class="button-container">
-                    <a id="add-drink-btn" href="#add-drink" class="button main" data-control="3">Add drink
-                    </a><a href="#back-button" class="button secondary back-btn">Back</a>
+                        <a id="add-drink-btn" href="#add-drink" class="button main" data-control="3">Add drink
+                        </a><a href="#back-button" class="button secondary back-btn">Back</a>
                     </div>
                 </div>
             </div>
@@ -109,11 +116,11 @@
         <section id="genre-slide" class="dark animate__animated hide">
             <div class="grid-x align-middle align-center">
                 <div class="cell large-5 choices">
-                    <img src="./assets/images/movie.png" />
+                    <img src="./assets/images/movie.png" alt="" />
                     <h2><span>[Drink type]</span> sounds good, now let's pick a movie genre.</h2>
                     <div class="grid-x align-center pad20">
                         <div class="cell medium-8 question-container">
-                            
+
                             <select name="movie-type" id="movie-type">
                                 <option value="">Select a Movie genre</option>
                                 <option value="28">Action</option>
@@ -139,8 +146,8 @@
                         </div>
                     </div>
                     <div class="button-container">
-                    <a id="add-genre-btn" href="#add-genre" class="button main" data-control="6">Add Movie
-                    </a><a href="#back-button" class="button secondary back-btn">Back</a>
+                        <a id="add-genre-btn" href="#add-genre" class="button main" data-control="6">Add Movie
+                        </a><a href="#back-button" class="button secondary back-btn">Back</a>
                     </div>
                 </div>
             </div>
@@ -149,7 +156,7 @@
 
 
 
-     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./Foundation-Sites-6.6.3-CSS/Foundation-Sites-6.6.3-CSS/assets/js/vendor.js"></script>
     <script src="./Foundation-Sites-6.6.3-CSS/Foundation-Sites-6.6.3-CSS/assets/js/foundation.js"></script>
     <script src="./assets/js/home.js"></script>
