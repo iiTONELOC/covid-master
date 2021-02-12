@@ -51,8 +51,8 @@ If you are tired of the same old please check out, [Bored In The House](https://
 | Technology | Description                        |Links ↘️ |
 | ---------- | -----------------------------------| ------|
 |![GitHub top language](https://img.shields.io/github/languages/top/iiTONELOC/covid-master?color=yellow&label=JavaScript&style=flat-square) | JavaScript |  [Moment.js](https://momentjs.com/), [jQuery](https://jquery.com/), [TheMealDB](https://www.themealdb.com/), [TheCocktailDB](https://www.thecocktaildb.com/), [TMDB](https://developers.themoviedb.org/3/getting-started/introduction)                                               |
-|![CSS](https://img.shields.io/static/v1?label=CSS&message=31.2%&color=blue&style=flat-square)| Cascading Style Sheets |[Foundation](https://get.foundation/), [Google Font](https://fonts.google.com/), [Animate CSS](https://animate.style/)                                   |
-|![HTML](https://img.shields.io/static/v1?label=HTML&message=22%&color=orange&style=flat-square)| Hyper Text MarkUp Language |
+|![CSS](https://img.shields.io/static/v1?label=CSS&message=42.6%&color=blue&style=flat-square)| Cascading Style Sheets |[Foundation](https://get.foundation/), [Google Font](https://fonts.google.com/), [Animate CSS](https://animate.style/)                                   |
+|![HTML](https://img.shields.io/static/v1?label=HTML&message=1.9%&color=orange&style=flat-square)| Hyper Text MarkUp Language |
 
 # Usage  
 
