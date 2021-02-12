@@ -19,13 +19,13 @@ My plan is then stored in the history to be pulled up again.
 ```  
 # Table of Contents  
 
-1. Features  
-2. Screenshot
-3. Demo
-4. Technology Stack
-5. Usage
-6. Collaborators 
-7. License
+1. [Features](https://github.com/iiTONELOC/covid-master#features)  
+2. [Screenshot](https://github.com/iiTONELOC/covid-master#screenshot)
+3. [Demo](https://github.com/iiTONELOC/covid-master#demo)
+4. [Technology Stack](https://github.com/iiTONELOC/covid-master#technology-stack)
+5. [Usage](https://github.com/iiTONELOC/covid-master#usage)
+6. [Collaborators](https://github.com/iiTONELOC/covid-master#collaborators)
+7. [License](https://github.com/iiTONELOC/covid-master#license)
 
 # Features  
 
