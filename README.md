@@ -35,7 +35,7 @@ This application uses localStorage for persistance of user data.
 
 # Screenshot  
 
-Screenshot/GIF
+
 ![Bored In The House Screenshot](./assets/images/boredinthehousegif.gif)
 
 
