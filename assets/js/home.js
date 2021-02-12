@@ -36,7 +36,7 @@ document.querySelector('main').addEventListener("click", function() {
         } else {
             document.querySelector("#drink-slide").classList.replace("hide", "animate__slideInUp");   
             document.querySelector("#drink-slide h2 span").textContent = foodType;
-            console.log(foodType);
+            
         }
     }
     if (clickedBtnId === "add-drink-btn") {
@@ -47,7 +47,7 @@ document.querySelector('main').addEventListener("click", function() {
         } else {
             document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
             document.querySelector("#genre-slide h2 span").textContent = drinkType;
-            console.log(drinkType);
+            
         }
         
     }
@@ -58,9 +58,6 @@ document.querySelector('main').addEventListener("click", function() {
             displayAlertMessage();
         } else {
             document.querySelector("#genre-slide").classList.replace("hide", "animate__slideInUp");
-            console.log(movieType);
-            console.log(foodType);
-            console.log(drinkType);
             window.location='./results.html?para=' + foodType + '=' + drinkType + '=' + movieType
         }
         

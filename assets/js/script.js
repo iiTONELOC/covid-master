@@ -6,14 +6,13 @@ var mealType = dataTypes[1];
 var drinkType = dataTypes[2];
 var genreId = dataTypes[3];
 
-console.log("fuckyou", dataTypes);
 
 var drinkBoxEl = $("#drink-box")
 var mealBoxE1 = $("#meal-box")
 //VARIABLEs FOR SAVED PLANS
 var savedPlanEl = $("#saved-plans")
 
-// DATE INFORMATIONS USING MOMENT.JS
+// DATE INFORMATION USING MOMENT.JS
 var currentDate = moment().format(' Do [of] MMMM ');
 
 // MEMORY
@@ -113,12 +112,12 @@ var loadMemory = function () {
          //append div to page
          savedPlanEl.append(newEntry);
       }
-      console.log(storageArray);
+
    }
 }
 // END VAR MEMORYGET = FUNCTION
 
-// RENDER FUNCTION DYNAMIC ELEMENT (REFACTOR) EASIER TO READ SEPARATING FRUNCT FOR FETCH/API CALL> 
+// RENDER FUNCTION 
 var renderMeal = function (data2) {
    var mealTitle = $('<h3>')
    mealTitle.attr("class", "results-title")
@@ -130,7 +129,7 @@ var renderMeal = function (data2) {
    //APPEND CHILD ON FIRST PAGE
    mealBoxE1.append(mealTitle,)
    mealBoxE1.append(mealImage)
-   //console.log(data2);
+
    if (data2.meals[0].strSource) {
       var recipe = $("<a>")
       recipe.attr("href", data2.meals[0].strSource);
@@ -138,7 +137,7 @@ var renderMeal = function (data2) {
       recipe.textContent = "Check out the recipe!";
       mealBoxE1.append(recipe)
    }
-   //ARRAY COULD BE CONDENCES DO TO THE NATURE OF API DESIGN. 
+
    var ingredients = [
       data2.meals[0].strIngredient1,
       data2.meals[0].strIngredient2,
@@ -184,7 +183,7 @@ var renderMeal = function (data2) {
       data2.meals[0].strMeasure20,
    ]
 
-   // HAD TO DEFIND MEAL ID AS VAR (REFRACTOR)
+
    let mealId = data2.meals[0].idMeal
    //console.log("this is the mealId: " + mealId)
    //creates ingredients header
@@ -205,14 +204,9 @@ var renderMeal = function (data2) {
    instructions.attr('class', "text");
    instructions.text(data2.meals[0].strInstructions);
    // LOOKING FOR INSTRUCTIONS.  
-   //console.log(instructions);
-
    mealBoxE1.append(instructions);
    dID = mealId;
-
-   //console.log("this is the dID: " + dID)//
    for (var i = 0; i < measure.length; i++) {
-      //console.log($(this));
       if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
          return;
       }
@@ -231,24 +225,17 @@ var drinkRender = function (data) {
    drinkTitle.text(data.drinks[0].strDrink)
    drinkTitle.attr("class", "results-title")
    drinkTitle.attr("id", "drink-title")
-   console.log(drinkTitle)
    //append title
    drinkBoxEl.append(drinkTitle)
-
    //add image to page and set alt attribute
    var drinkImg = $("<img>")
    drinkImg.attr("src", data.drinks[0].strDrinkThumb)
    drinkImg.attr("alt", "Picture of a " + data.drinks[0].strDrink)
-
    //append image
    drinkBoxEl.append(drinkImg)
-
-
    // stores the drink id
    var drinkId = data.drinks[0].idDrink
    bevID = drinkId
-
-   //console.log("this is the drinkID: " + drinkId)
    var ingredients = [
       data.drinks[0].strIngredient1,
       data.drinks[0].strIngredient2,
@@ -283,8 +270,7 @@ var drinkRender = function (data) {
       data.drinks[0].strMeasure14,
       data.drinks[0].strMeasure15,
    ]
-   console.log(measure);
-   console.log(ingredients);
+
    //ingredientsHeader
    var ingredientsHeader = $("<h3>")
    ingredientsHeader.attr("class", "results-title")
@@ -299,13 +285,11 @@ var drinkRender = function (data) {
    instructionsHeader.text("Instructions")
    //append to page
    drinkBoxEl.append(instructionsHeader)
-
    var instructions = $('<p>')
    instructions.attr("class", "text")
    instructions.text(data.drinks[0].strInstructions)
    drinkBoxEl.append(instructions);
    for (var i = 0; i < measure.length; i++) {
-      //console.log($(this));
       if (ingredients[i] === null || ingredients[i] === "") {
          return;
       }
@@ -316,8 +300,8 @@ var drinkRender = function (data) {
             drinkList.append(drinkM);
          }
          else {
-         drinkM.text(measure[i] + "-" + ingredients[i]);
-         drinkList.append(drinkM);
+            drinkM.text(measure[i] + "-" + ingredients[i]);
+            drinkList.append(drinkM);
          }
       }
    }
@@ -327,15 +311,11 @@ var drinkRender = function (data) {
 //BEGINNING OF MOVIE RENDER DYNAMIC
 var movieRender = function (movieData) {
    var randomNum = Math.floor(Math.random() * 20);
-   //console.log("selected randoStyle is: " + randomNum);
-
-   console.log(movieData)
    //CREATE DYNAMICALLY APPEND TO PAGE>  
    var title = $('<h3>')
    title.attr('class', 'results-title')
    title.attr('id', "movie-title")
    title.text(movieData.results[randomNum].original_title)
-
    $('#movie-box').append(title)
    //create movie cover
    var cover = $('<img>')
@@ -355,16 +335,11 @@ var movieRender = function (movieData) {
    $('#movie-box').append(summary)
    // creates the variable for the movieID so we call recall out of storage
    movieID = movieData.results[randomNum].id
-   // console.log("this is the movieID: " + movieID)
 }
-
 // END OF MOVIE RENDER DYNAMIC(KH)
-
 // BEGINNING OF API CALLS (KH)
-
 // VAR FUNCTION FOR API MEAL(KH)(!current set up just to run a random meal!)(AT)
 var meal = function () {
-
    if (mealType === "random") {
       apiUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
    }
@@ -386,19 +361,14 @@ var meal = function () {
                if (data.meals === null) {
                   return;
                }
-
             };
             ranNumFunc();
             var mealId = data.meals[randomNum].idMeal;
-            //console.log(data);
-
             var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId
             fetch(apiUrl2)
                .then(function (response2) {
                   response2.json().then(function (data2) {
-
                      renderMeal(data2);
-
                   })
                })
          })
@@ -423,7 +393,6 @@ var drink = function () {
          return response.json();
       })
       .then(function (data) {
-
          var randomNum = ""
          var ranNumFunc = function () {
             randomNum = Math.floor(Math.random() * 34);
@@ -433,15 +402,11 @@ var drink = function () {
          };
          ranNumFunc();
          var drinkId = data.drinks[randomNum].idDrink;
-
-
          var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId
          fetch(apiUrl2)
             .then(function (response2) {
                response2.json()
                   .then(function (data) {
-                     console.log(data);
-
                      //WILL PASS FUNCTION
                      drinkRender(data)
                   })
@@ -450,11 +415,9 @@ var drink = function () {
 };
 drink();
 // END OF VAR FUNCTION FOR API DRINKS(KH)
-
 // VAR FUNCTION FOR API MOVIE(KH)(! need to change the current values in html to match the ids!)
 var movie = function () {
    if (genreId != undefined) {
-      console.log("genreFucker", genreId);
       fetch("https://api.themoviedb.org/3/discover/movie?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" + genreId + "")
          .then(function (movieResponse) {
             if (movieResponse.ok) {
@@ -466,25 +429,17 @@ var movie = function () {
 
          })
          .then(function (movieData) {
-            console.log(movieData);
             // random result from list of results
-
             movieRender(movieData);
             hideHistory();
          })
    }
 }
 movie();
-
-console.log("this is the movieID: " + movieID)
-
-
 //save function
 var savePlan = function () {
-   //console.log("You clicked save");
    //push items to array for storage
-   //check for DUPES
-   //loadMemory();
+   //check for DUPES 
    var duplicate = false;
    for (let i = 0; i < newSave.length; i++) {
       const element = newSave[i];
@@ -518,16 +473,12 @@ var savePlan = function () {
       drinkName = $("#drink-title").text()
       movieName = $('#movie-title').text()
       newSave.push(currentDate, drinkName, movieName, dID, movieID, foodName, bevID)
-      console.log("fuckoff", newSave)
       storageArray.push(newSave)
       save();
-      
-
    }
 }
 //second movie api call to fetch movie by title
 var movieHistory = function () {
-   console.log(movieHistoryID)
    if (movieHistoryID != undefined) {
       fetch("https://api.themoviedb.org/3/movie/" + movieHistoryID + "?api_key=9c93d665dc21728a97fdea54289e90ee&language=en-US")
          .then(function (historyResponse) {
@@ -540,7 +491,6 @@ var movieHistory = function () {
 
          })
          .then(function (historyData) {
-            console.log(historyData)
             //clear out the div 
             $('#movie-box').text("");
             //dynamically create the elements and append to page
@@ -566,30 +516,22 @@ var movieHistory = function () {
             summary.attr("class", "text")
             summary.text(historyData.overview)
             $('#movie-box').append(summary)
-
          })
-
    }
-
 }
 
 //api call for mealHistory
 var mealHistory = function () {
-   console.log(mealHistoryID)
    mealBoxE1.text("");
-
    var apiUrl2 = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealHistoryID
    fetch(apiUrl2).then(function (response2) {
       return response2.json()
    })
       .then(function (data2) {
-         console.log(data2);
-
          //creates the h3 element for the meal-title
          var mealTitle = $('<h3>')
          mealTitle.attr('class', "results-title")
          mealTitle.text(data2.meals[0].strMeal);
-         //getElementById("meal-title").text(data2.meals[0].strMeal;
          //creates the img element for the meal-img
          var mealImage = $('<img>')
          mealImage.attr("src", data2.meals[0].strMealThumb)
@@ -597,9 +539,6 @@ var mealHistory = function () {
          //append the title and image to page
          mealBoxE1.append(mealTitle,)
          mealBoxE1.append(mealImage)
-         //getElementById('meal-img').attr("src", data2.meals[0].strMealThumb)
-         //getElementById('meal-img').attr("alt", "Picture of a " + data2.meals[0].strMeal)
-
          if (data2.meals[0].strSource) {
             var recipe = $("<a>")
             recipe.attr("href", data2.meals[0].strSource);
@@ -651,16 +590,10 @@ var mealHistory = function () {
             data2.meals[0].strMeasure19,
             data2.meals[0].strMeasure20,
          ]
-
          // stores the meal id
          mealID = data2.meals[0].idMeal
-
-
-
-
          // stores the meal id
          mealID = data2.meals[0].idMeal
-         console.log("this is the mealId: " + mealID)
          //ingredientsHeader
          var ingredientsHeader = $("<h3>")
          ingredientsHeader.attr("class", "results-title")
@@ -678,12 +611,9 @@ var mealHistory = function () {
          var instructions = $('<p>')
          instructions.attr('class', "text");
          instructions.text(data2.meals[0].strInstructions)
-         console.log(instructions);
          mealBoxE1.append(instructions);
          dID = mealID;
-         console.log("this is the dID: " + dID)
          for (var i = 0; i < measure.length; i++) {
-            //console.log($(this));
             if (measure[i] === null || measure[i] === "" || measure[i] === " ") {
                return;
             }
@@ -693,20 +623,15 @@ var mealHistory = function () {
                mealList.append(mealStuff);
             }
          }
-
       })
-
-
 }
-
-//drinkHistory (Code reduction Redunancy maybe fractering. )
+//drinkHistory 
 var drinkHistory = function () {
-   console.log(drinkHistoryID)
    var apiUrl2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkHistoryID
    fetch(apiUrl2).then(function (response2) {
       return response2.json()
    }).then(function (data) {
-      console.log(data);
+      
       var ingredientsd = [
          data.drinks[0].strIngredient1,
          data.drinks[0].strIngredient2,
@@ -747,23 +672,16 @@ var drinkHistory = function () {
       drinkTitle.text(data.drinks[0].strDrink);
       drinkTitle.attr("class", "results-title")
       drinkTitle.attr("id", "drink-title")
-
       //append title
       drinkBoxEl.append(drinkTitle)
-
       //add image to page and set alt attribute
       var drinkImg = $("<img>")
       drinkImg.attr("src", data.drinks[0].strDrinkThumb)
       drinkImg.attr("alt", "Picture of a " + data.drinks[0].strDrink)
-
       //append image
       drinkBoxEl.append(drinkImg)
-
-
       // stores the drink id
       drinkID = data.drinks[0].idDrink
-
-      console.log("this is the drinkID: " + drinkID)
       //ingredientsHeader
       var ingredientsHeader = $("<h3>")
       ingredientsHeader.attr("class", "results-title")
@@ -782,10 +700,7 @@ var drinkHistory = function () {
       instructions.attr("class", "text")
       instructions.text(data.drinks[0].strInstructions)
       drinkBoxEl.append(instructions);
-      console.log(measured)
-      console.log(ingredientsd)
       for (let i = 0; i < measured.length; i++) {
-         //console.log($(this));
          if (ingredientsd[i] === null || ingredientsd[i] === "") {
             return;
          }
@@ -796,8 +711,8 @@ var drinkHistory = function () {
                drinkList.append(drinkM);
             }
             else {
-            drinkM.text(measured[i] + "-" + ingredientsd[i]);
-            drinkList.append(drinkM);
+               drinkM.text(measured[i] + "-" + ingredientsd[i]);
+               drinkList.append(drinkM);
             }
          }
       }
@@ -808,7 +723,6 @@ var drinkHistory = function () {
 var reFetch = function (event) {
    showButton();
    event.preventDefault()
-   console.log(event.target)
    if (event.target.getAttribute("data-movie") === null
       || event.target.getAttribute("data-meal") === null
       || event.target.getAttribute("data-drink") === null) {
@@ -823,30 +737,6 @@ var reFetch = function (event) {
    drinkHistory();
 
 }
-
-//reFetch
-//var reFetch = function (event) {
-//showButton();
-//event.preventDefault()
-//console.log(event.target)
-//if ($(this).attr("data-movie") === null
-//|| $(this).attr("data-meal") === null
-//|| $(this).attr("data-drink") === null) {
-//return;
-//}
-//movieHistoryID = $(this).attr('data-movie')
-//mealHistoryID = $(this).attr("data-meal")
-//drinkHistoryID = $(this).attr("data-drink")
-//console.log(movieHistoryID);
-//console.log(mealHistoryID);
-//console.log(drinkHistoryID);
-
-//call the api
-//movieHistory();
-//mealHistory();
-//drinkHistory();
-
-//}
 //var showHistory
 var showHistory = function () {
    removeButton()
@@ -858,11 +748,9 @@ var showHistory = function () {
          $("#saved-plans").addClass("animate__slideInUp open");
          $("#his").append("History");
       }, 0);
-
    }
 }
 // hides the elements when when are viewing history
-
 loadMemory();
 //event listener for the savedPlan click
 $('#saved-plans').on("click", reFetch)
@@ -870,24 +758,10 @@ $('#saved-plans').on("click", reFetch)
 $('#save-plan-btn').on("click", savePlan)
 //event listener for the view saved plans
 $('#view-saved-btn').on("click", showHistory)
-
 //IF WE REFRESH THE PAGE IT WILL RELOAD THE RESULTS WE COULD USE THIS AS A 'MIX AGAIN'
-
 $("#reload-btn").on('click', function (
-
 ) {
    event.preventDefault();
    location.reload();
 });
 
-//document.$("#view-saved-btn").addEventListener("click", function () {
-   //if (document.$("#saved-plans").classList.contains('open')) {
-      //return false;
-   //} else {
-      //setTimeout(function () {
-         //document.$("#saved-plans").classList.replace("hide", "animate_slideInUp");
-        // document.$("#saved-plans").classList.add("open");
-      //}, 500);
-
-  // }
-//});
