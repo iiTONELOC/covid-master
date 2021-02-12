@@ -134,6 +134,7 @@ var renderMeal = function (data2) {
       var recipe = $("<a>")
       recipe.attr("href", data2.meals[0].strSource);
       recipe.attr("target", "_blank")
+      recipe.attr("rel", "noopener")
       recipe.textContent = "Check out the recipe!";
       mealBoxE1.append(recipe)
    }
