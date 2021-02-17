@@ -99,7 +99,14 @@ var loadMemory = function () {
          span.attr('class', 'float-right')
 
          //create the icon inside the span
-
+         /*
+         var icon = $('<i>')
+         icon.attr('class', 'fas fa-plus')
+         icon.attr('data-drink', memory[i][6])
+         icon.attr('data-movie', memory[i][4]);
+         icon.attr('data-meal', memory[i][3]);
+         span.append(icon);
+         */
          //append the span to the link
          aE1.append(span);
          //append link to the div
