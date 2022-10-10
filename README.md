@@ -35,14 +35,16 @@ This application uses localStorage for persistance of user data.
 
 # Screenshot  
 
+./assets/images/screenshot.jpeg
 
-![Bored In The House Screenshot](./assets/images/boredinthehousegif.gif)
 
 
 
 # DEMO  
 
 If you are tired of the same old please check out, [Bored In The House](https://iiTONELOC.github.io/covid-master)
+
+![Bored In The House Screenshot](./assets/images/boredinthehousegif.gif)
 
 
 # Technology Stack
