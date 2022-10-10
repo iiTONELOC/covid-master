@@ -35,7 +35,7 @@ This application uses localStorage for persistance of user data.
 
 # Screenshot  
 
-./assets/images/screenshot.jpeg
+![Screenshot](./assets/images/screenshot.jpeg)
 
 
 
